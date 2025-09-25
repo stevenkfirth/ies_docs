@@ -1,0 +1,106 @@
+API Reference
+=============
+
+.. py:module:: iesve
+   :synopsis: This module...
+
+   The `iesve` module is imported as:
+
+   .. code-block:: python
+
+      import iesve
+
+
+   The `iesve` module has a single module-level function and many classes.
+
+
+   ---
+
+   .. py:method:: get_application_folder()
+
+      :returns: The absolute filepath of the directory of the VE instance.
+      :rtype: str
+
+   .. py:class:: VEProject
+
+      Represents an IES-VE project.
+
+      Also see: 
+
+      * :ref:`access-the-current-project`
+
+      ---
+
+      .. py:classmethod:: get_current_project()
+
+         :returns: Returns the project currently loaded in the VE.
+         :rtype: :py:class:`VEProject`
+
+      .. py:method:: air_exchanges()
+
+      .. py:method:: create_air_exchange(type: AirExchange_type)
+
+      .. py:method:: apache_systems()
+
+      .. py:method:: archive_project(destination, full)
+
+      .. py:method:: casual_gains() 
+
+      .. py:method:: construction_templates(assigned = True)
+
+      .. py:attribute:: content_folder
+
+         :returns: Project content folder path
+         :rtype: str
+
+      .. py:method:: create_casual_gain(type: CasualGain_type)
+
+      .. py:method:: create_profile(type, reference, modulating, units) 
+
+      .. py:method:: create_apache_system(from_id, system_name)
+
+      .. py:method:: create_construction_template(template_name: str)
+
+      .. py:method:: create_thermal_template(template_name: str)
+
+      .. py:method:: daily_profile(profileID) 
+
+      .. py:method:: daily_profiles([profileIDs]) 
+
+      .. py:method:: register_content(path, category, displayString, notification)
+
+      .. py:method:: deregister_content(path)
+
+      .. py:method:: get_display_units()
+
+      .. py:method:: get_language_code()
+
+      .. py:method:: get_macro_flo_opening_by_id(...)
+
+      .. py:method:: get_macro_flo_opening_types(...)
+
+      .. py:method:: get_scenario_base_project_path()
+
+      .. py:method:: get_version() 
+
+      .. py:method:: group_profile(profileID)
+
+      .. py:method:: group_profiles([profileIDs])
+
+      .. py:attribute:: models
+
+      .. py:attribute:: name
+
+      .. py:attribute:: path
+
+      .. py:method:: profiles()
+
+      .. py:method:: save_profiles() 
+
+      .. py:method:: thermal_templates(assigned = True, allow_ncm = False)
+
+   
+
+      
+
+   

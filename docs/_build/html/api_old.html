@@ -1,0 +1,307 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>API Reference &mdash; IES-VE Python API  documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=92fd9be5" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/custom.css?v=e6a37869" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="_static/doctools.js?v=9a2dae69"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            IES-VE Python API
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="how_tos.html">How Tos</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">IES-VE Python API</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">API Reference</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/api_old.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-iesve">
+<span id="api-reference"></span><h1>API Reference<a class="headerlink" href="#module-iesve" title="Link to this heading"></a></h1>
+<p>The <cite>iesve</cite> module is imported as:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">iesve</span>
+</pre></div>
+</div>
+<p>The <cite>iesve</cite> module has a single module-level function and many classes.</p>
+<p>—</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="iesve.get_application_folder">
+<span class="sig-prename descclassname"><span class="pre">iesve.</span></span><span class="sig-name descname"><span class="pre">get_application_folder</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#iesve.get_application_folder" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The absolute filepath of the directory of the VE instance.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="iesve.VEProject">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">iesve.</span></span><span class="sig-name descname"><span class="pre">VEProject</span></span><a class="headerlink" href="#iesve.VEProject" title="Link to this definition"></a></dt>
+<dd><p>Represents an IES-VE project.</p>
+<p>Also see:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="how_tos.html#access-the-current-project"><span class="std std-ref">How to access the current project</span></a></p></li>
+</ul>
+<p>—</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="iesve.VEProject.get_current_project">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_current_project</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#iesve.VEProject.get_current_project" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Returns the project currently loaded in the VE.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#iesve.VEProject" title="iesve.VEProject"><code class="xref py py-class docutils literal notranslate"><span class="pre">VEProject</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="iesve.VEProject.air_exchanges">
+<span class="sig-name descname"><span class="pre">air_exchanges</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#iesve.VEProject.air_exchanges" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="iesve.VEProject.create_air_exchange">
+<span class="sig-name descname"><span class="pre">create_air_exchange</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">AirExchange_type</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#iesve.VEProject.create_air_exchange" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="iesve.VEProject.apache_systems">
+<span class="sig-name descname"><span class="pre">apache_systems</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#iesve.VEProject.apache_systems" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="iesve.VEProject.archive_project">
+<span class="sig-name descname"><span class="pre">archive_project</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">destination</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">full</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#iesve.VEProject.archive_project" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="iesve.VEProject.casual_gains">
+<span class="sig-name descname"><span class="pre">casual_gains</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#iesve.VEProject.casual_gains" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="iesve.VEProject.construction_templates">
+<span class="sig-name descname"><span class="pre">construction_templates</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">assigned</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#iesve.VEProject.construction_templates" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="iesve.VEProject.content_folder">
+<span class="sig-name descname"><span class="pre">content_folder</span></span><a class="headerlink" href="#iesve.VEProject.content_folder" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Project content folder path</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="iesve.VEProject.create_casual_gain">
+<span class="sig-name descname"><span class="pre">create_casual_gain</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">CasualGain_type</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#iesve.VEProject.create_casual_gain" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="iesve.VEProject.create_profile">
+<span class="sig-name descname"><span class="pre">create_profile</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reference</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">modulating</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">units</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#iesve.VEProject.create_profile" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="iesve.VEProject.create_apache_system">
+<span class="sig-name descname"><span class="pre">create_apache_system</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">from_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">system_name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#iesve.VEProject.create_apache_system" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="iesve.VEProject.create_construction_template">
+<span class="sig-name descname"><span class="pre">create_construction_template</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">template_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#iesve.VEProject.create_construction_template" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="iesve.VEProject.create_thermal_template">
+<span class="sig-name descname"><span class="pre">create_thermal_template</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">template_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#iesve.VEProject.create_thermal_template" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="iesve.VEProject.daily_profile">
+<span class="sig-name descname"><span class="pre">daily_profile</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">profileID</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#iesve.VEProject.daily_profile" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="iesve.VEProject.daily_profiles">
+<span class="sig-name descname"><span class="pre">daily_profiles</span></span><span class="sig-paren">(</span><span class="optional">[</span><em class="sig-param"><span class="n"><span class="pre">profileIDs</span></span></em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#iesve.VEProject.daily_profiles" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="iesve.VEProject.register_content">
+<span class="sig-name descname"><span class="pre">register_content</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">category</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">displayString</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">notification</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#iesve.VEProject.register_content" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="iesve.VEProject.deregister_content">
+<span class="sig-name descname"><span class="pre">deregister_content</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#iesve.VEProject.deregister_content" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="iesve.VEProject.get_display_units">
+<span class="sig-name descname"><span class="pre">get_display_units</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#iesve.VEProject.get_display_units" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="iesve.VEProject.get_language_code">
+<span class="sig-name descname"><span class="pre">get_language_code</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#iesve.VEProject.get_language_code" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="iesve.VEProject.get_macro_flo_opening_by_id">
+<span class="sig-name descname"><span class="pre">get_macro_flo_opening_by_id</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">...</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#iesve.VEProject.get_macro_flo_opening_by_id" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="iesve.VEProject.get_macro_flo_opening_types">
+<span class="sig-name descname"><span class="pre">get_macro_flo_opening_types</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">...</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#iesve.VEProject.get_macro_flo_opening_types" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="iesve.VEProject.get_scenario_base_project_path">
+<span class="sig-name descname"><span class="pre">get_scenario_base_project_path</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#iesve.VEProject.get_scenario_base_project_path" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="iesve.VEProject.get_version">
+<span class="sig-name descname"><span class="pre">get_version</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#iesve.VEProject.get_version" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="iesve.VEProject.group_profile">
+<span class="sig-name descname"><span class="pre">group_profile</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">profileID</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#iesve.VEProject.group_profile" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="iesve.VEProject.group_profiles">
+<span class="sig-name descname"><span class="pre">group_profiles</span></span><span class="sig-paren">(</span><span class="optional">[</span><em class="sig-param"><span class="n"><span class="pre">profileIDs</span></span></em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#iesve.VEProject.group_profiles" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="iesve.VEProject.models">
+<span class="sig-name descname"><span class="pre">models</span></span><a class="headerlink" href="#iesve.VEProject.models" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="iesve.VEProject.name">
+<span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#iesve.VEProject.name" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="iesve.VEProject.path">
+<span class="sig-name descname"><span class="pre">path</span></span><a class="headerlink" href="#iesve.VEProject.path" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="iesve.VEProject.profiles">
+<span class="sig-name descname"><span class="pre">profiles</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#iesve.VEProject.profiles" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="iesve.VEProject.save_profiles">
+<span class="sig-name descname"><span class="pre">save_profiles</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#iesve.VEProject.save_profiles" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="iesve.VEProject.thermal_templates">
+<span class="sig-name descname"><span class="pre">thermal_templates</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">assigned</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">allow_ncm</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#iesve.VEProject.thermal_templates" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Steven Firth.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
