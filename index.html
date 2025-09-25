@@ -1,0 +1,440 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>IES-VE Python API documentation (unofficial) &mdash; IES-VE Python API  documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/custom.css?v=e6a37869" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Overview" href="overview.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="#" class="icon icon-home">
+            IES-VE Python API
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quick_start.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="code_snippets.html">Code Snippets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Example Scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API Reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="#">IES-VE Python API</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="#" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">IES-VE Python API documentation (unofficial)</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="ies-ve-python-api-documentation-unofficial">
+<h1>IES-VE Python API documentation (unofficial)<a class="headerlink" href="#ies-ve-python-api-documentation-unofficial" title="Link to this heading"></a></h1>
+<p>I have written this unofficial documentation to the IES-VE Python API to support my undergraduate and postgraduate teaching.</p>
+<p>The offical help guide from IES is <a class="reference external" href="https://help.iesve.com/ve2025/python_api_guidance.htm?ms=AhAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAACAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEBAAiABQA%3D%3D&amp;st=MA%3D%3D&amp;sct=MTg3&amp;mw=MzEx">here</a>.</p>
+<p>I’ve made this available in case it is useful to others.</p>
+<p>For more information and if you have any questions, please see my website: <a class="reference external" href="https://www.stevenfirth.com/">www.stevenfirth.com</a>.</p>
+<p><em>Steven Firth, 2025</em></p>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="overview.html#what-is-ies-ve">What is IES-VE?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="overview.html#what-is-python">What is Python?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="overview.html#what-is-an-api">What is an API?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="overview.html#what-is-the-ies-ve-python-api">What is the IES-VE Python API?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="overview.html#why-learn-the-ies-ve-python-api">Why learn the IES-VE Python API?</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="quick_start.html">Quick Start</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="quick_start.html#installation">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quick_start.html#open-the-vescript-python-editor">Open the VEScript Python Editor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quick_start.html#create-a-ies-python-script">Create a IES Python script</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quick_start.html#run-the-python-script">Run the Python script</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quick_start.html#next-steps">Next steps</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="code_snippets.html">Code Snippets</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="code_snippets.html#how-to-access-the-current-project">How to access the current project</a></li>
+<li class="toctree-l2"><a class="reference internal" href="code_snippets.html#how-to-access-the-real-model">How to access the real model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="code_snippets.html#how-to-access-the-bodies-in-the-real-model">How to access the bodies in the real model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="code_snippets.html#how-to-access-the-room-bodies-in-the-real-model">How to access the room bodies in the real model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="code_snippets.html#how-to-access-the-path-of-the-current-project">How to access the path of the current project</a></li>
+<li class="toctree-l2"><a class="reference internal" href="code_snippets.html#how-to-ask-the-user-to-choose-a-ies-ve-result-file">How to ask the user to choose a IES-VE result file</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Example Scripts</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="examples.html#export-results-to-csv-files">Export Results to CSV files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples.html#plot-room-air-temperatures">Plot room air temperatures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples.html#plot-room-heat-balance">Plot room heat balance</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.get_application_folder"><code class="docutils literal notranslate"><span class="pre">get_application_folder()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.AdjacentCondition_type"><code class="docutils literal notranslate"><span class="pre">AdjacentCondition_type</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.AirExchange"><code class="docutils literal notranslate"><span class="pre">AirExchange</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.AirExchange_type"><code class="docutils literal notranslate"><span class="pre">AirExchange_type</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.ApacheSim"><code class="docutils literal notranslate"><span class="pre">ApacheSim</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.Ashrae621Version"><code class="docutils literal notranslate"><span class="pre">Ashrae621Version</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.AuxEnergyMethod_type"><code class="docutils literal notranslate"><span class="pre">AuxEnergyMethod_type</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.BatteryControlType"><code class="docutils literal notranslate"><span class="pre">BatteryControlType</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.BpfCustom"><code class="docutils literal notranslate"><span class="pre">BpfCustom</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.CasualGain"><code class="docutils literal notranslate"><span class="pre">CasualGain</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.CoilLocationCircuit"><code class="docutils literal notranslate"><span class="pre">CoilLocationCircuit</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.CompactProfile"><code class="docutils literal notranslate"><span class="pre">CompactProfile</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.Conditioning_type"><code class="docutils literal notranslate"><span class="pre">Conditioning_type</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.CoolingCoilModelType"><code class="docutils literal notranslate"><span class="pre">CoolingCoilModelType</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.CoolingMechanism_type"><code class="docutils literal notranslate"><span class="pre">CoolingMechanism_type</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.DailyProfile"><code class="docutils literal notranslate"><span class="pre">DailyProfile</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.DehumidificationControlOption"><code class="docutils literal notranslate"><span class="pre">DehumidificationControlOption</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.DesignZoneTemperatureSource"><code class="docutils literal notranslate"><span class="pre">DesignZoneTemperatureSource</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.DisplayUnits"><code class="docutils literal notranslate"><span class="pre">DisplayUnits</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.EnergyGain"><code class="docutils literal notranslate"><span class="pre">EnergyGain</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.EnergyGain_type"><code class="docutils literal notranslate"><span class="pre">EnergyGain_type</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.EnergyMeter"><code class="docutils literal notranslate"><span class="pre">EnergyMeter</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.EnergySource"><code class="docutils literal notranslate"><span class="pre">EnergySource</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.EnergySources"><code class="docutils literal notranslate"><span class="pre">EnergySources</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.EnergyUse"><code class="docutils literal notranslate"><span class="pre">EnergyUse</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.ExhaustMakeUpAirOption"><code class="docutils literal notranslate"><span class="pre">ExhaustMakeUpAirOption</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.FreeFormProfile"><code class="docutils literal notranslate"><span class="pre">FreeFormProfile</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.GarageFanControlScheme"><code class="docutils literal notranslate"><span class="pre">GarageFanControlScheme</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.GroupProfile"><code class="docutils literal notranslate"><span class="pre">GroupProfile</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.HVACACCCalculationStatus"><code class="docutils literal notranslate"><span class="pre">HVACACCCalculationStatus</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.HVACACCSizingMode"><code class="docutils literal notranslate"><span class="pre">HVACACCSizingMode</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.HVACAbstractBoiler"><code class="docutils literal notranslate"><span class="pre">HVACAbstractBoiler</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.HVACAbstractCHRHeatExchanger"><code class="docutils literal notranslate"><span class="pre">HVACAbstractCHRHeatExchanger</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.HVACAbstractChiller"><code class="docutils literal notranslate"><span class="pre">HVACAbstractChiller</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.HVACAbstractComponent"><code class="docutils literal notranslate"><span class="pre">HVACAbstractComponent</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.HVACAbstractController"><code class="docutils literal notranslate"><span class="pre">HVACAbstractController</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.HVACAbstractControllerWithSensor"><code class="docutils literal notranslate"><span class="pre">HVACAbstractControllerWithSensor</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.HVACAbstractDXCoolingSystem"><code class="docutils literal notranslate"><span class="pre">HVACAbstractDXCoolingSystem</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.HVACAbstractHeatPump"><code class="docutils literal notranslate"><span class="pre">HVACAbstractHeatPump</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.HVACAbstractWaterAirHeatPump"><code class="docutils literal notranslate"><span class="pre">HVACAbstractWaterAirHeatPump</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.HVACAbstractWaterWaterHeatExchanger"><code class="docutils literal notranslate"><span class="pre">HVACAbstractWaterWaterHeatExchanger</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.HVACAirFilter"><code class="docutils literal notranslate"><span class="pre">HVACAirFilter</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.HVACAirToAirHeatEnthalpyExchanger"><code class="docutils literal notranslate"><span class="pre">HVACAirToAirHeatEnthalpyExchanger</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.HVACAmbientHeatRejectionDevice"><code class="docutils literal notranslate"><span class="pre">HVACAmbientHeatRejectionDevice</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.HVACBoiler"><code class="docutils literal notranslate"><span class="pre">HVACBoiler</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.HVACBoilerType"><code class="docutils literal notranslate"><span class="pre">HVACBoilerType</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.HVACChilledCeiling"><code class="docutils literal notranslate"><span class="pre">HVACChilledCeiling</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.HVACChilledCeilingRoom"><code class="docutils literal notranslate"><span class="pre">HVACChilledCeilingRoom</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.HVACChilledWaterLoop"><code class="docutils literal notranslate"><span class="pre">HVACChilledWaterLoop</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.HVACChiller"><code class="docutils literal notranslate"><span class="pre">HVACChiller</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.HVACChillerType"><code class="docutils literal notranslate"><span class="pre">HVACChillerType</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.HVACCombinedHeatAndPower"><code class="docutils literal notranslate"><span class="pre">HVACCombinedHeatAndPower</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.HVACComponent"><code class="docutils literal notranslate"><span class="pre">HVACComponent</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.HVACCondenserWaterLoop"><code class="docutils literal notranslate"><span class="pre">HVACCondenserWaterLoop</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.HVACController"><code class="docutils literal notranslate"><span class="pre">HVACController</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.HVACControllerWithDifferentialSensor"><code class="docutils literal notranslate"><span class="pre">HVACControllerWithDifferentialSensor</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.HVACControllerWithSensor"><code class="docutils literal notranslate"><span class="pre">HVACControllerWithSensor</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.HVACCoolingCoil"><code class="docutils literal notranslate"><span class="pre">HVACCoolingCoil</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.HVACCoolingSourceSystemType"><code class="docutils literal notranslate"><span class="pre">HVACCoolingSourceSystemType</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.HVACCoolingTower"><code class="docutils literal notranslate"><span class="pre">HVACCoolingTower</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.HVACDHWBranch"><code class="docutils literal notranslate"><span class="pre">HVACDHWBranch</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.HVACDHWCHRHeatExchanger"><code class="docutils literal notranslate"><span class="pre">HVACDHWCHRHeatExchanger</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.HVACDHWModel"><code class="docutils literal notranslate"><span class="pre">HVACDHWModel</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.HVACDHWSystem"><code class="docutils literal notranslate"><span class="pre">HVACDHWSystem</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.HVACDHWTankDetails"><code class="docutils literal notranslate"><span class="pre">HVACDHWTankDetails</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.HVACDHWTankInsulationType"><code class="docutils literal notranslate"><span class="pre">HVACDHWTankInsulationType</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.HVACDHWTemperatureSetPointType"><code class="docutils literal notranslate"><span class="pre">HVACDHWTemperatureSetPointType</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.HVACDXCoolingCondenserType"><code class="docutils literal notranslate"><span class="pre">HVACDXCoolingCondenserType</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.HVACDXCoolingInstance"><code class="docutils literal notranslate"><span class="pre">HVACDXCoolingInstance</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.HVACDXCoolingSystem"><code class="docutils literal notranslate"><span class="pre">HVACDXCoolingSystem</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.HVACDXFanControl"><code class="docutils literal notranslate"><span class="pre">HVACDXFanControl</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.HVACDamper"><code class="docutils literal notranslate"><span class="pre">HVACDamper</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.HVACDamperSplitter"><code class="docutils literal notranslate"><span class="pre">HVACDamperSplitter</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.HVACDedicatedWatersideEconomizer"><code class="docutils literal notranslate"><span class="pre">HVACDedicatedWatersideEconomizer</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.HVACDefrostControl"><code class="docutils literal notranslate"><span class="pre">HVACDefrostControl</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.HVACDefrostStrategy"><code class="docutils literal notranslate"><span class="pre">HVACDefrostStrategy</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.HVACDirectActingHeater"><code class="docutils literal notranslate"><span class="pre">HVACDirectActingHeater</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.HVACDirectActingHeaterRoom"><code class="docutils literal notranslate"><span class="pre">HVACDirectActingHeaterRoom</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.HVACDryFluidCooler"><code class="docutils literal notranslate"><span class="pre">HVACDryFluidCooler</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.HVACDryFluidCoolerMode"><code class="docutils literal notranslate"><span class="pre">HVACDryFluidCoolerMode</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.HVACDuct"><code class="docutils literal notranslate"><span class="pre">HVACDuct</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.HVACEACChiller"><code class="docutils literal notranslate"><span class="pre">HVACEACChiller</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.HVACEWCChiller"><code class="docutils literal notranslate"><span class="pre">HVACEWCChiller</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.HVACElectricChiller"><code class="docutils literal notranslate"><span class="pre">HVACElectricChiller</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.HVACEnhancedBoiler"><code class="docutils literal notranslate"><span class="pre">HVACEnhancedBoiler</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.HVACFan"><code class="docutils literal notranslate"><span class="pre">HVACFan</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.HVACGenericCoolingSource"><code class="docutils literal notranslate"><span class="pre">HVACGenericCoolingSource</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.HVACGenericHeatSource"><code class="docutils literal notranslate"><span class="pre">HVACGenericHeatSource</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.HVACHWLDHWHeatExchanger"><code class="docutils literal notranslate"><span class="pre">HVACHWLDHWHeatExchanger</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.HVACHWLDemandLoop"><code class="docutils literal notranslate"><span class="pre">HVACHWLDemandLoop</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.HVACHeatPump"><code class="docutils literal notranslate"><span class="pre">HVACHeatPump</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.HVACHeatPumpInstance"><code class="docutils literal notranslate"><span class="pre">HVACHeatPumpInstance</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.HVACHeatPumpType"><code class="docutils literal notranslate"><span class="pre">HVACHeatPumpType</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.HVACHeatRecoveryModel"><code class="docutils literal notranslate"><span class="pre">HVACHeatRecoveryModel</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.HVACHeatSource"><code class="docutils literal notranslate"><span class="pre">HVACHeatSource</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.HVACHeatTransferLoop"><code class="docutils literal notranslate"><span class="pre">HVACHeatTransferLoop</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.HVACHeatingCoil"><code class="docutils literal notranslate"><span class="pre">HVACHeatingCoil</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.HVACHotWaterLoop"><code class="docutils literal notranslate"><span class="pre">HVACHotWaterLoop</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.HVACInlet"><code class="docutils literal notranslate"><span class="pre">HVACInlet</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.HVACJunction"><code class="docutils literal notranslate"><span class="pre">HVACJunction</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.HVACLARIData"><code class="docutils literal notranslate"><span class="pre">HVACLARIData</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.HVACLocation"><code class="docutils literal notranslate"><span class="pre">HVACLocation</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.HVACMultiplex"><code class="docutils literal notranslate"><span class="pre">HVACMultiplex</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.HVACMultiplexLayerEditingMode"><code class="docutils literal notranslate"><span class="pre">HVACMultiplexLayerEditingMode</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.HVACNetwork"><code class="docutils literal notranslate"><span class="pre">HVACNetwork</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.HVACNetworkObject"><code class="docutils literal notranslate"><span class="pre">HVACNetworkObject</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.HVACNetworkObjectType"><code class="docutils literal notranslate"><span class="pre">HVACNetworkObjectType</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.HVACOutdoorUnitControl"><code class="docutils literal notranslate"><span class="pre">HVACOutdoorUnitControl</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.HVACOutlet"><code class="docutils literal notranslate"><span class="pre">HVACOutlet</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.HVACPCMBattery"><code class="docutils literal notranslate"><span class="pre">HVACPCMBattery</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.HVACPLCChiller"><code class="docutils literal notranslate"><span class="pre">HVACPLCChiller</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.HVACPlenum"><code class="docutils literal notranslate"><span class="pre">HVACPlenum</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.HVACPreCoolingLoop"><code class="docutils literal notranslate"><span class="pre">HVACPreCoolingLoop</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.HVACPrototypeSystem"><code class="docutils literal notranslate"><span class="pre">HVACPrototypeSystem</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.HVACPrototypeSystemType"><code class="docutils literal notranslate"><span class="pre">HVACPrototypeSystemType</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.HVACPump"><code class="docutils literal notranslate"><span class="pre">HVACPump</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.HVACRadiator"><code class="docutils literal notranslate"><span class="pre">HVACRadiator</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.HVACRadiatorRoom"><code class="docutils literal notranslate"><span class="pre">HVACRadiatorRoom</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.HVACRecirculationScheduleType"><code class="docutils literal notranslate"><span class="pre">HVACRecirculationScheduleType</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.HVACRoom"><code class="docutils literal notranslate"><span class="pre">HVACRoom</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.HVACRoomUnit"><code class="docutils literal notranslate"><span class="pre">HVACRoomUnit</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.HVACSHWPanelType"><code class="docutils literal notranslate"><span class="pre">HVACSHWPanelType</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.HVACSolarAirCollectorBIST"><code class="docutils literal notranslate"><span class="pre">HVACSolarAirCollectorBIST</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.HVACSolarWaterHeater"><code class="docutils literal notranslate"><span class="pre">HVACSolarWaterHeater</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.HVACSourceDependentRoom"><code class="docutils literal notranslate"><span class="pre">HVACSourceDependentRoom</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.HVACSprayChamber"><code class="docutils literal notranslate"><span class="pre">HVACSprayChamber</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.HVACSteamHumidifier"><code class="docutils literal notranslate"><span class="pre">HVACSteamHumidifier</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.HVACSysClassification"><code class="docutils literal notranslate"><span class="pre">HVACSysClassification</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.HVACSystemCurve"><code class="docutils literal notranslate"><span class="pre">HVACSystemCurve</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.HVACSystemCurveRole"><code class="docutils literal notranslate"><span class="pre">HVACSystemCurveRole</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.HVACSystemCurveType"><code class="docutils literal notranslate"><span class="pre">HVACSystemCurveType</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.HVACSystemLink"><code class="docutils literal notranslate"><span class="pre">HVACSystemLink</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.HVACThermalDuctProperties"><code class="docutils literal notranslate"><span class="pre">HVACThermalDuctProperties</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.HVACThermalStorageLoop"><code class="docutils literal notranslate"><span class="pre">HVACThermalStorageLoop</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.HVACThermalStorageTank"><code class="docutils literal notranslate"><span class="pre">HVACThermalStorageTank</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.HVACTimeSwitchController"><code class="docutils literal notranslate"><span class="pre">HVACTimeSwitchController</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.HVACUnitaryCoolingSystem"><code class="docutils literal notranslate"><span class="pre">HVACUnitaryCoolingSystem</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.HVACVRFSourceType"><code class="docutils literal notranslate"><span class="pre">HVACVRFSourceType</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.HVACVRFSystem"><code class="docutils literal notranslate"><span class="pre">HVACVRFSystem</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.HVACWaterAirHeatPump"><code class="docutils literal notranslate"><span class="pre">HVACWaterAirHeatPump</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.HVACWaterAirHeatPumpInstance"><code class="docutils literal notranslate"><span class="pre">HVACWaterAirHeatPumpInstance</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.HVACWaterLoopHeatRecovery"><code class="docutils literal notranslate"><span class="pre">HVACWaterLoopHeatRecovery</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.HVACWaterSourceLoop"><code class="docutils literal notranslate"><span class="pre">HVACWaterSourceLoop</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.HVACWaterWaterHeatExchanger"><code class="docutils literal notranslate"><span class="pre">HVACWaterWaterHeatExchanger</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.HVACWaterWaterHeatExchangerDataType"><code class="docutils literal notranslate"><span class="pre">HVACWaterWaterHeatExchangerDataType</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.HVACWaterWaterHeatPump"><code class="docutils literal notranslate"><span class="pre">HVACWaterWaterHeatPump</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.HVACZone"><code class="docutils literal notranslate"><span class="pre">HVACZone</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.HeatingCoilModelType"><code class="docutils literal notranslate"><span class="pre">HeatingCoilModelType</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.HeatingSourceSystemType"><code class="docutils literal notranslate"><span class="pre">HeatingSourceSystemType</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.HumidificationControlOption"><code class="docutils literal notranslate"><span class="pre">HumidificationControlOption</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.IECC"><code class="docutils literal notranslate"><span class="pre">IECC</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.ImportGBXML"><code class="docutils literal notranslate"><span class="pre">ImportGBXML</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.Insulation_type"><code class="docutils literal notranslate"><span class="pre">Insulation_type</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.LARISpaceData"><code class="docutils literal notranslate"><span class="pre">LARISpaceData</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.LightingGain"><code class="docutils literal notranslate"><span class="pre">LightingGain</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.LightingGain_type"><code class="docutils literal notranslate"><span class="pre">LightingGain_type</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.LightingStandard"><code class="docutils literal notranslate"><span class="pre">LightingStandard</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.Mv2"><code class="docutils literal notranslate"><span class="pre">Mv2</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.NECB"><code class="docutils literal notranslate"><span class="pre">NECB</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.OccupantDiversity"><code class="docutils literal notranslate"><span class="pre">OccupantDiversity</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.OutdoorAirRequirementLinkage"><code class="docutils literal notranslate"><span class="pre">OutdoorAirRequirementLinkage</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.PRM"><code class="docutils literal notranslate"><span class="pre">PRM</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.PeopleGain"><code class="docutils literal notranslate"><span class="pre">PeopleGain</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.PeopleGain_type"><code class="docutils literal notranslate"><span class="pre">PeopleGain_type</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.ProfileUnits"><code class="docutils literal notranslate"><span class="pre">ProfileUnits</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.ProfileVariation"><code class="docutils literal notranslate"><span class="pre">ProfileVariation</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.ProjectInfo"><code class="docutils literal notranslate"><span class="pre">ProjectInfo</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.RefModelUserEdits"><code class="docutils literal notranslate"><span class="pre">RefModelUserEdits</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.ResultsReader"><code class="docutils literal notranslate"><span class="pre">ResultsReader</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.RoomAirExchange"><code class="docutils literal notranslate"><span class="pre">RoomAirExchange</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.RoomGroups"><code class="docutils literal notranslate"><span class="pre">RoomGroups</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.RoomInternalGain"><code class="docutils literal notranslate"><span class="pre">RoomInternalGain</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.RoomLightingGain"><code class="docutils literal notranslate"><span class="pre">RoomLightingGain</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.RoomPeopleGain"><code class="docutils literal notranslate"><span class="pre">RoomPeopleGain</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.RoomPowerGain"><code class="docutils literal notranslate"><span class="pre">RoomPowerGain</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.SolarHeating_type"><code class="docutils literal notranslate"><span class="pre">SolarHeating_type</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.SpaceOutdoorAirRequirementBasis"><code class="docutils literal notranslate"><span class="pre">SpaceOutdoorAirRequirementBasis</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.StrategyOutsideAirVentilationMinReq"><code class="docutils literal notranslate"><span class="pre">StrategyOutsideAirVentilationMinReq</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.StrategySystemFanOperation"><code class="docutils literal notranslate"><span class="pre">StrategySystemFanOperation</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.SystemOutdoorAirRequirementBasis"><code class="docutils literal notranslate"><span class="pre">SystemOutdoorAirRequirementBasis</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.SystemParameters"><code class="docutils literal notranslate"><span class="pre">SystemParameters</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.SystemSizingBypassOption"><code class="docutils literal notranslate"><span class="pre">SystemSizingBypassOption</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.T24"><code class="docutils literal notranslate"><span class="pre">T24</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.T24EndUseData"><code class="docutils literal notranslate"><span class="pre">T24EndUseData</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.T24ProposedBatterySimData"><code class="docutils literal notranslate"><span class="pre">T24ProposedBatterySimData</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.T24ReportEndUse"><code class="docutils literal notranslate"><span class="pre">T24ReportEndUse</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.T24ResponsiblePerson"><code class="docutils literal notranslate"><span class="pre">T24ResponsiblePerson</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.TDVCalculator"><code class="docutils literal notranslate"><span class="pre">TDVCalculator</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.TariffsEngine"><code class="docutils literal notranslate"><span class="pre">TariffsEngine</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.TerminalUnitFanControl"><code class="docutils literal notranslate"><span class="pre">TerminalUnitFanControl</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.Title24ClimateZones"><code class="docutils literal notranslate"><span class="pre">Title24ClimateZones</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.TransformerLosses"><code class="docutils literal notranslate"><span class="pre">TransformerLosses</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.UMLH"><code class="docutils literal notranslate"><span class="pre">UMLH</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.UnitType"><code class="docutils literal notranslate"><span class="pre">UnitType</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.VEAdjacency"><code class="docutils literal notranslate"><span class="pre">VEAdjacency</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.VEApacheSystem"><code class="docutils literal notranslate"><span class="pre">VEApacheSystem</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.VEBody"><code class="docutils literal notranslate"><span class="pre">VEBody</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.VEBody_subtype"><code class="docutils literal notranslate"><span class="pre">VEBody_subtype</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.VEBody_type"><code class="docutils literal notranslate"><span class="pre">VEBody_type</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.VECdbConstruction"><code class="docutils literal notranslate"><span class="pre">VECdbConstruction</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.VECdbDatabase"><code class="docutils literal notranslate"><span class="pre">VECdbDatabase</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.VECdbLayer"><code class="docutils literal notranslate"><span class="pre">VECdbLayer</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.VECdbMaterial"><code class="docutils literal notranslate"><span class="pre">VECdbMaterial</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.VECdbProject"><code class="docutils literal notranslate"><span class="pre">VECdbProject</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.VEComponentProcess"><code class="docutils literal notranslate"><span class="pre">VEComponentProcess</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.VEEnergyMeter"><code class="docutils literal notranslate"><span class="pre">VEEnergyMeter</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.VEGeometry"><code class="docutils literal notranslate"><span class="pre">VEGeometry</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.VELocate"><code class="docutils literal notranslate"><span class="pre">VELocate</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.VEMacroFlo"><code class="docutils literal notranslate"><span class="pre">VEMacroFlo</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.VEModel"><code class="docutils literal notranslate"><span class="pre">VEModel</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.VEModels"><code class="docutils literal notranslate"><span class="pre">VEModels</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.VEProfile"><code class="docutils literal notranslate"><span class="pre">VEProfile</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.VEProject"><code class="docutils literal notranslate"><span class="pre">VEProject</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.VERenewables"><code class="docutils literal notranslate"><span class="pre">VERenewables</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.VERoomData"><code class="docutils literal notranslate"><span class="pre">VERoomData</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.VESankey"><code class="docutils literal notranslate"><span class="pre">VESankey</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.VESuncast"><code class="docutils literal notranslate"><span class="pre">VESuncast</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.VESurface"><code class="docutils literal notranslate"><span class="pre">VESurface</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.VESurface_type"><code class="docutils literal notranslate"><span class="pre">VESurface_type</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.VEThermalTemplate"><code class="docutils literal notranslate"><span class="pre">VEThermalTemplate</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.VEThermalTemplate_standard"><code class="docutils literal notranslate"><span class="pre">VEThermalTemplate_standard</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.VariableSource"><code class="docutils literal notranslate"><span class="pre">VariableSource</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.VariableType"><code class="docutils literal notranslate"><span class="pre">VariableType</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.VolumeCapMode"><code class="docutils literal notranslate"><span class="pre">VolumeCapMode</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.WeatherFileReader"><code class="docutils literal notranslate"><span class="pre">WeatherFileReader</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.air_flow_regulation_type"><code class="docutils literal notranslate"><span class="pre">air_flow_regulation_type</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.angular_dependence_type"><code class="docutils literal notranslate"><span class="pre">angular_dependence_type</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.attribute_type"><code class="docutils literal notranslate"><span class="pre">attribute_type</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.cmm_free_cooling"><code class="docutils literal notranslate"><span class="pre">cmm_free_cooling</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.condition_type"><code class="docutils literal notranslate"><span class="pre">condition_type</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.conditioned_flag"><code class="docutils literal notranslate"><span class="pre">conditioned_flag</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.construction_class"><code class="docutils literal notranslate"><span class="pre">construction_class</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.demand_controlled_ventilation"><code class="docutils literal notranslate"><span class="pre">demand_controlled_ventilation</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.design_weather_source"><code class="docutils literal notranslate"><span class="pre">design_weather_source</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.dhw_parent_type"><code class="docutils literal notranslate"><span class="pre">dhw_parent_type</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.eASHRAEStandard"><code class="docutils literal notranslate"><span class="pre">eASHRAEStandard</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.element_categories"><code class="docutils literal notranslate"><span class="pre">element_categories</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.extract_system_scope"><code class="docutils literal notranslate"><span class="pre">extract_system_scope</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.frame_materials"><code class="docutils literal notranslate"><span class="pre">frame_materials</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.frame_type"><code class="docutils literal notranslate"><span class="pre">frame_type</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.fuel_type"><code class="docutils literal notranslate"><span class="pre">fuel_type</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.glazing_types"><code class="docutils literal notranslate"><span class="pre">glazing_types</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.heat_recovery"><code class="docutils literal notranslate"><span class="pre">heat_recovery</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.heating_cooling_capacity_unit"><code class="docutils literal notranslate"><span class="pre">heating_cooling_capacity_unit</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.hvac_methodology"><code class="docutils literal notranslate"><span class="pre">hvac_methodology</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.lamp_types"><code class="docutils literal notranslate"><span class="pre">lamp_types</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.lighting_case"><code class="docutils literal notranslate"><span class="pre">lighting_case</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.material_categories"><code class="docutils literal notranslate"><span class="pre">material_categories</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.month"><code class="docutils literal notranslate"><span class="pre">month</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.mv2_viewmode"><code class="docutils literal notranslate"><span class="pre">mv2_viewmode</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.ncm_air_supply_mechanism"><code class="docutils literal notranslate"><span class="pre">ncm_air_supply_mechanism</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.ncm_chiller_power"><code class="docutils literal notranslate"><span class="pre">ncm_chiller_power</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.ncm_chiller_type"><code class="docutils literal notranslate"><span class="pre">ncm_chiller_type</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.ncm_eca_list"><code class="docutils literal notranslate"><span class="pre">ncm_eca_list</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#id0"><code class="docutils literal notranslate"><span class="pre">ncm_eca_list</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.ncm_heat_recovery"><code class="docutils literal notranslate"><span class="pre">ncm_heat_recovery</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.ncm_heat_source"><code class="docutils literal notranslate"><span class="pre">ncm_heat_source</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.ncm_leakage_standard"><code class="docutils literal notranslate"><span class="pre">ncm_leakage_standard</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.ncm_leakage_test"><code class="docutils literal notranslate"><span class="pre">ncm_leakage_test</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.ncm_pump_type"><code class="docutils literal notranslate"><span class="pre">ncm_pump_type</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.ncm_system_type"><code class="docutils literal notranslate"><span class="pre">ncm_system_type</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.occupancy_sensing"><code class="docutils literal notranslate"><span class="pre">occupancy_sensing</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.opening_internality"><code class="docutils literal notranslate"><span class="pre">opening_internality</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.opening_type"><code class="docutils literal notranslate"><span class="pre">opening_type</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.percent_sky_blocked_options"><code class="docutils literal notranslate"><span class="pre">percent_sky_blocked_options</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.photoelectric_control_type"><code class="docutils literal notranslate"><span class="pre">photoelectric_control_type</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.prm_mode"><code class="docutils literal notranslate"><span class="pre">prm_mode</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.project_types"><code class="docutils literal notranslate"><span class="pre">project_types</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.pvs_type"><code class="docutils literal notranslate"><span class="pre">pvs_type</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.reference_irradiance"><code class="docutils literal notranslate"><span class="pre">reference_irradiance</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.reporting_interval"><code class="docutils literal notranslate"><span class="pre">reporting_interval</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.room_type"><code class="docutils literal notranslate"><span class="pre">room_type</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.sensor_type"><code class="docutils literal notranslate"><span class="pre">sensor_type</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.setpoint_type"><code class="docutils literal notranslate"><span class="pre">setpoint_type</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.shw_circulation_sys"><code class="docutils literal notranslate"><span class="pre">shw_circulation_sys</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.shw_collector_type"><code class="docutils literal notranslate"><span class="pre">shw_collector_type</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.shw_insulation_type"><code class="docutils literal notranslate"><span class="pre">shw_insulation_type</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.shw_preheating_type"><code class="docutils literal notranslate"><span class="pre">shw_preheating_type</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.standard"><code class="docutils literal notranslate"><span class="pre">standard</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.surface_type"><code class="docutils literal notranslate"><span class="pre">surface_type</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.time_step"><code class="docutils literal notranslate"><span class="pre">time_step</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.uvalue_types"><code class="docutils literal notranslate"><span class="pre">uvalue_types</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.wattage_unit"><code class="docutils literal notranslate"><span class="pre">wattage_unit</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#iesve.weather_variable"><code class="docutils literal notranslate"><span class="pre">weather_variable</span></code></a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="overview.html" class="btn btn-neutral float-right" title="Overview" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Steven Firth.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
