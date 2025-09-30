@@ -102,10 +102,23 @@ print(air_temperatures_dict['RF000000'])
 
 
 
-print(type(iesve))
-
-print(iesve.get_application_folder())
-
-
+db = iesve.VECdbDatabase.get_current_database()
+print(db.get_projects())
+project = db.get_projects()[iesve.project_types.project][0]
+print(project.title)
+print(project.get_construction_ids(iesve.construction_class.none))
+construction = project.get_construction('ALUMP', iesve.construction_class.none)
+print(construction.get_layers())
+layer = construction.get_layers()[0]
+print(layer.get_material(True))
 quit()
+
+
+
+
+
+
+
+
+
 
