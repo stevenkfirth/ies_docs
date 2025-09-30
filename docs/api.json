@@ -1,7 +1,7 @@
 {
     "iesve": {
         "name": "iesve",
-        "doc": "Note: text in italics has been reproduced verbatim from the original text used in the IES-VE Python API online help guide or Python docstrings. Where I have replaced this with my own text, this is in non-italics.",
+        "doc": "",
         "type": "module",
         "classname": "iesve.module",
         "value": null,
@@ -29797,7 +29797,7 @@
             },
             "ResultsReader": {
                 "name": "ResultsReader",
-                "doc": "*Support for reading simulation result files (APS files).*\n*Basic usage:*\n\n*f = iesve.ResultsReader()*\n*f.open_aps_data(filename)*\n*x = f.get_results('Total electricity', 'e')*\n*f.close()*\n\n*or*\n\n*f = iesve.ResultsReader.open(filename)*\n*x = f.get_results('Total electricity', 'e')*\n*f.close()*",
+                "doc": "A class used to access the results of a simulation as stored in an *.aps* file in the *vista* folder.\n\nSee also: :ref:`working_with_results`",
                 "type": "class",
                 "classname": "iesve.class",
                 "value": null,
@@ -30133,8 +30133,8 @@
                         "isclassmethod": false
                     },
                     "get_room_results": {
-                        "name": "get_room_results",
-                        "doc": "*get_room_results(room_id, aps_var, vista_var, var_level, [start_day], [end_day]) ->*\n    *Numpy array of floats*\n\n*Get the results for specified room + variable.  See units spreadsheet*\n*for available variables and matching level.  See get_results for start_day*\n*and end_day details.*",
+                        "name": "get_room_results(room_id, aps_var, vista_var, start_day = -1, end_day = -1)",
+                        "doc": ":param str room_id: The id of the room (see :py:meth:`~iesve.ResultsReader.get_room_ids`)\n\n:param str aps_var: The name of the variable as used in the .aps results file (see 'aps_varname' in :py:meth:`~iesve.ResultsReader.get_variables`.\n\n:param str vista_var: The name of the variable as used in the Vista module (see 'display_name' in :py:meth:`~iesve.ResultsReader.get_variables`).\n\n:param int start_day: The start day for the returned results (default is the first day of the simulation).\n\n:param int end_day: The end day for the returned results (default is the last day of the simulation).\n\n:returns: The values of a variable of a room in the :py:class:`~iesve.ResultsReader` instance.\n\n:rtype: numpy.array (floats)\n\nSee also: :ref:`how_to_access_the_air_temperatures_for_all_rooms_in_a_results_file`",
                         "type": "method",
                         "classname": null,
                         "value": null,
@@ -30174,7 +30174,7 @@
                     },
                     "get_variables": {
                         "name": "get_variables",
-                        "doc": "*get_variables( ) -> [ variable data ]*\n\n*Get the list of results file variables that are applicable to the loaded*\n*file.  The return value is a list of dictionaries with all relevant*\n*variable data.  The available data fields are:*\n    *category, display_name, aps_varname, units_type, units_category,*\n    *combine_flag, model_level, post_process, color, color_rgb, subtype,*\n    *line_style, order, polarity.*",
+                        "doc": ":returns: A list of dictionaries, where the dictionaries contains information about all the variables stored in a :py:class:`~iesve.ResultsReader` instance.\n\n:rtype: list\n\nEach dictionary may contain the following key/value pairs:\n\n* 'category'\n\n* 'display_name' (str): The name of the variable as used in the Vista module.\n\n* 'aps_varname' (str): The name of the variable as used in the .aps results file.\n\n* 'units_type' (str)\n\n* 'units_category'\n\n* 'combine_flag'\n\n* 'model_level' (str): One of:\n\n  * 'w': weather (used in :py:meth:`~iesve.ResultsReader.get_weather_results`)\n\n  * 'z': room level (zone) (used in :py:meth:`~iesve.ResultsReader.get_room_results`)\n\n  * 'v': apache systems misc (used in :py:meth:`~iesve.ResultsReader.get_apache_system_results`)\n\n  * 'j': apache systems energy (used in :py:meth:`~iesve.ResultsReader.get_apache_system_results`)\n\n  * 'r': apache systems carbon (used in :py:meth:`~iesve.ResultsReader.get_apache_system_results`)\n\n  * 'l': building loads (used in :py:meth:`~iesve.ResultsReader.get_results`)\n\n  * 'e': building energy (used in :py:meth:`~iesve.ResultsReader.get_results`)\n\n  * 'c': building carbon (used in :py:meth:`~iesve.ResultsReader.get_results`)\n\n  * 's': surface level (used in :py:meth:`~iesve.ResultsReader.get_surface_results`)\n\n  * 'o': opening level (used in :py:meth:`~iesve.ResultsReader.get_opening_results`)\n\n  * 'n': HVAC node level (used in :py:meth:`~iesve.ResultsReader.get_hvac_node_results`)\n\n  * 'h': HVAC component level (used in :py:meth:`~iesve.ResultsReader.get_hvac_component_results`)\n\n* 'post_process'\n\n* 'color'\n\n* 'color_rgb'\n\n* 'subtype'\n\n* 'line_style'\n\n* 'order'\n\n* 'polarity'",
                         "type": "method",
                         "classname": null,
                         "value": null,
@@ -30216,11 +30216,11 @@
                         "name": "open",
                         "doc": "*open(filename) -> iesve.ResultsReader*\n\n*Open an APS file and return a ResultsReader instance. Throws exception*\n*on error.*",
                         "type": "method",
-                        "classname": null,
+                        "classname": "iesve.ResultsReader",
                         "value": null,
                         "methods_and_attributes": {},
                         "classes": {},
-                        "isclassmethod": false
+                        "isclassmethod": true
                     },
                     "open_aps_data": {
                         "name": "open_aps_data",
@@ -34122,10 +34122,10 @@
                         "isclassmethod": false
                     },
                     "get_room_data": {
-                        "name": "get_room_data",
-                        "doc": "*get_room_data(type) -> VERoomData object*\n\n*Gets a VERoomData object for closer inspection of the room's data. The data*\n*depends on the input type: the default type of 'real_attributes' gives the default data for the*\n*room, but NCM, PRM and Title 24 specific data can be requested.*\n\n*Args:*\n    *type (enum, optional): attribute_type enum*\n*Returns:*\n    *A VERoomData object for accessing the room's data, including general data,*\n    *room conditions, system data, internal gains and air exchanges.*\n*Raises:*\n    *ValueError: if the input is outside the valid range or if it is inconsistent*\n                *with the model variant that the room belongs to.*\n    *RuntimeError: in the case of an internal data handling error*\n\n*get_room_data(type) -> VERoomData object*\n\n*Gets a VERoomData object for closer inspection of the room's data. The data*\n*depends on the input type: the default type of 'real_attributes' gives the default data for the*\n*room, but NCM, PRM and Title 24 specific data can be requested.*\n\n*Args:*\n    *type (enum, optional): attribute_type enum*\n*Returns:*\n    *A VERoomData object for accessing the room's data, including general data,*\n    *room conditions, system data, internal gains and air exchanges.*\n*Raises:*\n    *ValueError: if the input is outside the valid range or if it is inconsistent*\n                *with the model variant that the room belongs to.*\n    *RuntimeError: in the case of an internal data handling error*",
+                        "name": "get_room_data(type = iesve.attribute_type.real_attributes)",
+                        "doc": ":param type: The type of :py:class:`~iesve.VERoomData` instance to return. Options are :py:attr:`iesve.attribute_type.real_attributes` (default value), :py:attr:`iesve.attribute_type.ncm_attributes` (NCM), :py:attr:`iesve.attribute_type.bprm_attributes` (PRM) and :py:attr:`iesve.attribute_type.t_24` (Title 24).: \n\n:type type: iesve.attribute_type\n\n:returns: The :py:class:`~iesve.VERoomData` instance of the :py:class:`~iesve.VEBody`.",
                         "type": "method",
-                        "classname": null,
+                        "classname": "iesve.VERoomData",
                         "value": null,
                         "methods_and_attributes": {},
                         "classes": {},

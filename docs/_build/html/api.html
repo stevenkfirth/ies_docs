@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" data-content_root="./">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>API Reference &mdash; IES-VE Python API  documentation</title>
@@ -20,7 +20,7 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="prev" title="Example Scripts" href="examples.html" /> 
+    <link rel="prev" title="Export results to CSV files" href="examples/ExportResultsToCSV.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -46,8 +46,8 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="quick_start.html">Quick Start</a></li>
-<li class="toctree-l1"><a class="reference internal" href="code_snippets.html">Code Snippets</a></li>
-<li class="toctree-l1"><a class="reference internal" href="examples.html">Example Scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="code_snippets/code_snippets.html">Code Snippets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/examples.html">Example Scripts</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">API Reference</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#iesve.get_application_folder"><code class="docutils literal notranslate"><span class="pre">get_application_folder()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#iesve.AdjacentCondition_type"><code class="docutils literal notranslate"><span class="pre">AdjacentCondition_type</span></code></a><ul>
@@ -5093,10 +5093,13 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="module-iesve">
-<span id="id1"></span><span id="api-reference"></span><h1>API Reference<a class="headerlink" href="#module-iesve" title="Link to this heading"></a></h1>
+  <section id="api-reference">
+<span id="id1"></span><h1>API Reference<a class="headerlink" href="#api-reference" title="Link to this heading"></a></h1>
+<p>This page shows the classes and functions for the <code class="docutils literal notranslate"><span class="pre">iesve</span></code> module.</p>
+<p>These classes are not instantiated directly, but are accessed using either class methods or regular methods on ‘parent’ instances. For example, to instantiate an instance of the <a class="reference internal" href="#iesve.VEProject" title="iesve.VEProject"><code class="xref py py-class docutils literal notranslate"><span class="pre">VEProject</span></code></a> class this is not done using <code class="docutils literal notranslate"><span class="pre">iesve.VEProject()</span></code> but rather by using the <a class="reference internal" href="#iesve.VEProject.get_current_project" title="iesve.VEProject.get_current_project"><code class="xref py py-meth docutils literal notranslate"><span class="pre">get_current_project()</span></code></a> class method, i.e. <code class="docutils literal notranslate"><span class="pre">iesve.VEProject.get_current_project()</span></code>.</p>
+<p>For where to start with these classes, I would recommend the <a class="reference internal" href="code_snippets/code_snippets.html#code-snippets"><span class="std std-ref">Code Snippets</span></a> page and the helpful diagram in the official IES documentation <a class="reference external" href="https://www.iesve.com/support/faq/pdf/vescriptsguide/iiesve-class-structure-summary.pdf">here</a>.</p>
 <p>Note: text in italics has been reproduced verbatim from the original text used in the IES-VE Python API online help guide or Python docstrings. Where I have replaced this with my own text, this is in non-italics.</p>
-<dl class="py method">
+<dl class="py method" id="module-iesve">
 <dt class="sig sig-object py" id="iesve.get_application_folder">
 <span class="sig-prename descclassname"><span class="pre">iesve.</span></span><span class="sig-name descname"><span class="pre">get_application_folder</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#iesve.get_application_folder" title="Link to this definition"></a></dt>
 <dd><dl class="simple">
@@ -27212,16 +27215,8 @@
 <dl class="py class">
 <dt class="sig sig-object py" id="iesve.ResultsReader">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">iesve.</span></span><span class="sig-name descname"><span class="pre">ResultsReader</span></span><a class="headerlink" href="#iesve.ResultsReader" title="Link to this definition"></a></dt>
-<dd><p><em>Support for reading simulation result files (APS files).</em>
-<em>Basic usage:</em></p>
-<p><em>f = iesve.ResultsReader()</em>
-<em>f.open_aps_data(filename)</em>
-<em>x = f.get_results(‘Total electricity’, ‘e’)</em>
-<em>f.close()</em></p>
-<p><em>or</em></p>
-<p><em>f = iesve.ResultsReader.open(filename)</em>
-<em>x = f.get_results(‘Total electricity’, ‘e’)</em>
-<em>f.close()</em></p>
+<dd><p>A class used to access the results of a simulation as stored in an <em>.aps</em> file in the <em>vista</em> folder.</p>
+<p>See also: <a class="reference internal" href="code_snippets/ResultsReader.html#working-with-results"><span class="std std-ref">Working with results</span></a></p>
 <dl class="py method">
 <dt class="sig sig-object py" id="iesve.ResultsReader.close">
 <span class="sig-name descname"><span class="pre">close</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#iesve.ResultsReader.close" title="Link to this definition"></a></dt>
@@ -27666,14 +27661,25 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="iesve.ResultsReader.get_room_results">
-<span class="sig-name descname"><span class="pre">get_room_results</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#iesve.ResultsReader.get_room_results" title="Link to this definition"></a></dt>
-<dd><dl class="simple">
-<dt><em>get_room_results(room_id, aps_var, vista_var, var_level, [start_day], [end_day]) -&gt;</em></dt><dd><p><em>Numpy array of floats</em></p>
+<span class="sig-name descname"><span class="pre">get_room_results</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">room_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">aps_var</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vista_var</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start_day</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end_day</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#iesve.ResultsReader.get_room_results" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>room_id</strong> (<em>str</em>) – The id of the room (see <a class="reference internal" href="#iesve.ResultsReader.get_room_ids" title="iesve.ResultsReader.get_room_ids"><code class="xref py py-meth docutils literal notranslate"><span class="pre">get_room_ids()</span></code></a>)</p></li>
+<li><p><strong>aps_var</strong> (<em>str</em>) – The name of the variable as used in the .aps results file (see ‘aps_varname’ in <a class="reference internal" href="#iesve.ResultsReader.get_variables" title="iesve.ResultsReader.get_variables"><code class="xref py py-meth docutils literal notranslate"><span class="pre">get_variables()</span></code></a>.</p></li>
+<li><p><strong>vista_var</strong> (<em>str</em>) – The name of the variable as used in the Vista module (see ‘display_name’ in <a class="reference internal" href="#iesve.ResultsReader.get_variables" title="iesve.ResultsReader.get_variables"><code class="xref py py-meth docutils literal notranslate"><span class="pre">get_variables()</span></code></a>).</p></li>
+<li><p><strong>start_day</strong> (<em>int</em>) – The start day for the returned results (default is the first day of the simulation).</p></li>
+<li><p><strong>end_day</strong> (<em>int</em>) – The end day for the returned results (default is the last day of the simulation).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The values of a variable of a room in the <a class="reference internal" href="#iesve.ResultsReader" title="iesve.ResultsReader"><code class="xref py py-class docutils literal notranslate"><span class="pre">ResultsReader</span></code></a> instance.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>numpy.array (floats)</p>
 </dd>
 </dl>
-<p><em>Get the results for specified room + variable.  See units spreadsheet</em>
-<em>for available variables and matching level.  See get_results for start_day</em>
-<em>and end_day details.</em></p>
+<p>See also: <a class="reference internal" href="code_snippets/ResultsReader.html#how-to-access-the-air-temperatures-for-all-rooms-in-a-results-file"><span class="std std-ref">How to access the air temperatures for all rooms in a results file</span></a></p>
 </dd></dl>
 
 <dl class="py method">
@@ -27714,15 +27720,46 @@
 <dl class="py method">
 <dt class="sig sig-object py" id="iesve.ResultsReader.get_variables">
 <span class="sig-name descname"><span class="pre">get_variables</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#iesve.ResultsReader.get_variables" title="Link to this definition"></a></dt>
-<dd><p><em>get_variables( ) -&gt; [ variable data ]</em></p>
-<p><em>Get the list of results file variables that are applicable to the loaded</em>
-<em>file.  The return value is a list of dictionaries with all relevant</em>
-<em>variable data.  The available data fields are:</em></p>
-<blockquote>
-<div><p><em>category, display_name, aps_varname, units_type, units_category,</em>
-<em>combine_flag, model_level, post_process, color, color_rgb, subtype,</em>
-<em>line_style, order, polarity.</em></p>
-</div></blockquote>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A list of dictionaries, where the dictionaries contains information about all the variables stored in a <a class="reference internal" href="#iesve.ResultsReader" title="iesve.ResultsReader"><code class="xref py py-class docutils literal notranslate"><span class="pre">ResultsReader</span></code></a> instance.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>list</p>
+</dd>
+</dl>
+<p>Each dictionary may contain the following key/value pairs:</p>
+<ul class="simple">
+<li><p>‘category’</p></li>
+<li><p>‘display_name’ (str): The name of the variable as used in the Vista module.</p></li>
+<li><p>‘aps_varname’ (str): The name of the variable as used in the .aps results file.</p></li>
+<li><p>‘units_type’ (str)</p></li>
+<li><p>‘units_category’</p></li>
+<li><p>‘combine_flag’</p></li>
+<li><p>‘model_level’ (str): One of:</p>
+<ul>
+<li><p>‘w’: weather (used in <a class="reference internal" href="#iesve.ResultsReader.get_weather_results" title="iesve.ResultsReader.get_weather_results"><code class="xref py py-meth docutils literal notranslate"><span class="pre">get_weather_results()</span></code></a>)</p></li>
+<li><p>‘z’: room level (zone) (used in <a class="reference internal" href="#iesve.ResultsReader.get_room_results" title="iesve.ResultsReader.get_room_results"><code class="xref py py-meth docutils literal notranslate"><span class="pre">get_room_results()</span></code></a>)</p></li>
+<li><p>‘v’: apache systems misc (used in <a class="reference internal" href="#iesve.ResultsReader.get_apache_system_results" title="iesve.ResultsReader.get_apache_system_results"><code class="xref py py-meth docutils literal notranslate"><span class="pre">get_apache_system_results()</span></code></a>)</p></li>
+<li><p>‘j’: apache systems energy (used in <a class="reference internal" href="#iesve.ResultsReader.get_apache_system_results" title="iesve.ResultsReader.get_apache_system_results"><code class="xref py py-meth docutils literal notranslate"><span class="pre">get_apache_system_results()</span></code></a>)</p></li>
+<li><p>‘r’: apache systems carbon (used in <a class="reference internal" href="#iesve.ResultsReader.get_apache_system_results" title="iesve.ResultsReader.get_apache_system_results"><code class="xref py py-meth docutils literal notranslate"><span class="pre">get_apache_system_results()</span></code></a>)</p></li>
+<li><p>‘l’: building loads (used in <a class="reference internal" href="#iesve.ResultsReader.get_results" title="iesve.ResultsReader.get_results"><code class="xref py py-meth docutils literal notranslate"><span class="pre">get_results()</span></code></a>)</p></li>
+<li><p>‘e’: building energy (used in <a class="reference internal" href="#iesve.ResultsReader.get_results" title="iesve.ResultsReader.get_results"><code class="xref py py-meth docutils literal notranslate"><span class="pre">get_results()</span></code></a>)</p></li>
+<li><p>‘c’: building carbon (used in <a class="reference internal" href="#iesve.ResultsReader.get_results" title="iesve.ResultsReader.get_results"><code class="xref py py-meth docutils literal notranslate"><span class="pre">get_results()</span></code></a>)</p></li>
+<li><p>‘s’: surface level (used in <a class="reference internal" href="#iesve.ResultsReader.get_surface_results" title="iesve.ResultsReader.get_surface_results"><code class="xref py py-meth docutils literal notranslate"><span class="pre">get_surface_results()</span></code></a>)</p></li>
+<li><p>‘o’: opening level (used in <a class="reference internal" href="#iesve.ResultsReader.get_opening_results" title="iesve.ResultsReader.get_opening_results"><code class="xref py py-meth docutils literal notranslate"><span class="pre">get_opening_results()</span></code></a>)</p></li>
+<li><p>‘n’: HVAC node level (used in <a class="reference internal" href="#iesve.ResultsReader.get_hvac_node_results" title="iesve.ResultsReader.get_hvac_node_results"><code class="xref py py-meth docutils literal notranslate"><span class="pre">get_hvac_node_results()</span></code></a>)</p></li>
+<li><p>‘h’: HVAC component level (used in <a class="reference internal" href="#iesve.ResultsReader.get_hvac_component_results" title="iesve.ResultsReader.get_hvac_component_results"><code class="xref py py-meth docutils literal notranslate"><span class="pre">get_hvac_component_results()</span></code></a>)</p></li>
+</ul>
+</li>
+<li><p>‘post_process’</p></li>
+<li><p>‘color’</p></li>
+<li><p>‘color_rgb’</p></li>
+<li><p>‘subtype’</p></li>
+<li><p>‘line_style’</p></li>
+<li><p>‘order’</p></li>
+<li><p>‘polarity’</p></li>
+</ul>
 </dd></dl>
 
 <dl class="py method">
@@ -27750,10 +27787,15 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="iesve.ResultsReader.open">
-<span class="sig-name descname"><span class="pre">open</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#iesve.ResultsReader.open" title="Link to this definition"></a></dt>
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">open</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#iesve.ResultsReader.open" title="Link to this definition"></a></dt>
 <dd><p><em>open(filename) -&gt; iesve.ResultsReader</em></p>
 <p><em>Open an APS file and return a ResultsReader instance. Throws exception</em>
 <em>on error.</em></p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#iesve.ResultsReader" title="iesve.ResultsReader">iesve.ResultsReader</a></p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
@@ -29404,7 +29446,7 @@
 <blockquote>
 <div><p><em>te = iesve.TariffsEngine(…)</em></p>
 <p><em>costsPerGap = te.GetRatesTimeSeries(iesve.TariffsEngine.EUtilities.OIL, 1, 365)</em></p>
-<p><em>print(str(costsPerGap.size) + ” values retrieved”)</em></p>
+<p><em>print(str(costsPerGap.size) + “ values retrieved”)</em></p>
 <dl class="simple">
 <dt><em>if costsPerGap.size&gt;0:</em></dt><dd><p><em>print(costsPerGap[0])</em></p>
 </dd>
@@ -32551,39 +32593,16 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="iesve.VEBody.get_room_data">
-<span class="sig-name descname"><span class="pre">get_room_data</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#iesve.VEBody.get_room_data" title="Link to this definition"></a></dt>
-<dd><p><em>get_room_data(type) -&gt; VERoomData object</em></p>
-<p><em>Gets a VERoomData object for closer inspection of the room’s data. The data</em>
-<em>depends on the input type: the default type of ‘real_attributes’ gives the default data for the</em>
-<em>room, but NCM, PRM and Title 24 specific data can be requested.</em></p>
-<dl>
-<dt><em>Args:</em></dt><dd><p><em>type (enum, optional): attribute_type enum</em></p>
+<span class="sig-name descname"><span class="pre">get_room_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">iesve.attribute_type.real_attributes</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#iesve.VEBody.get_room_data" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>type</strong> (<a class="reference internal" href="#iesve.attribute_type" title="iesve.attribute_type"><em>iesve.attribute_type</em></a>) – The type of <a class="reference internal" href="#iesve.VERoomData" title="iesve.VERoomData"><code class="xref py py-class docutils literal notranslate"><span class="pre">VERoomData</span></code></a> instance to return. Options are <a class="reference internal" href="#iesve.attribute_type.real_attributes" title="iesve.attribute_type.real_attributes"><code class="xref py py-attr docutils literal notranslate"><span class="pre">iesve.attribute_type.real_attributes</span></code></a> (default value), <a class="reference internal" href="#iesve.attribute_type.ncm_attributes" title="iesve.attribute_type.ncm_attributes"><code class="xref py py-attr docutils literal notranslate"><span class="pre">iesve.attribute_type.ncm_attributes</span></code></a> (NCM), <a class="reference internal" href="#iesve.attribute_type.bprm_attributes" title="iesve.attribute_type.bprm_attributes"><code class="xref py py-attr docutils literal notranslate"><span class="pre">iesve.attribute_type.bprm_attributes</span></code></a> (PRM) and <code class="xref py py-attr docutils literal notranslate"><span class="pre">iesve.attribute_type.t_24</span></code> (Title 24).:</p>
 </dd>
-<dt><em>Returns:</em></dt><dd><p><em>A VERoomData object for accessing the room’s data, including general data,</em>
-<em>room conditions, system data, internal gains and air exchanges.</em></p>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The <a class="reference internal" href="#iesve.VERoomData" title="iesve.VERoomData"><code class="xref py py-class docutils literal notranslate"><span class="pre">VERoomData</span></code></a> instance of the <a class="reference internal" href="#iesve.VEBody" title="iesve.VEBody"><code class="xref py py-class docutils literal notranslate"><span class="pre">VEBody</span></code></a>.</p>
 </dd>
-<dt><em>Raises:</em></dt><dd><dl class="simple">
-<dt><em>ValueError: if the input is outside the valid range or if it is inconsistent</em></dt><dd><p><em>with the model variant that the room belongs to.</em></p>
-</dd>
-</dl>
-<p><em>RuntimeError: in the case of an internal data handling error</em></p>
-</dd>
-</dl>
-<p><em>get_room_data(type) -&gt; VERoomData object</em></p>
-<p><em>Gets a VERoomData object for closer inspection of the room’s data. The data</em>
-<em>depends on the input type: the default type of ‘real_attributes’ gives the default data for the</em>
-<em>room, but NCM, PRM and Title 24 specific data can be requested.</em></p>
-<dl>
-<dt><em>Args:</em></dt><dd><p><em>type (enum, optional): attribute_type enum</em></p>
-</dd>
-<dt><em>Returns:</em></dt><dd><p><em>A VERoomData object for accessing the room’s data, including general data,</em>
-<em>room conditions, system data, internal gains and air exchanges.</em></p>
-</dd>
-<dt><em>Raises:</em></dt><dd><dl class="simple">
-<dt><em>ValueError: if the input is outside the valid range or if it is inconsistent</em></dt><dd><p><em>with the model variant that the room belongs to.</em></p>
-</dd>
-</dl>
-<p><em>RuntimeError: in the case of an internal data handling error</em></p>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#iesve.VERoomData" title="iesve.VERoomData">iesve.VERoomData</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -43831,7 +43850,7 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="examples.html" class="btn btn-neutral float-left" title="Example Scripts" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="examples/ExportResultsToCSV.html" class="btn btn-neutral float-left" title="Export results to CSV files" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
 
   <hr/>

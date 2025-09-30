@@ -3,10 +3,11 @@
 
 
 import json
+import os
 
 # CREATE INTERMEDIATE JSON
 
-with open('ies_scripts.json') as f:
+with open(os.path.join('ies_scripts', 'ies_scripts.json')) as f:
     input_dict = json.load(f)
 
 def parse(obj_dict):
@@ -72,8 +73,54 @@ result['iesve'] = parse(input_dict)
 # MANUAL ADDITIONS TO JSON
 
 # iesve
+# Python API for the IES Virtual Environment (VE)
 x = result['iesve']
-x['doc'] = 'Note: text in italics has been reproduced verbatim from the original text used in the IES-VE Python API online help guide or Python docstrings. Where I have replaced this with my own text, this is in non-italics.'
+x['doc'] = ""
+
+# ResultsReader
+# Support for reading simulation result files (APS files). Basic usage:
+# f = iesve.ResultsReader() f.open_aps_data(filename) x = f.get_results(‘Total electricity’, ‘e’) f.close()
+# or
+# f = iesve.ResultsReader.open(filename) x = f.get_results(‘Total electricity’, ‘e’) f.close()
+x = result['iesve']['classes']['ResultsReader']
+x['doc'] = "A class used to access the results of a simulation as stored in an *.aps* file in the *vista* folder.\n\nSee also: :ref:`working_with_results`"
+
+# ResultsReader.get_room_results()
+# get_room_results(room_id, aps_var, vista_var, var_level, [start_day], [end_day]) ->
+# Numpy array of floats
+# Get the results for specified room + variable. See units spreadsheet for available variables and matching level. See get_results for start_day and end_day details.
+x = result['iesve']['classes']['ResultsReader']['methods_and_attributes']['get_room_results']
+x['name'] = "get_room_results(room_id, aps_var, vista_var, start_day = -1, end_day = -1)"
+x['doc'] = ":param str room_id: The id of the room (see :py:meth:`~iesve.ResultsReader.get_room_ids`)\n\n:param str aps_var: The name of the variable as used in the .aps results file (see 'aps_varname' in :py:meth:`~iesve.ResultsReader.get_variables`.\n\n:param str vista_var: The name of the variable as used in the Vista module (see 'display_name' in :py:meth:`~iesve.ResultsReader.get_variables`).\n\n:param int start_day: The start day for the returned results (default is the first day of the simulation).\n\n:param int end_day: The end day for the returned results (default is the last day of the simulation).\n\n:returns: The values of a variable of a room in the :py:class:`~iesve.ResultsReader` instance.\n\n:rtype: numpy.array (floats)\n\nSee also: :ref:`how_to_access_the_air_temperatures_for_all_rooms_in_a_results_file`"
+
+# ResultsReader.get_variables()
+# get_variables( ) -> [ variable data ]
+# Get the list of results file variables that are applicable to the loaded file. The return value is a list of dictionaries with all relevant variable data. The available data fields are:
+# category, display_name, aps_varname, units_type, units_category, combine_flag, model_level, post_process, color, color_rgb, subtype, line_style, order, polarity.
+x = result['iesve']['classes']['ResultsReader']['methods_and_attributes']['get_variables']
+x['doc'] = ":returns: A list of dictionaries, where the dictionaries contains information about all the variables stored in a :py:class:`~iesve.ResultsReader` instance.\n\n:rtype: list\n\nEach dictionary may contain the following key/value pairs:\n\n* 'category'\n\n* 'display_name' (str): The name of the variable as used in the Vista module.\n\n* 'aps_varname' (str): The name of the variable as used in the .aps results file.\n\n* 'units_type' (str)\n\n* 'units_category'\n\n* 'combine_flag'\n\n* 'model_level' (str): One of:\n\n  * 'w': weather (used in :py:meth:`~iesve.ResultsReader.get_weather_results`)\n\n  * 'z': room level (zone) (used in :py:meth:`~iesve.ResultsReader.get_room_results`)\n\n  * 'v': apache systems misc (used in :py:meth:`~iesve.ResultsReader.get_apache_system_results`)\n\n  * 'j': apache systems energy (used in :py:meth:`~iesve.ResultsReader.get_apache_system_results`)\n\n  * 'r': apache systems carbon (used in :py:meth:`~iesve.ResultsReader.get_apache_system_results`)\n\n  * 'l': building loads (used in :py:meth:`~iesve.ResultsReader.get_results`)\n\n  * 'e': building energy (used in :py:meth:`~iesve.ResultsReader.get_results`)\n\n  * 'c': building carbon (used in :py:meth:`~iesve.ResultsReader.get_results`)\n\n  * 's': surface level (used in :py:meth:`~iesve.ResultsReader.get_surface_results`)\n\n  * 'o': opening level (used in :py:meth:`~iesve.ResultsReader.get_opening_results`)\n\n  * 'n': HVAC node level (used in :py:meth:`~iesve.ResultsReader.get_hvac_node_results`)\n\n  * 'h': HVAC component level (used in :py:meth:`~iesve.ResultsReader.get_hvac_component_results`)\n\n* 'post_process'\n\n* 'color'\n\n* 'color_rgb'\n\n* 'subtype'\n\n* 'line_style'\n\n* 'order'\n\n* 'polarity'"
+
+# ResultsReader.open
+x = result['iesve']['classes']['ResultsReader']['methods_and_attributes']['open']
+x['isclassmethod'] = True
+x['classname'] = 'iesve.ResultsReader'
+
+
+# VEBody
+x = result['iesve']['classes']['VEBody']
+x['doc'] = 'Represents a room of the building or another feature such as adjacent_building, topographical shade, local_shade or tree.\n\nSee iesve.VEBody_type for all options.'
+
+# VEBody.type
+x = result['iesve']['classes']['VEBody']['methods_and_attributes']['type']
+x['doc'] = ':returns: The type of the VEBody.'
+x['classname'] = 'iesve.VEBody_type'
+
+# VEBody.get_room_data
+x = result['iesve']['classes']['VEBody']['methods_and_attributes']['get_room_data']
+x['name'] = "get_room_data(type = iesve.attribute_type.real_attributes)"
+x['doc'] = ":param type: The type of :py:class:`~iesve.VERoomData` instance to return. Options are :py:attr:`iesve.attribute_type.real_attributes` (default value), :py:attr:`iesve.attribute_type.ncm_attributes` (NCM), :py:attr:`iesve.attribute_type.bprm_attributes` (PRM) and :py:attr:`iesve.attribute_type.t_24` (Title 24).: \n\n:type type: iesve.attribute_type\n\n:returns: The :py:class:`~iesve.VERoomData` instance of the :py:class:`~iesve.VEBody`."
+x['classname'] = 'iesve.VERoomData'
+
 
 # VEProject
 x = result['iesve']['classes']['VEProject']
@@ -106,14 +153,8 @@ x['name'] = 'get_bodies(selectedOnly)'
 x['doc'] = ':param bool selectedOnly: Use `True` to return only the bodies already selected by the user in the IES-VE software; use `False` to return all bodies.\n\n:returns: A list of "body" instances.'
 x['classname'] = 'list[iesve.VEBody]'
 
-# VEBody
-x = result['iesve']['classes']['VEBody']
-x['doc'] = 'Represents a room of the building or another feature such as adjacent_building, topographical shade, local_shade or tree.\n\nSee iesve.VEBody_type for all options.'
 
-# VEBody.type
-x = result['iesve']['classes']['VEBody']['methods_and_attributes']['type']
-x['doc'] = ':returns: The type of the VEBody.'
-x['classname'] = 'iesve.VEBody_type'
+
 
 # update the integer-like classes
 for name, obj_dict in result['iesve']['classes'].items():
@@ -147,6 +188,15 @@ lines.append('.. _api-reference:')
 lines.append('')
 lines.append('API Reference')
 lines.append('=============')
+lines.append('')
+
+lines.append("This page shows the classes and functions for the ``iesve`` module.")
+lines.append('')
+lines.append("These classes are not instantiated directly, but are accessed using either class methods or regular methods on 'parent' instances. For example, to instantiate an instance of the :py:class:`~iesve.VEProject` class this is not done using ``iesve.VEProject()`` but rather by using the :py:meth:`~iesve.VEProject.get_current_project` class method, i.e. ``iesve.VEProject.get_current_project()``.")
+lines.append('')
+lines.append("For where to start with these classes, I would recommend the :ref:`code-snippets` page and the helpful diagram in the official IES documentation `here <https://www.iesve.com/support/faq/pdf/vescriptsguide/iiesve-class-structure-summary.pdf>`__.")
+lines.append('')
+lines.append("Note: text in italics has been reproduced verbatim from the original text used in the IES-VE Python API online help guide or Python docstrings. Where I have replaced this with my own text, this is in non-italics.")
 lines.append('')
 
 def obj_lines(name, obj_dict):

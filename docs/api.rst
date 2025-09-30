@@ -3,9 +3,17 @@
 API Reference
 =============
 
+This page shows the classes and functions for the ``iesve`` module.
+
+These classes are not instantiated directly, but are accessed using either class methods or regular methods on 'parent' instances. For example, to instantiate an instance of the :py:class:`~iesve.VEProject` class this is not done using ``iesve.VEProject()`` but rather by using the :py:meth:`~iesve.VEProject.get_current_project` class method, i.e. ``iesve.VEProject.get_current_project()``.
+
+For where to start with these classes, I would recommend the :ref:`code-snippets` page and the helpful diagram in the official IES documentation `here <https://www.iesve.com/support/faq/pdf/vescriptsguide/iiesve-class-structure-summary.pdf>`__.
+
+Note: text in italics has been reproduced verbatim from the original text used in the IES-VE Python API online help guide or Python docstrings. Where I have replaced this with my own text, this is in non-italics.
+
 .. py:module:: iesve
 
-   Note: text in italics has been reproduced verbatim from the original text used in the IES-VE Python API online help guide or Python docstrings. Where I have replaced this with my own text, this is in non-italics.
+   
 
    .. py:method:: get_application_folder
    
@@ -17062,19 +17070,9 @@ API Reference
       
    .. py:class:: ResultsReader
    
-      *Support for reading simulation result files (APS files).*
-      *Basic usage:*
+      A class used to access the results of a simulation as stored in an *.aps* file in the *vista* folder.
       
-      *f = iesve.ResultsReader()*
-      *f.open_aps_data(filename)*
-      *x = f.get_results('Total electricity', 'e')*
-      *f.close()*
-      
-      *or*
-      
-      *f = iesve.ResultsReader.open(filename)*
-      *x = f.get_results('Total electricity', 'e')*
-      *f.close()*
+      See also: :ref:`working_with_results`
    
       .. py:method:: close
       
@@ -17430,14 +17428,23 @@ API Reference
          
          *Returns a list of (room ID, room name, room area, room volume) for all rooms in the results file.*
       
-      .. py:method:: get_room_results
+      .. py:method:: get_room_results(room_id, aps_var, vista_var, start_day = -1, end_day = -1)
       
-         *get_room_results(room_id, aps_var, vista_var, var_level, [start_day], [end_day]) ->*
-             *Numpy array of floats*
+         :param str room_id: The id of the room (see :py:meth:`~iesve.ResultsReader.get_room_ids`)
          
-         *Get the results for specified room + variable.  See units spreadsheet*
-         *for available variables and matching level.  See get_results for start_day*
-         *and end_day details.*
+         :param str aps_var: The name of the variable as used in the .aps results file (see 'aps_varname' in :py:meth:`~iesve.ResultsReader.get_variables`.
+         
+         :param str vista_var: The name of the variable as used in the Vista module (see 'display_name' in :py:meth:`~iesve.ResultsReader.get_variables`).
+         
+         :param int start_day: The start day for the returned results (default is the first day of the simulation).
+         
+         :param int end_day: The end day for the returned results (default is the last day of the simulation).
+         
+         :returns: The values of a variable of a room in the :py:class:`~iesve.ResultsReader` instance.
+         
+         :rtype: numpy.array (floats)
+         
+         See also: :ref:`how_to_access_the_air_temperatures_for_all_rooms_in_a_results_file`
       
       .. py:method:: get_surface_results
       
@@ -17467,14 +17474,63 @@ API Reference
       
       .. py:method:: get_variables
       
-         *get_variables( ) -> [ variable data ]*
+         :returns: A list of dictionaries, where the dictionaries contains information about all the variables stored in a :py:class:`~iesve.ResultsReader` instance.
          
-         *Get the list of results file variables that are applicable to the loaded*
-         *file.  The return value is a list of dictionaries with all relevant*
-         *variable data.  The available data fields are:*
-             *category, display_name, aps_varname, units_type, units_category,*
-             *combine_flag, model_level, post_process, color, color_rgb, subtype,*
-             *line_style, order, polarity.*
+         :rtype: list
+         
+         Each dictionary may contain the following key/value pairs:
+         
+         * 'category'
+         
+         * 'display_name' (str): The name of the variable as used in the Vista module.
+         
+         * 'aps_varname' (str): The name of the variable as used in the .aps results file.
+         
+         * 'units_type' (str)
+         
+         * 'units_category'
+         
+         * 'combine_flag'
+         
+         * 'model_level' (str): One of:
+         
+           * 'w': weather (used in :py:meth:`~iesve.ResultsReader.get_weather_results`)
+         
+           * 'z': room level (zone) (used in :py:meth:`~iesve.ResultsReader.get_room_results`)
+         
+           * 'v': apache systems misc (used in :py:meth:`~iesve.ResultsReader.get_apache_system_results`)
+         
+           * 'j': apache systems energy (used in :py:meth:`~iesve.ResultsReader.get_apache_system_results`)
+         
+           * 'r': apache systems carbon (used in :py:meth:`~iesve.ResultsReader.get_apache_system_results`)
+         
+           * 'l': building loads (used in :py:meth:`~iesve.ResultsReader.get_results`)
+         
+           * 'e': building energy (used in :py:meth:`~iesve.ResultsReader.get_results`)
+         
+           * 'c': building carbon (used in :py:meth:`~iesve.ResultsReader.get_results`)
+         
+           * 's': surface level (used in :py:meth:`~iesve.ResultsReader.get_surface_results`)
+         
+           * 'o': opening level (used in :py:meth:`~iesve.ResultsReader.get_opening_results`)
+         
+           * 'n': HVAC node level (used in :py:meth:`~iesve.ResultsReader.get_hvac_node_results`)
+         
+           * 'h': HVAC component level (used in :py:meth:`~iesve.ResultsReader.get_hvac_component_results`)
+         
+         * 'post_process'
+         
+         * 'color'
+         
+         * 'color_rgb'
+         
+         * 'subtype'
+         
+         * 'line_style'
+         
+         * 'order'
+         
+         * 'polarity'
       
       .. py:method:: get_weather_results
       
@@ -17493,11 +17549,14 @@ API Reference
          *(int) The last simulation day that has results.*
       
       .. py:method:: open
+         :classmethod:
       
          *open(filename) -> iesve.ResultsReader*
          
          *Open an APS file and return a ResultsReader instance. Throws exception*
          *on error.*
+      
+         :rtype: iesve.ResultsReader
       
       .. py:method:: open_aps_data
       
@@ -21693,39 +21752,15 @@ API Reference
          *Returns a list of VEComponentProcess objects representing the component*
          *processes in the body.*
       
-      .. py:method:: get_room_data
+      .. py:method:: get_room_data(type = iesve.attribute_type.real_attributes)
       
-         *get_room_data(type) -> VERoomData object*
+         :param type: The type of :py:class:`~iesve.VERoomData` instance to return. Options are :py:attr:`iesve.attribute_type.real_attributes` (default value), :py:attr:`iesve.attribute_type.ncm_attributes` (NCM), :py:attr:`iesve.attribute_type.bprm_attributes` (PRM) and :py:attr:`iesve.attribute_type.t_24` (Title 24).: 
          
-         *Gets a VERoomData object for closer inspection of the room's data. The data*
-         *depends on the input type: the default type of 'real_attributes' gives the default data for the*
-         *room, but NCM, PRM and Title 24 specific data can be requested.*
+         :type type: iesve.attribute_type
          
-         *Args:*
-             *type (enum, optional): attribute_type enum*
-         *Returns:*
-             *A VERoomData object for accessing the room's data, including general data,*
-             *room conditions, system data, internal gains and air exchanges.*
-         *Raises:*
-             *ValueError: if the input is outside the valid range or if it is inconsistent*
-                         *with the model variant that the room belongs to.*
-             *RuntimeError: in the case of an internal data handling error*
-         
-         *get_room_data(type) -> VERoomData object*
-         
-         *Gets a VERoomData object for closer inspection of the room's data. The data*
-         *depends on the input type: the default type of 'real_attributes' gives the default data for the*
-         *room, but NCM, PRM and Title 24 specific data can be requested.*
-         
-         *Args:*
-             *type (enum, optional): attribute_type enum*
-         *Returns:*
-             *A VERoomData object for accessing the room's data, including general data,*
-             *room conditions, system data, internal gains and air exchanges.*
-         *Raises:*
-             *ValueError: if the input is outside the valid range or if it is inconsistent*
-                         *with the model variant that the room belongs to.*
-             *RuntimeError: in the case of an internal data handling error*
+         :returns: The :py:class:`~iesve.VERoomData` instance of the :py:class:`~iesve.VEBody`.
+      
+         :rtype: iesve.VERoomData
       
       .. py:method:: get_surfaces
       

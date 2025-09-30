@@ -10,11 +10,9 @@ I have written this unofficial documentation to the IES-VE Python API to support
 
 The offical help guide from IES is `here <https://help.iesve.com/ve2025/python_api_guidance.htm?ms=AhAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAACAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEBAAiABQA%3D%3D&st=MA%3D%3D&sct=MTg3&mw=MzEx>`__.
 
-I've made this available in case it is useful to others. 
+I've made this website available in case it is useful to others. 
 
-For more information and if you have any questions, please see my website: `www.stevenfirth.com`_.
-
-.. _www.stevenfirth.com: https://www.stevenfirth.com/
+Any questions? Please contact me: `www.stevenfirth.com/contact <https://www.stevenfirth.com/contact/>`__
 
 *Steven Firth, 2025*
 
@@ -25,8 +23,8 @@ For more information and if you have any questions, please see my website: `www.
 
    overview
    quick_start
-   code_snippets
-   examples
+   code_snippets/code_snippets
+   examples/examples
    api
 
 .. Indices and tables
