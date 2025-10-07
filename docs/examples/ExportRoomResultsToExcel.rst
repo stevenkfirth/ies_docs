@@ -11,6 +11,8 @@ The Excel data is "stacked" by filename and room id, which makes it suitable for
 
 The script makes use of the :py:class:`~iesve.ResultsReader` class to read the results files, the `tkinter.filedialog.asksaveasfilename <https://docs.python.org/3/library/dialog.html#tkinter.filedialog.asksaveasfile>`__ method to create a name for the Excel workbook and the `xlsxwriter <https://xlsxwriter.readthedocs.io/>`__ package (one of the external Python packages available in the IES-VE) to write the data to an Excel spreadsheet.
 
+.. image:: ../images/figure_export_room_results_to_excel.png
+
 .. code-block:: python
 
    # ExportRoomResultsToExcel
