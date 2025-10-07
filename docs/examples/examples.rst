@@ -9,4 +9,5 @@ Example Scripts
 
    PlotAirTemperaturesBoxPlot
    PlotRoomHeatBalance
+   ExportRoomResultsToExcel
    ExportResultsToCSV

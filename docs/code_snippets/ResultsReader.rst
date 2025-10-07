@@ -44,7 +44,7 @@ This uses the :py:meth:`~iesve.ResultsReader.get_variables` method of the :py:cl
    import os
    fp_in = os.path.join('vista', 'small_office.aps')  # replace this with the path to any IES results (*.aps) file.
    with iesve.ResultsReader.open(fp_in) as f:
-      variables_list = f.variables()
+      variables_list = f.get_variables()
 
 - `fp_in` is the filepath to a IES results file (.aps file).
 - `f` is an instance of the :py:class:`~iesve.ResultsReader` class. This is returned by the :py:meth:`~iesve.ResultsReader.open` class method.

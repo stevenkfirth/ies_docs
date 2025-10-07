@@ -1,6 +1,7 @@
 
-
+_build/
 _ies_model/
+_linkedin/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
