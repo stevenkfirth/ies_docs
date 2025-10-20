@@ -75,7 +75,7 @@ result['iesve'] = parse(input_dict)
 # iesve
 # Python API for the IES Virtual Environment (VE)
 x = result['iesve']
-x['doc'] = "The iesve module\n----------------\n\nThis module contains classes and functions for working with the IES software.\n\nThe classes which are instantiated directly are:\n\n* :py:class:`~iesve.ApacheSim`\n* :py:class:`~iesve.VESankey`\n\nThe classes which are instantiated using their own class methods are:\n\n* :py:class:`~iesve.VEProject` using :py:meth:`~iesve.VEProject.get_current_project`\n\n* :py:class:`~iesve.WeatherFileReader` using :py:meth:`~iesve.WeatherFileReader.open_weather_file`\n\n* :py:class:`~iesve.ResultsReader` using :py:meth:`~iesve.ResultsReader.open`\n\n* :py:class:`~iesve.VECdbDatabase` using :py:meth:`~iesve.VECdbDatabase.get_current_database`\n\nThe classes which are never instantiated and only provide class methods are:\n\n* :py:class:`~iesve.ImportGBXML`\n\n* :py:class:`~iesve.VELocate`\n\n* :py:class:`~iesve.VERenewables`\n\n* :py:class:`~iesve.RoomGroups`\n\n* :py:class:`~iesve.PRM`\n\n* :py:class:`~iesve.Mv2`\n\n* :py:class:`~iesve.IECC`\n\n* :py:class:`~iesve.TariffsEngine`\n\n* :py:class:`~iesve.HVACNetwork`\n\n* :py:class:`~iesve.EnergySources`\n\nFor where to start with these classes, I would recommend the :ref:`code-snippets` page and the helpful diagram in the official IES documentation `here <https://www.iesve.com/support/faq/pdf/vescriptsguide/iiesve-class-structure-summary.pdf>`__.\n\nNote: text in *italics* has been reproduced verbatim from the original text used in the IES-VE Python API online help guide or Python docstrings. Where I have replaced this with my own text, this is in non-italics."
+x['doc'] = "The iesve module\n----------------\n\nThis module contains classes and functions for working with the IES software.\n\nThe classes which are instantiated directly are:\n\n* :py:class:`~iesve.ApacheSim`\n\n* :py:class:`~iesve.VELocate`\n\n* :py:class:`~iesve.VESankey`\n\n* :py:class:`~iesve.WeatherFileReader`\n\nThe classes which are instantiated using their own class methods are:\n\n* :py:class:`~iesve.VEProject` using :py:meth:`~iesve.VEProject.get_current_project`\n\n* :py:class:`~iesve.ResultsReader` using :py:meth:`~iesve.ResultsReader.open`\n\n* :py:class:`~iesve.VECdbDatabase` using :py:meth:`~iesve.VECdbDatabase.get_current_database`\n\nThe classes which are never instantiated and only provide class methods are:\n\n* :py:class:`~iesve.ImportGBXML`\n\n* :py:class:`~iesve.VERenewables`\n\n* :py:class:`~iesve.RoomGroups`\n\n* :py:class:`~iesve.PRM`\n\n* :py:class:`~iesve.Mv2`\n\n* :py:class:`~iesve.IECC`\n\n* :py:class:`~iesve.TariffsEngine`\n\n* :py:class:`~iesve.HVACNetwork`\n\n* :py:class:`~iesve.EnergySources`\n\nFor where to start with these classes, I would recommend the :ref:`code-snippets` page and the helpful diagram in the official IES documentation `here <https://www.iesve.com/support/faq/pdf/vescriptsguide/iiesve-class-structure-summary.pdf>`__.\n\nNote: text in *italics* has been reproduced verbatim from the original text used in the IES-VE Python API online help guide or Python docstrings. Where I have replaced this with my own text, this is in non-italics."
 
 # AirExchange
 x = result['iesve']['classes']['AirExchange']
@@ -84,7 +84,6 @@ x['doc'] = 'Instantiated by: :py:class:`~iesve.VEThermalTemplate` using :py:meth
 # VEApacheSystem
 x = result['iesve']['classes']['VEApacheSystem']
 x['doc'] = 'Instantiated by: :py:class:`~iesve.VEProject` using :py:meth:`~iesve.VEProject.apache_systems`\n\n' + x['doc']
-
 
 # CasualGain
 x = result['iesve']['classes']['CasualGain']
@@ -105,9 +104,6 @@ x['doc'] = 'Subclass of: :py:class:`~iesve.GroupProfile`\n\n' + x['doc']
 # GroupProfile
 x = result['iesve']['classes']['GroupProfile']
 x['doc'] = 'Instantiated by: :py:class:`~iesve.VEProject` using :py:meth:`~iesve.VEProject.profiles`\n\nSubclasses: :py:class:`~iesve.CompactProfile` and :py:class:`~iesve.FreeFormProfile`\n\n' + x['doc']
-
-
-
 
 # ResultsReader
 # Support for reading simulation result files (APS files). Basic usage:

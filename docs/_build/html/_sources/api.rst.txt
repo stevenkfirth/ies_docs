@@ -13,13 +13,16 @@ API Reference
    The classes which are instantiated directly are:
    
    * :py:class:`~iesve.ApacheSim`
+   
+   * :py:class:`~iesve.VELocate`
+   
    * :py:class:`~iesve.VESankey`
+   
+   * :py:class:`~iesve.WeatherFileReader`
    
    The classes which are instantiated using their own class methods are:
    
    * :py:class:`~iesve.VEProject` using :py:meth:`~iesve.VEProject.get_current_project`
-   
-   * :py:class:`~iesve.WeatherFileReader` using :py:meth:`~iesve.WeatherFileReader.open_weather_file`
    
    * :py:class:`~iesve.ResultsReader` using :py:meth:`~iesve.ResultsReader.open`
    
@@ -28,8 +31,6 @@ API Reference
    The classes which are never instantiated and only provide class methods are:
    
    * :py:class:`~iesve.ImportGBXML`
-   
-   * :py:class:`~iesve.VELocate`
    
    * :py:class:`~iesve.VERenewables`
    

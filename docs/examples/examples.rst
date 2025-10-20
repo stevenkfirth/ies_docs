@@ -11,3 +11,4 @@ Example Scripts
    PlotRoomHeatBalance
    ExportRoomResultsToExcel
    ExportResultsToCSV
+   ParametricRunThermostat

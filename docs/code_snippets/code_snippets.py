@@ -1,5 +1,7 @@
 # HOW TOS
 
+from pprint import pprint
+
 print('--- How to access the current project ---')
 import iesve
 currentproject = iesve.VEProject.get_current_project()
@@ -65,6 +67,22 @@ roombodies_room_data_dict = {body.id: body.get_room_data(type = iesve.attribute_
 roombodies_room_data_general_dict = {body_id: room_data.get_general() for body_id, room_data in roombodies_room_data_dict.items()}
 print(roombodies_room_data_general_dict)
 print(roombodies_room_data_general_dict['RF000000'])
+
+print('--- How to access the room conditions information for all rooms ---')
+import iesve
+import os
+import iesve
+currentproject = iesve.VEProject.get_current_project()
+realmodel = currentproject.models[0]
+bodies = realmodel.get_bodies(False)  # SelectedOnly = False; used to select all bodies in the model.
+roombodies = [x for x in bodies if x.type == iesve.VEBody_type.room]  # iesve.VEBody_type.room has an integer value of 1.
+roombodies_room_data_dict = {body.id: body.get_room_data(type = iesve.attribute_type.real_attributes) for body in bodies}
+roombodies_room_data_room_conditions_dict = {body_id: room_data.get_room_conditions() for body_id, room_data in roombodies_room_data_dict.items()}
+pprint(roombodies_room_data_room_conditions_dict)
+
+
+
+quit()
 
 print('--- How to access the room ids in a results file ---')
 import iesve
