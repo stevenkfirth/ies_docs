@@ -1,0 +1,203 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Parametric analysis with heating setpoint &mdash; IES-VE Python API  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=e6a37869" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="API Reference" href="../api.html" />
+    <link rel="prev" title="Export results to CSV files" href="ExportResultsToCSV.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            IES-VE Python API
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quick_start.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../code_snippets/code_snippets.html">Code Snippets</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="examples.html">Example Scripts</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="PlotAirTemperaturesBoxPlot.html">Plot room air temperatures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="PlotRoomHeatBalance.html">Plot room heat balance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ExportRoomResultsToExcel.html">Export room results to Excel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ExportResultsToCSV.html">Export results to CSV files</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Parametric analysis with heating setpoint</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../api.html">API Reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">IES-VE Python API</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="examples.html">Example Scripts</a></li>
+      <li class="breadcrumb-item active">Parametric analysis with heating setpoint</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/examples/ParametricRunThermostat.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="parametric-analysis-with-heating-setpoint">
+<h1>Parametric analysis with heating setpoint<a class="headerlink" href="#parametric-analysis-with-heating-setpoint" title="Link to this heading"></a></h1>
+<p>This script:</p>
+<ul class="simple">
+<li><p>Changes the heating thermostat setting for each room in the model, iterating through a list of six options.</p></li>
+<li><p>For each thermostat setting, an ApacheSim simulation is run.</p></li>
+<li><p>The simulation results are saved as separate <em>.aps</em> results files.</p></li>
+</ul>
+<p>The script makes use of the <a class="reference internal" href="../api.html#iesve.VERoomData" title="iesve.VERoomData"><code class="xref py py-class docutils literal notranslate"><span class="pre">VERoomData</span></code></a> class to edit the heating setpoints and the <a class="reference internal" href="../api.html#iesve.ApacheSim" title="iesve.ApacheSim"><code class="xref py py-class docutils literal notranslate"><span class="pre">ApacheSim</span></code></a> class to run the simulations.</p>
+<img alt="../_images/figure_parametric_run_thermostat.png" src="../_images/figure_parametric_run_thermostat.png" />
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ParametricRunThermostat</span>
+
+<span class="c1"># Steven Firth, Loughborough University, 2025</span>
+
+<span class="c1"># v0.0.1 - 2025-10-20</span>
+
+<span class="c1"># This IES-VE Python script</span>
+<span class="c1"># - Changes the heating thermostat setting for each room in the model, iterating through a list of 6 options.</span>
+<span class="c1"># - For each thermostat setting, an ApacheSim simulation is run.</span>
+<span class="c1"># - The simulation results are saved as separate .aps results files.</span>
+
+<span class="c1"># Notes</span>
+
+<span class="c1"># Possible improvements</span>
+<span class="c1"># - Show a dialog box with the results filename, so the user can see the progress of the simulations.</span>
+<span class="c1"># - Allow the user to choose their own heating points using a tkinter form.</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;START&#39;</span><span class="p">)</span>
+
+<span class="c1"># Step 1 - Import packages</span>
+<span class="kn">import</span> <span class="nn">iesve</span>
+<span class="kn">from</span> <span class="nn">pprint</span> <span class="kn">import</span> <span class="n">pprint</span>
+
+<span class="c1"># Step 2 - Get VERoomData instances</span>
+<span class="n">currentproject</span> <span class="o">=</span> <span class="n">iesve</span><span class="o">.</span><span class="n">VEProject</span><span class="o">.</span><span class="n">get_current_project</span><span class="p">()</span>
+<span class="n">realmodel</span> <span class="o">=</span> <span class="n">currentproject</span><span class="o">.</span><span class="n">models</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">bodies</span> <span class="o">=</span> <span class="n">realmodel</span><span class="o">.</span><span class="n">get_bodies</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+   <span class="c1"># SelectedOnly = False; used to select all bodies in the model.</span>
+<span class="n">roombodies</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">bodies</span> <span class="k">if</span> <span class="n">x</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="n">iesve</span><span class="o">.</span><span class="n">VEBody_type</span><span class="o">.</span><span class="n">room</span><span class="p">]</span>
+   <span class="c1"># iesve.VEBody_type.room has an integer value of 1. A list of iesve.VEBody instances.</span>
+<span class="n">roombodies_room_data_dict</span> <span class="o">=</span> <span class="p">{</span>
+   <span class="n">body</span><span class="o">.</span><span class="n">id</span><span class="p">:</span> <span class="n">body</span><span class="o">.</span><span class="n">get_room_data</span><span class="p">(</span><span class="nb">type</span> <span class="o">=</span> <span class="n">iesve</span><span class="o">.</span><span class="n">attribute_type</span><span class="o">.</span><span class="n">real_attributes</span><span class="p">)</span>
+   <span class="k">for</span> <span class="n">body</span> <span class="ow">in</span> <span class="n">bodies</span>
+   <span class="p">}</span>
+   <span class="c1"># {body_id (str): VERoomData instance (iesve.VERoomData)}</span>
+
+<span class="c1"># Step 3 - Get original heating setpoints &amp; link to thermal template</span>
+<span class="n">original_heating_setpoints</span> <span class="o">=</span> <span class="p">{</span>
+   <span class="n">body_id</span><span class="p">:</span> <span class="n">room_data_instance</span><span class="o">.</span><span class="n">get_room_conditions</span><span class="p">()[</span><span class="s1">&#39;heating_setpoint&#39;</span><span class="p">]</span>
+   <span class="k">for</span> <span class="n">body_id</span><span class="p">,</span> <span class="n">room_data_instance</span> <span class="ow">in</span> <span class="n">roombodies_room_data_dict</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+   <span class="p">}</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;original_heating_setpoints:&#39;</span><span class="p">)</span>
+<span class="n">pprint</span><span class="p">(</span><span class="n">original_heating_setpoints</span><span class="p">)</span>
+<span class="c1">#</span>
+<span class="n">original_heating_setpoint_from_templates</span> <span class="o">=</span> <span class="p">{</span>
+   <span class="n">body_id</span><span class="p">:</span> <span class="n">room_data_instance</span><span class="o">.</span><span class="n">get_room_conditions</span><span class="p">()[</span><span class="s1">&#39;heating_setpoint_from_template&#39;</span><span class="p">]</span>
+   <span class="k">for</span> <span class="n">body_id</span><span class="p">,</span> <span class="n">room_data_instance</span> <span class="ow">in</span> <span class="n">roombodies_room_data_dict</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+   <span class="p">}</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;original_heating_setpoint_from_templates:&#39;</span><span class="p">)</span>
+<span class="n">pprint</span><span class="p">(</span><span class="n">original_heating_setpoint_from_templates</span><span class="p">)</span>
+
+<span class="c1"># Step 4 - Loop through heating setpoint values, and run an ApacheSim simulation.</span>
+<span class="k">for</span> <span class="n">heating_setpoint</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">18</span><span class="p">,</span> <span class="mi">20</span><span class="p">]:</span>  <span class="c1"># these can be changed as needed</span>
+   <span class="c1">#</span>
+   <span class="n">fn_result</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;heating_setpoint_</span><span class="si">{</span><span class="n">heating_setpoint</span><span class="si">}</span><span class="s1">.aps&#39;</span>  <span class="c1"># the results filename</span>
+   <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;fn_result&#39;</span><span class="p">,</span> <span class="n">fn_result</span><span class="p">)</span>
+   <span class="c1">#</span>
+   <span class="k">for</span> <span class="n">body_id</span><span class="p">,</span> <span class="n">room_data_instance</span> <span class="ow">in</span> <span class="n">roombodies_room_data_dict</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+      <span class="n">room_data_instance</span><span class="o">.</span><span class="n">set_room_conditions</span><span class="p">({</span><span class="s1">&#39;heating_setpoint_from_template&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">})</span>  <span class="c1"># unlink heating setpoint from thermal template</span>
+      <span class="n">room_data_instance</span><span class="o">.</span><span class="n">set_room_conditions</span><span class="p">({</span><span class="s1">&#39;heating_setpoint&#39;</span><span class="p">:</span> <span class="n">heating_setpoint</span><span class="p">})</span>  <span class="c1"># change heating setpoint for each room</span>
+   <span class="c1">#</span>
+   <span class="n">s</span> <span class="o">=</span> <span class="n">iesve</span><span class="o">.</span><span class="n">ApacheSim</span><span class="p">()</span>
+   <span class="n">s</span><span class="o">.</span><span class="n">set_options</span><span class="p">({</span><span class="s1">&#39;results_filename&#39;</span> <span class="p">:</span> <span class="n">fn_result</span><span class="p">})</span>   <span class="c1"># set ApacheSim to use the results filename</span>
+   <span class="n">s</span><span class="o">.</span><span class="n">run_simulation</span><span class="p">()</span>  <span class="c1"># run ApacheSim</span>
+
+<span class="c1"># Step 5 - Return heating setpoints &amp; link to thermal template to original values</span>
+<span class="k">for</span> <span class="n">body_id</span><span class="p">,</span> <span class="n">room_data_instance</span> <span class="ow">in</span> <span class="n">roombodies_room_data_dict</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+   <span class="n">room_data_instance</span><span class="o">.</span><span class="n">set_room_conditions</span><span class="p">({</span><span class="s1">&#39;heating_setpoint_from_template&#39;</span><span class="p">:</span> <span class="n">original_heating_setpoint_from_templates</span><span class="p">[</span><span class="n">body_id</span><span class="p">]})</span>
+   <span class="n">room_data_instance</span><span class="o">.</span><span class="n">set_room_conditions</span><span class="p">({</span><span class="s1">&#39;heating_setpoint&#39;</span><span class="p">:</span> <span class="n">original_heating_setpoints</span><span class="p">[</span><span class="n">body_id</span><span class="p">]})</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;END&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="ExportResultsToCSV.html" class="btn btn-neutral float-left" title="Export results to CSV files" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../api.html" class="btn btn-neutral float-right" title="API Reference" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Steven Firth.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

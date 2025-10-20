@@ -1,0 +1,197 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Working with results &mdash; IES-VE Python API  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=e6a37869" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Example Scripts" href="../examples/examples.html" />
+    <link rel="prev" title="Working with room data" href="VERoomData.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            IES-VE Python API
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quick_start.html">Quick Start</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="code_snippets.html">Code Snippets</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="working_with_files.html">Working with files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="VEProject.html">Working with projects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="VEModel.html">Working with models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="VEBody.html">Working with bodies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="VERoomData.html">Working with room data</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Working with results</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#how-to-access-the-room-ids-in-a-results-file">How to access the room ids in a results file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#how-to-access-the-variable-information-in-a-results-file">How to access the variable information in a results file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#how-to-access-the-air-temperatures-for-all-rooms-in-a-results-file">How to access the air temperatures for all rooms in a results file</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/examples.html">Example Scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api.html">API Reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">IES-VE Python API</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="code_snippets.html">Code Snippets</a></li>
+      <li class="breadcrumb-item active">Working with results</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/code_snippets/ResultsReader.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="working-with-results">
+<span id="id1"></span><h1>Working with results<a class="headerlink" href="#working-with-results" title="Link to this heading"></a></h1>
+<section id="how-to-access-the-room-ids-in-a-results-file">
+<span id="id2"></span><h2>How to access the room ids in a results file<a class="headerlink" href="#how-to-access-the-room-ids-in-a-results-file" title="Link to this heading"></a></h2>
+<p>This first opens an IES results file stored on the local computer. These are saved as <em>.aps</em> files, usually in the <em>vista</em> folder. The results file is opened using the <a class="reference internal" href="../api.html#iesve.ResultsReader.open" title="iesve.ResultsReader.open"><code class="xref py py-meth docutils literal notranslate"><span class="pre">open()</span></code></a> class method of the <a class="reference internal" href="../api.html#iesve.ResultsReader" title="iesve.ResultsReader"><code class="xref py py-class docutils literal notranslate"><span class="pre">ResultsReader</span></code></a> class. In the code below this is done using the <code class="docutils literal notranslate"><span class="pre">with</span></code> Python context manager, so the opened file is automatically closed again at the end of the <code class="docutils literal notranslate"><span class="pre">with</span></code> block.</p>
+<p>Once opened, a list of the room ids within the result file can be accessed using the <a class="reference internal" href="../api.html#iesve.ResultsReader.get_room_ids" title="iesve.ResultsReader.get_room_ids"><code class="xref py py-meth docutils literal notranslate"><span class="pre">get_room_ids()</span></code></a> method of the <a class="reference internal" href="../api.html#iesve.ResultsReader" title="iesve.ResultsReader"><code class="xref py py-class docutils literal notranslate"><span class="pre">ResultsReader</span></code></a> class.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">iesve</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="n">fp_in</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39;vista&#39;</span><span class="p">,</span> <span class="s1">&#39;small_office.aps&#39;</span><span class="p">)</span>  <span class="c1"># replace this with the path to any IES results (*.aps) file.</span>
+<span class="k">with</span> <span class="n">iesve</span><span class="o">.</span><span class="n">ResultsReader</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">fp_in</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+   <span class="n">room_id_list</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">get_room_ids</span><span class="p">()</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><cite>fp_in</cite> is the filepath to a IES results file (.aps file).</p></li>
+<li><p><cite>f</cite> is an instance of the <a class="reference internal" href="../api.html#iesve.ResultsReader" title="iesve.ResultsReader"><code class="xref py py-class docutils literal notranslate"><span class="pre">ResultsReader</span></code></a> class. This is returned by the <a class="reference internal" href="../api.html#iesve.ResultsReader.open" title="iesve.ResultsReader.open"><code class="xref py py-meth docutils literal notranslate"><span class="pre">open()</span></code></a> class method.</p></li>
+<li><p><cite>room_id_list</cite> is a list of ids (str) of the rooms stored in the results file.</p></li>
+</ul>
+<p>An example of the <cite>room_id_list</cite> is:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="s1">&#39;RF000000&#39;</span><span class="p">,</span> <span class="s1">&#39;NR000000&#39;</span><span class="p">,</span> <span class="s1">&#39;ST000000&#39;</span><span class="p">,</span> <span class="s1">&#39;ST000001&#39;</span><span class="p">,</span> <span class="s1">&#39;NT000000&#39;</span><span class="p">,</span> <span class="s1">&#39;WS000000&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</section>
+<section id="how-to-access-the-variable-information-in-a-results-file">
+<span id="id3"></span><h2>How to access the variable information in a results file<a class="headerlink" href="#how-to-access-the-variable-information-in-a-results-file" title="Link to this heading"></a></h2>
+<p>This uses the <a class="reference internal" href="../api.html#iesve.ResultsReader.get_variables" title="iesve.ResultsReader.get_variables"><code class="xref py py-meth docutils literal notranslate"><span class="pre">get_variables()</span></code></a> method of the <a class="reference internal" href="../api.html#iesve.ResultsReader" title="iesve.ResultsReader"><code class="xref py py-class docutils literal notranslate"><span class="pre">ResultsReader</span></code></a> class to access a list of information about all the variables in a results file.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">iesve</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="n">fp_in</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39;vista&#39;</span><span class="p">,</span> <span class="s1">&#39;small_office.aps&#39;</span><span class="p">)</span>  <span class="c1"># replace this with the path to any IES results (*.aps) file.</span>
+<span class="k">with</span> <span class="n">iesve</span><span class="o">.</span><span class="n">ResultsReader</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">fp_in</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+   <span class="n">variables_list</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">get_variables</span><span class="p">()</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><cite>fp_in</cite> is the filepath to a IES results file (.aps file).</p></li>
+<li><p><cite>f</cite> is an instance of the <a class="reference internal" href="../api.html#iesve.ResultsReader" title="iesve.ResultsReader"><code class="xref py py-class docutils literal notranslate"><span class="pre">ResultsReader</span></code></a> class. This is returned by the <a class="reference internal" href="../api.html#iesve.ResultsReader.open" title="iesve.ResultsReader.open"><code class="xref py py-meth docutils literal notranslate"><span class="pre">open()</span></code></a> class method.</p></li>
+<li><p><cite>variables_list</cite> is a list of dictionaries each with information about the variables stored in the results file.</p></li>
+</ul>
+<p>An example of a dictionary in <cite>variables_list</cite> might be:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+   <span class="s1">&#39;display_name&#39;</span><span class="p">:</span> <span class="s1">&#39;System elec. CE&#39;</span><span class="p">,</span>
+   <span class="s1">&#39;aps_varname&#39;</span><span class="p">:</span> <span class="s1">&#39;System elec. CE&#39;</span><span class="p">,</span>
+   <span class="s1">&#39;units_type&#39;</span><span class="p">:</span> <span class="s1">&#39;Carbon emission&#39;</span><span class="p">,</span>
+   <span class="s1">&#39;model_level&#39;</span><span class="p">:</span> <span class="s1">&#39;c&#39;</span><span class="p">,</span>
+   <span class="s1">&#39;subtype&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+   <span class="s1">&#39;custom_type&#39;</span><span class="p">:</span> <span class="n">iesve</span><span class="o">.</span><span class="n">VariableType</span><span class="o">.</span><span class="n">energy_meter</span><span class="p">,</span>
+   <span class="s1">&#39;post_process_spec&#39;</span><span class="p">:</span> <span class="s1">&#39;u&#39;</span><span class="p">,</span>
+   <span class="s1">&#39;source&#39;</span><span class="p">:</span> <span class="n">iesve</span><span class="o">.</span><span class="n">VariableSource</span><span class="o">.</span><span class="n">system</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="how-to-access-the-air-temperatures-for-all-rooms-in-a-results-file">
+<span id="id4"></span><h2>How to access the air temperatures for all rooms in a results file<a class="headerlink" href="#how-to-access-the-air-temperatures-for-all-rooms-in-a-results-file" title="Link to this heading"></a></h2>
+<p>This uses the <a class="reference internal" href="../api.html#iesve.ResultsReader.get_room_results" title="iesve.ResultsReader.get_room_results"><code class="xref py py-meth docutils literal notranslate"><span class="pre">get_room_results()</span></code></a> method of the <a class="reference internal" href="../api.html#iesve.ResultsReader" title="iesve.ResultsReader"><code class="xref py py-class docutils literal notranslate"><span class="pre">ResultsReader</span></code></a> class to access the air temperatures stored in a results file.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">iesve</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="n">fp_in</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39;vista&#39;</span><span class="p">,</span> <span class="s1">&#39;small_office.aps&#39;</span><span class="p">)</span>  <span class="c1"># replace this with the path to any IES results (*.aps) file.</span>
+<span class="k">with</span> <span class="n">iesve</span><span class="o">.</span><span class="n">ResultsReader</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">fp_in</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+   <span class="n">air_temperatures_dict</span> <span class="o">=</span> <span class="p">{</span>
+      <span class="n">room_id</span><span class="p">:</span> <span class="n">f</span><span class="o">.</span><span class="n">get_room_results</span><span class="p">(</span><span class="n">room_id</span><span class="p">,</span> <span class="s1">&#39;Room air temperature&#39;</span><span class="p">,</span> <span class="s1">&#39;Air temperature&#39;</span><span class="p">,</span> <span class="s1">&#39;z&#39;</span><span class="p">)</span>
+      <span class="k">for</span> <span class="n">room_id</span> <span class="ow">in</span> <span class="n">f</span><span class="o">.</span><span class="n">get_room_ids</span><span class="p">()</span>
+      <span class="p">}</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><cite>fp_in</cite> is the filepath to a IES results file (.aps file).</p></li>
+<li><p><cite>f</cite> is an instance of the <a class="reference internal" href="../api.html#iesve.ResultsReader" title="iesve.ResultsReader"><code class="xref py py-class docutils literal notranslate"><span class="pre">ResultsReader</span></code></a> class. This is returned by the <a class="reference internal" href="../api.html#iesve.ResultsReader.open" title="iesve.ResultsReader.open"><code class="xref py py-meth docutils literal notranslate"><span class="pre">open()</span></code></a> class method.</p></li>
+<li><p><cite>air_temperatures_dict</cite> is a dictionary with key/value pairs of {room id (str): air temperatures (numpy.array)}.</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="VERoomData.html" class="btn btn-neutral float-left" title="Working with room data" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../examples/examples.html" class="btn btn-neutral float-right" title="Example Scripts" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Steven Firth.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

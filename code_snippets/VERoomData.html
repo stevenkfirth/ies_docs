@@ -1,0 +1,264 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Working with room data &mdash; IES-VE Python API  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=e6a37869" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Working with results" href="ResultsReader.html" />
+    <link rel="prev" title="Working with bodies" href="VEBody.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            IES-VE Python API
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quick_start.html">Quick Start</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="code_snippets.html">Code Snippets</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="working_with_files.html">Working with files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="VEProject.html">Working with projects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="VEModel.html">Working with models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="VEBody.html">Working with bodies</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Working with room data</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#how-to-access-the-room-data-of-rooms-in-the-real-model">How to access the room data of rooms in the real model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#how-to-access-the-room-general-information-for-all-rooms">How to access the room general information for all rooms</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#how-to-access-the-room-conditions-information-for-all-rooms">How to access the room conditions information for all rooms</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ResultsReader.html">Working with results</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/examples.html">Example Scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api.html">API Reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">IES-VE Python API</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="code_snippets.html">Code Snippets</a></li>
+      <li class="breadcrumb-item active">Working with room data</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/code_snippets/VERoomData.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="working-with-room-data">
+<h1>Working with room data<a class="headerlink" href="#working-with-room-data" title="Link to this heading"></a></h1>
+<section id="how-to-access-the-room-data-of-rooms-in-the-real-model">
+<span id="id1"></span><h2>How to access the room data of rooms in the real model<a class="headerlink" href="#how-to-access-the-room-data-of-rooms-in-the-real-model" title="Link to this heading"></a></h2>
+<p>The “room data” here refers to the <a class="reference internal" href="../api.html#iesve.VERoomData" title="iesve.VERoomData"><code class="xref py py-class docutils literal notranslate"><span class="pre">VERoomData</span></code></a> class which allows access to information about a room and also methods to make changes to the room. These are accessed using the <a class="reference internal" href="../api.html#iesve.VEBody.get_room_data" title="iesve.VEBody.get_room_data"><code class="xref py py-meth docutils literal notranslate"><span class="pre">get_room_data()</span></code></a> method of the <a class="reference internal" href="../api.html#iesve.VEBody" title="iesve.VEBody"><code class="xref py py-class docutils literal notranslate"><span class="pre">VEBody</span></code></a> class.</p>
+<p>The code below uses a Python dictionary comprehension statement to create a Python dictionary <code class="docutils literal notranslate"><span class="pre">roombodies_room_data_dict</span></code> to hold the <a class="reference internal" href="../api.html#iesve.VERoomData" title="iesve.VERoomData"><code class="xref py py-class docutils literal notranslate"><span class="pre">VERoomData</span></code></a> instances for all rooms.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">iesve</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">iesve</span>
+<span class="n">currentproject</span> <span class="o">=</span> <span class="n">iesve</span><span class="o">.</span><span class="n">VEProject</span><span class="o">.</span><span class="n">get_current_project</span><span class="p">()</span>
+<span class="n">realmodel</span> <span class="o">=</span> <span class="n">currentproject</span><span class="o">.</span><span class="n">models</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">bodies</span> <span class="o">=</span> <span class="n">realmodel</span><span class="o">.</span><span class="n">get_bodies</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>  <span class="c1"># SelectedOnly = False; used to select all bodies in the model.</span>
+<span class="n">roombodies</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">bodies</span> <span class="k">if</span> <span class="n">x</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="n">iesve</span><span class="o">.</span><span class="n">VEBody_type</span><span class="o">.</span><span class="n">room</span><span class="p">]</span>  <span class="c1"># iesve.VEBody_type.room has an integer value of 1.</span>
+<span class="n">roombodies_room_data_dict</span> <span class="o">=</span> <span class="p">{</span><span class="n">body</span><span class="o">.</span><span class="n">id</span><span class="p">:</span> <span class="n">body</span><span class="o">.</span><span class="n">get_room_data</span><span class="p">()</span> <span class="k">for</span> <span class="n">body</span> <span class="ow">in</span> <span class="n">bodies</span><span class="p">}</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><cite>currentproject</cite> is an instance of the <a class="reference internal" href="../api.html#iesve.VEProject" title="iesve.VEProject"><code class="xref py py-class docutils literal notranslate"><span class="pre">VEProject</span></code></a> class.</p></li>
+<li><p><cite>realmodel</cite> is an instance of the <a class="reference internal" href="../api.html#iesve.VEModel" title="iesve.VEModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">VEModel</span></code></a> class.</p></li>
+<li><p><cite>bodies</cite> is a list of <a class="reference internal" href="../api.html#iesve.VEBody" title="iesve.VEBody"><code class="xref py py-class docutils literal notranslate"><span class="pre">VEBody</span></code></a> instances.</p></li>
+<li><p><cite>roombodies</cite> is a list of <a class="reference internal" href="../api.html#iesve.VEBody" title="iesve.VEBody"><code class="xref py py-class docutils literal notranslate"><span class="pre">VEBody</span></code></a> instances of type <a class="reference internal" href="../api.html#iesve.VEBody_type.room" title="iesve.VEBody_type.room"><code class="xref py py-attr docutils literal notranslate"><span class="pre">iesve.VEBody_type.room</span></code></a>.</p></li>
+<li><p><cite>roombodies_room_data_dict</cite> is a dictionary of {<a class="reference internal" href="../api.html#iesve.VEBody.id" title="iesve.VEBody.id"><code class="xref py py-attr docutils literal notranslate"><span class="pre">iesve.VEBody.id</span></code></a>: <a class="reference internal" href="../api.html#iesve.VERoomData" title="iesve.VERoomData"><code class="xref py py-class docutils literal notranslate"><span class="pre">VERoomData</span></code></a> instances}. <a class="reference internal" href="../api.html#iesve.VEBody.id" title="iesve.VEBody.id"><code class="xref py py-attr docutils literal notranslate"><span class="pre">iesve.VEBody.id</span></code></a> is the id of the room as seen in the ModelIT section.</p></li>
+</ul>
+</section>
+<section id="how-to-access-the-room-general-information-for-all-rooms">
+<h2>How to access the room general information for all rooms<a class="headerlink" href="#how-to-access-the-room-general-information-for-all-rooms" title="Link to this heading"></a></h2>
+<p>This code uses the <a class="reference internal" href="../api.html#iesve.VERoomData.get_general" title="iesve.VERoomData.get_general"><code class="xref py py-meth docutils literal notranslate"><span class="pre">get_general()</span></code></a> method of the <a class="reference internal" href="../api.html#iesve.VERoomData" title="iesve.VERoomData"><code class="xref py py-class docutils literal notranslate"><span class="pre">VERoomData</span></code></a> class to access the general information about a room such as its name, area and volume.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">iesve</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">iesve</span>
+<span class="n">currentproject</span> <span class="o">=</span> <span class="n">iesve</span><span class="o">.</span><span class="n">VEProject</span><span class="o">.</span><span class="n">get_current_project</span><span class="p">()</span>
+<span class="n">realmodel</span> <span class="o">=</span> <span class="n">currentproject</span><span class="o">.</span><span class="n">models</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">bodies</span> <span class="o">=</span> <span class="n">realmodel</span><span class="o">.</span><span class="n">get_bodies</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>  <span class="c1"># SelectedOnly = False; used to select all bodies in the model.</span>
+<span class="n">roombodies</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">bodies</span> <span class="k">if</span> <span class="n">x</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="n">iesve</span><span class="o">.</span><span class="n">VEBody_type</span><span class="o">.</span><span class="n">room</span><span class="p">]</span>  <span class="c1"># iesve.VEBody_type.room has an integer value of 1.</span>
+<span class="n">roombodies_room_data_dict</span> <span class="o">=</span> <span class="p">{</span><span class="n">body</span><span class="o">.</span><span class="n">id</span><span class="p">:</span> <span class="n">body</span><span class="o">.</span><span class="n">get_room_data</span><span class="p">(</span><span class="nb">type</span> <span class="o">=</span> <span class="n">iesve</span><span class="o">.</span><span class="n">attribute_type</span><span class="o">.</span><span class="n">real_attributes</span><span class="p">)</span> <span class="k">for</span> <span class="n">body</span> <span class="ow">in</span> <span class="n">bodies</span><span class="p">}</span>
+<span class="n">roombodies_room_data_general_dict</span> <span class="o">=</span> <span class="p">{</span><span class="n">body_id</span><span class="p">:</span> <span class="n">room_data</span><span class="o">.</span><span class="n">get_general</span><span class="p">()</span> <span class="k">for</span> <span class="n">body_id</span><span class="p">,</span> <span class="n">room_data</span> <span class="ow">in</span> <span class="n">roombodies_room_data_dict</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><cite>currentproject</cite> is an instance of the <a class="reference internal" href="../api.html#iesve.VEProject" title="iesve.VEProject"><code class="xref py py-class docutils literal notranslate"><span class="pre">VEProject</span></code></a> class.</p></li>
+<li><p><cite>realmodel</cite> is an instance of the <a class="reference internal" href="../api.html#iesve.VEModel" title="iesve.VEModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">VEModel</span></code></a> class.</p></li>
+<li><p><cite>bodies</cite> is a list of <a class="reference internal" href="../api.html#iesve.VEBody" title="iesve.VEBody"><code class="xref py py-class docutils literal notranslate"><span class="pre">VEBody</span></code></a> instances.</p></li>
+<li><p><cite>roombodies</cite> is a list of <a class="reference internal" href="../api.html#iesve.VEBody" title="iesve.VEBody"><code class="xref py py-class docutils literal notranslate"><span class="pre">VEBody</span></code></a> instances of type <a class="reference internal" href="../api.html#iesve.VEBody_type.room" title="iesve.VEBody_type.room"><code class="xref py py-attr docutils literal notranslate"><span class="pre">iesve.VEBody_type.room</span></code></a>.</p></li>
+<li><p><cite>roombodies_room_data_dict</cite> is a dictionary of {<a class="reference internal" href="../api.html#iesve.VEBody.id" title="iesve.VEBody.id"><code class="xref py py-attr docutils literal notranslate"><span class="pre">iesve.VEBody.id</span></code></a>: <a class="reference internal" href="../api.html#iesve.VERoomData" title="iesve.VERoomData"><code class="xref py py-class docutils literal notranslate"><span class="pre">VERoomData</span></code></a> instances}. <a class="reference internal" href="../api.html#iesve.VEBody.id" title="iesve.VEBody.id"><code class="xref py py-attr docutils literal notranslate"><span class="pre">iesve.VEBody.id</span></code></a> is the id of the room as seen in the ModelIT section.</p></li>
+<li><p><cite>roombodies_room_data_general_dict</cite> is a dictionary of {<a class="reference internal" href="../api.html#iesve.VEBody.id" title="iesve.VEBody.id"><code class="xref py py-attr docutils literal notranslate"><span class="pre">iesve.VEBody.id</span></code></a>: dictionary as returned by the <a class="reference internal" href="../api.html#iesve.VERoomData.get_general" title="iesve.VERoomData.get_general"><code class="xref py py-meth docutils literal notranslate"><span class="pre">iesve.VERoomData.get_general()</span></code></a> method}.</p></li>
+</ul>
+<p>An example of a <a class="reference internal" href="../api.html#iesve.VERoomData.get_general" title="iesve.VERoomData.get_general"><code class="xref py py-meth docutils literal notranslate"><span class="pre">iesve.VERoomData.get_general()</span></code></a> return value is:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+   <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;ROOF&#39;</span><span class="p">,</span>
+   <span class="s1">&#39;general_template&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+   <span class="s1">&#39;general_template_name&#39;</span><span class="p">:</span> <span class="s1">&#39;default&#39;</span><span class="p">,</span>
+   <span class="s1">&#39;thermal_template&#39;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+   <span class="s1">&#39;thermal_template_name&#39;</span><span class="p">:</span> <span class="s1">&#39;Void&#39;</span><span class="p">,</span>
+   <span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="s1">&#39;RF000000&#39;</span><span class="p">,</span>
+   <span class="s1">&#39;volume&#39;</span><span class="p">:</span> <span class="mf">714.7855251355139</span><span class="p">,</span>
+   <span class="s1">&#39;facade_area&#39;</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span>
+   <span class="s1">&#39;floor_area&#39;</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span>
+   <span class="s1">&#39;included_in_building_floor_area&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+   <span class="s1">&#39;included_in_building_floor_area_from_template&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+   <span class="s1">&#39;lettable_perc&#39;</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
+   <span class="s1">&#39;lettable_perc_from_template&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+   <span class="s1">&#39;circ_perc&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+   <span class="s1">&#39;circ_perc_from_template&#39;</span><span class="p">:</span> <span class="kc">True</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="how-to-access-the-room-conditions-information-for-all-rooms">
+<h2>How to access the room conditions information for all rooms<a class="headerlink" href="#how-to-access-the-room-conditions-information-for-all-rooms" title="Link to this heading"></a></h2>
+<p>This code uses the <a class="reference internal" href="../api.html#iesve.VERoomData.get_room_conditions" title="iesve.VERoomData.get_room_conditions"><code class="xref py py-meth docutils literal notranslate"><span class="pre">get_room_conditions()</span></code></a> method of the <a class="reference internal" href="../api.html#iesve.VERoomData" title="iesve.VERoomData"><code class="xref py py-class docutils literal notranslate"><span class="pre">VERoomData</span></code></a> class to access the general information about a room such as its name, area and volume.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">iesve</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">iesve</span>
+<span class="n">currentproject</span> <span class="o">=</span> <span class="n">iesve</span><span class="o">.</span><span class="n">VEProject</span><span class="o">.</span><span class="n">get_current_project</span><span class="p">()</span>
+<span class="n">realmodel</span> <span class="o">=</span> <span class="n">currentproject</span><span class="o">.</span><span class="n">models</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">bodies</span> <span class="o">=</span> <span class="n">realmodel</span><span class="o">.</span><span class="n">get_bodies</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>  <span class="c1"># SelectedOnly = False; used to select all bodies in the model.</span>
+<span class="n">roombodies</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">bodies</span> <span class="k">if</span> <span class="n">x</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="n">iesve</span><span class="o">.</span><span class="n">VEBody_type</span><span class="o">.</span><span class="n">room</span><span class="p">]</span>  <span class="c1"># iesve.VEBody_type.room has an integer value of 1.</span>
+<span class="n">roombodies_room_data_dict</span> <span class="o">=</span> <span class="p">{</span><span class="n">body</span><span class="o">.</span><span class="n">id</span><span class="p">:</span> <span class="n">body</span><span class="o">.</span><span class="n">get_room_data</span><span class="p">(</span><span class="nb">type</span> <span class="o">=</span> <span class="n">iesve</span><span class="o">.</span><span class="n">attribute_type</span><span class="o">.</span><span class="n">real_attributes</span><span class="p">)</span> <span class="k">for</span> <span class="n">body</span> <span class="ow">in</span> <span class="n">bodies</span><span class="p">}</span>
+<span class="n">roombodies_room_data_room_conditions_dict</span> <span class="o">=</span> <span class="p">{</span><span class="n">body_id</span><span class="p">:</span> <span class="n">room_data</span><span class="o">.</span><span class="n">get_room_conditions</span><span class="p">()</span> <span class="k">for</span> <span class="n">body_id</span><span class="p">,</span> <span class="n">room_data</span> <span class="ow">in</span> <span class="n">roombodies_room_data_dict</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><cite>currentproject</cite> is an instance of the <a class="reference internal" href="../api.html#iesve.VEProject" title="iesve.VEProject"><code class="xref py py-class docutils literal notranslate"><span class="pre">VEProject</span></code></a> class.</p></li>
+<li><p><cite>realmodel</cite> is an instance of the <a class="reference internal" href="../api.html#iesve.VEModel" title="iesve.VEModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">VEModel</span></code></a> class.</p></li>
+<li><p><cite>bodies</cite> is a list of <a class="reference internal" href="../api.html#iesve.VEBody" title="iesve.VEBody"><code class="xref py py-class docutils literal notranslate"><span class="pre">VEBody</span></code></a> instances.</p></li>
+<li><p><cite>roombodies</cite> is a list of <a class="reference internal" href="../api.html#iesve.VEBody" title="iesve.VEBody"><code class="xref py py-class docutils literal notranslate"><span class="pre">VEBody</span></code></a> instances of type <a class="reference internal" href="../api.html#iesve.VEBody_type.room" title="iesve.VEBody_type.room"><code class="xref py py-attr docutils literal notranslate"><span class="pre">iesve.VEBody_type.room</span></code></a>.</p></li>
+<li><p><cite>roombodies_room_data_dict</cite> is a dictionary of {<a class="reference internal" href="../api.html#iesve.VEBody.id" title="iesve.VEBody.id"><code class="xref py py-attr docutils literal notranslate"><span class="pre">iesve.VEBody.id</span></code></a>: <a class="reference internal" href="../api.html#iesve.VERoomData" title="iesve.VERoomData"><code class="xref py py-class docutils literal notranslate"><span class="pre">VERoomData</span></code></a> instances}. <a class="reference internal" href="../api.html#iesve.VEBody.id" title="iesve.VEBody.id"><code class="xref py py-attr docutils literal notranslate"><span class="pre">iesve.VEBody.id</span></code></a> is the id of the room as seen in the ModelIT section.</p></li>
+<li><p><cite>roombodies_room_data_room_conditions_dict</cite> is a dictionary of {<a class="reference internal" href="../api.html#iesve.VEBody.id" title="iesve.VEBody.id"><code class="xref py py-attr docutils literal notranslate"><span class="pre">iesve.VEBody.id</span></code></a>: dictionary as returned by the <a class="reference internal" href="../api.html#iesve.VERoomData.get_room_conditions" title="iesve.VERoomData.get_room_conditions"><code class="xref py py-meth docutils literal notranslate"><span class="pre">iesve.VERoomData.get_room_conditions()</span></code></a> method}.</p></li>
+</ul>
+<p>An example of a <a class="reference internal" href="../api.html#iesve.VERoomData.get_room_conditions" title="iesve.VERoomData.get_room_conditions"><code class="xref py py-meth docutils literal notranslate"><span class="pre">iesve.VERoomData.get_room_conditions()</span></code></a> return value is:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+   <span class="s1">&#39;cooling_profile&#39;</span><span class="p">:</span> <span class="s1">&#39;ON&#39;</span><span class="p">,</span>
+   <span class="s1">&#39;cooling_profile_from_template&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+   <span class="s1">&#39;cooling_setpoint&#39;</span><span class="p">:</span> <span class="mf">23.0</span><span class="p">,</span>
+   <span class="s1">&#39;cooling_setpoint_constant&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+   <span class="s1">&#39;cooling_setpoint_from_template&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+   <span class="s1">&#39;cooling_setpoint_profile&#39;</span><span class="p">:</span> <span class="s1">&#39;-&#39;</span><span class="p">,</span>
+   <span class="s1">&#39;cooling_setpoint_type&#39;</span><span class="p">:</span> <span class="n">iesve</span><span class="o">.</span><span class="n">setpoint_type</span><span class="o">.</span><span class="n">constant</span><span class="p">,</span>
+   <span class="s1">&#39;dhw&#39;</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span>
+   <span class="s1">&#39;dhw_from_template&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+   <span class="s1">&#39;dhw_linked_to_occupancy&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+   <span class="s1">&#39;dhw_linked_to_occupancy_from_template&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+   <span class="s1">&#39;dhw_profile&#39;</span><span class="p">:</span> <span class="s1">&#39;-&#39;</span><span class="p">,</span>
+   <span class="s1">&#39;dhw_profile_from_template&#39;</span><span class="p">:</span> <span class="s1">&#39;-&#39;</span><span class="p">,</span>
+   <span class="s1">&#39;dhw_room_level_setting&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+   <span class="s1">&#39;dhw_room_level_setting_from_template&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+   <span class="s1">&#39;dhw_unit&#39;</span><span class="p">:</span> <span class="s1">&#39;l/(h·pers)&#39;</span><span class="p">,</span>
+   <span class="s1">&#39;dhw_unit_val&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+   <span class="s1">&#39;furniture_mass_factor&#39;</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span>
+   <span class="s1">&#39;furniture_mass_factor_from_template&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+   <span class="s1">&#39;heating_profile&#39;</span><span class="p">:</span> <span class="s1">&#39;ON&#39;</span><span class="p">,</span>
+   <span class="s1">&#39;heating_profile_from_template&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+   <span class="s1">&#39;heating_setpoint&#39;</span><span class="p">:</span> <span class="mf">19.0</span><span class="p">,</span>
+   <span class="s1">&#39;heating_setpoint_constant&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+   <span class="s1">&#39;heating_setpoint_from_template&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+   <span class="s1">&#39;heating_setpoint_profile&#39;</span><span class="p">:</span> <span class="s1">&#39;-&#39;</span><span class="p">,</span>
+   <span class="s1">&#39;heating_setpoint_twovalue_main_setpoint&#39;</span><span class="p">:</span> <span class="s1">&#39;-&#39;</span><span class="p">,</span>
+   <span class="s1">&#39;heating_setpoint_twovalue_profile&#39;</span><span class="p">:</span> <span class="s1">&#39;-&#39;</span><span class="p">,</span>
+   <span class="s1">&#39;heating_setpoint_twovalue_setback&#39;</span><span class="p">:</span> <span class="s1">&#39;-&#39;</span><span class="p">,</span>
+   <span class="s1">&#39;heating_setpoint_type&#39;</span><span class="p">:</span> <span class="n">iesve</span><span class="o">.</span><span class="n">setpoint_type</span><span class="o">.</span><span class="n">constant</span><span class="p">,</span>
+   <span class="s1">&#39;max_cooling_and_dehumidification&#39;</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span>
+   <span class="s1">&#39;max_dehumidification&#39;</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span>
+   <span class="s1">&#39;max_heating_and_humidification&#39;</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span>
+   <span class="s1">&#39;max_humidification&#39;</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span>
+   <span class="s1">&#39;plant_profile&#39;</span><span class="p">:</span> <span class="s1">&#39;ON&#39;</span><span class="p">,</span>
+   <span class="s1">&#39;plant_profile_from_template&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+   <span class="s1">&#39;plant_profile_type&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+   <span class="s1">&#39;plant_profile_type_str&#39;</span><span class="p">:</span> <span class="s1">&#39;Set to heating profile&#39;</span><span class="p">,</span>
+   <span class="s1">&#39;sat_perc_lower&#39;</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span>
+   <span class="s1">&#39;sat_perc_lower_from_template&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+   <span class="s1">&#39;sat_perc_upper&#39;</span><span class="p">:</span> <span class="mf">100.0</span><span class="p">,</span>
+   <span class="s1">&#39;sat_perc_upper_from_template&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+   <span class="s1">&#39;solar_reflected_fraction&#39;</span><span class="p">:</span> <span class="mf">0.05</span><span class="p">,</span>
+   <span class="s1">&#39;solar_reflected_fraction_from_template&#39;</span><span class="p">:</span> <span class="kc">True</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="VEBody.html" class="btn btn-neutral float-left" title="Working with bodies" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="ResultsReader.html" class="btn btn-neutral float-right" title="Working with results" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Steven Firth.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

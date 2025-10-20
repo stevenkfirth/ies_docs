@@ -1,0 +1,428 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Export room results to Excel &mdash; IES-VE Python API  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=e6a37869" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Export results to CSV files" href="ExportResultsToCSV.html" />
+    <link rel="prev" title="Plot room heat balance" href="PlotRoomHeatBalance.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            IES-VE Python API
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quick_start.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../code_snippets/code_snippets.html">Code Snippets</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="examples.html">Example Scripts</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="PlotAirTemperaturesBoxPlot.html">Plot room air temperatures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="PlotRoomHeatBalance.html">Plot room heat balance</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Export room results to Excel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ExportResultsToCSV.html">Export results to CSV files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ParametricRunThermostat.html">Parametric analysis with heating setpoint</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../api.html">API Reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">IES-VE Python API</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="examples.html">Example Scripts</a></li>
+      <li class="breadcrumb-item active">Export room results to Excel</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/examples/ExportRoomResultsToExcel.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="export-room-results-to-excel">
+<h1>Export room results to Excel<a class="headerlink" href="#export-room-results-to-excel" title="Link to this heading"></a></h1>
+<p>This script:</p>
+<ul class="simple">
+<li><p>Reads all the results files in the ‘Vista’ folder.</p></li>
+<li><p>Loads a selection of 18 results variables for all rooms.</p></li>
+<li><p>Saves the entire result set to an Excel Workbook.</p></li>
+</ul>
+<p>The Excel data is “stacked” by filename and room id, which makes it suitable for Excel Pivot Tables and Charts.</p>
+<p>The script makes use of the <a class="reference internal" href="../api.html#iesve.ResultsReader" title="iesve.ResultsReader"><code class="xref py py-class docutils literal notranslate"><span class="pre">ResultsReader</span></code></a> class to read the results files, the <a class="reference external" href="https://docs.python.org/3/library/dialog.html#tkinter.filedialog.asksaveasfile">tkinter.filedialog.asksaveasfilename</a> method to create a name for the Excel workbook and the <a class="reference external" href="https://xlsxwriter.readthedocs.io/">xlsxwriter</a> package (one of the external Python packages available in the IES-VE) to write the data to an Excel spreadsheet.</p>
+<img alt="../_images/figure_export_room_results_to_excel.png" src="../_images/figure_export_room_results_to_excel.png" />
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ExportRoomResultsToExcel</span>
+
+<span class="c1"># Steven Firth, Loughborough University, 2025</span>
+
+<span class="c1"># v0.0.1 - 2025-10-08</span>
+
+<span class="c1"># This IES-VE Python script</span>
+<span class="c1"># - Reads all the results .aps files in the &#39;vista&#39; folder.</span>
+<span class="c1"># - Extracts a selection of room variables (air temperature, CO2 levels etc) for all rooms.</span>
+<span class="c1"># - Exports the data to an Excel worksbook.</span>
+
+<span class="c1"># Notes</span>
+<span class="c1"># - The data is &#39;stacked&#39; for each file and room combination, making it good for Excel pivot tables and charts.</span>
+<span class="c1"># - If there are too many results files and rooms (more than 114 combined) then this will be more rows than Excel can handle (1 million).</span>
+<span class="c1">#   - This could be solved by exporting to CSV and importing the data into Excel as a linked data source (Data / From text csv).</span>
+<span class="c1"># - Currently exports the following columns. This can be changed by commenting/uncommenting the `vars` list below.</span>
+<span class="c1">#   - filename</span>
+<span class="c1">#   - room_id</span>
+<span class="c1">#   - datetimes</span>
+<span class="c1">#   - Air temperature</span>
+<span class="c1">#   - Mean radiant temperature</span>
+<span class="c1">#   - Heating set point</span>
+<span class="c1">#   - Cooling set point</span>
+<span class="c1">#   - Room CO2 concentration</span>
+<span class="c1">#   - Space conditioning sensible</span>
+<span class="c1">#   - Heating plant sensible load</span>
+<span class="c1">#   - Cooling plant sensible load</span>
+<span class="c1">#   - Internal gain</span>
+<span class="c1">#   - Lighting gain</span>
+<span class="c1">#   - Equipment gain</span>
+<span class="c1">#   - People gain</span>
+<span class="c1">#   - Solar gain</span>
+<span class="c1">#   - External conduction gain</span>
+<span class="c1">#   - Internal conduction gain</span>
+<span class="c1">#   - Natural vent gain</span>
+<span class="c1">#   - Infiltration gain</span>
+<span class="c1">#   - Number of people</span>
+
+<span class="c1"># Possible improvements</span>
+<span class="c1"># - Add a tkinter check box to choose which .aps files to export (rather than exporting all files at present)</span>
+<span class="c1"># - Add a tkinter check box to choose which room to export (rather than exporting all rooms at present)</span>
+<span class="c1"># - Add a tkinter check box to choose which room variables to export (rather than the hard coded selection below)</span>
+
+<span class="kn">import</span> <span class="nn">iesve</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">tkinter</span> <span class="kn">import</span> <span class="n">Tk</span><span class="p">,</span> <span class="n">messagebox</span>
+<span class="kn">from</span> <span class="nn">tkinter.filedialog</span> <span class="kn">import</span> <span class="n">asksaveasfilename</span>
+<span class="kn">import</span> <span class="nn">xlsxwriter</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span><span class="p">,</span> <span class="n">timedelta</span>
+
+
+<span class="c1"># Step 1 - get the filepath to the Vista folder</span>
+<span class="n">currentproject</span> <span class="o">=</span> <span class="n">iesve</span><span class="o">.</span><span class="n">VEProject</span><span class="o">.</span><span class="n">get_current_project</span><span class="p">()</span>
+<span class="n">dir_currentproject</span> <span class="o">=</span> <span class="n">currentproject</span><span class="o">.</span><span class="n">path</span>
+<span class="k">if</span> <span class="n">dir_currentproject</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>  <span class="c1"># if no path exists, show an error message box then exit.</span>
+   <span class="n">root</span> <span class="o">=</span> <span class="n">Tk</span><span class="p">()</span>
+   <span class="n">root</span><span class="o">.</span><span class="n">withdraw</span><span class="p">()</span>
+   <span class="n">messagebox</span><span class="o">.</span><span class="n">showinfo</span><span class="p">(</span><span class="s1">&#39;User action required&#39;</span><span class="p">,</span> <span class="s1">&#39;Please save the IES-VE project.&#39;</span><span class="p">,</span> <span class="n">parent</span> <span class="o">=</span> <span class="n">root</span><span class="p">)</span>
+   <span class="n">root</span><span class="o">.</span><span class="n">destroy</span><span class="p">()</span>
+   <span class="n">quit</span><span class="p">()</span>
+<span class="n">dir_vista</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">dir_currentproject</span><span class="p">,</span> <span class="s1">&#39;vista&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;dir_vista:&#39;</span><span class="p">,</span> <span class="n">dir_vista</span><span class="p">)</span>
+
+<span class="c1"># Step 2 - find all the .aps files in the Vista folder</span>
+<span class="n">fps_in</span> <span class="o">=</span> <span class="p">[</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">dir_vista</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">dir_vista</span><span class="p">)</span> <span class="k">if</span> <span class="n">x</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;.aps&#39;</span><span class="p">)]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;fps_in:&#39;</span><span class="p">,</span> <span class="n">fps_in</span><span class="p">)</span>
+
+<span class="c1"># Step 3 - open the first results file and print the room variables.</span>
+<span class="c1"># - optional, to help to create the vars list in Step 4 below.</span>
+<span class="k">if</span> <span class="kc">False</span><span class="p">:</span>  <span class="c1"># change to True/False if (not) needed</span>
+   <span class="k">for</span> <span class="n">fp_in</span> <span class="ow">in</span> <span class="n">fps_in</span><span class="p">:</span>
+      <span class="k">with</span> <span class="n">iesve</span><span class="o">.</span><span class="n">ResultsReader</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">fp_in</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">room_variables_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">f</span><span class="o">.</span><span class="n">get_variables</span><span class="p">()</span> <span class="k">if</span> <span class="n">x</span><span class="p">[</span><span class="s1">&#39;model_level&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;z&#39;</span><span class="p">]</span>
+            <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">room_variables_list</span><span class="p">):</span>
+               <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;# (&#39;</span><span class="si">{</span><span class="n">x</span><span class="p">[</span><span class="s1">&#39;display_name&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;, &#39;</span><span class="si">{</span><span class="n">x</span><span class="p">[</span><span class="s1">&#39;aps_varname&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;, &#39;</span><span class="si">{</span><span class="n">x</span><span class="p">[</span><span class="s1">&#39;units_type&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;, &#39;</span><span class="si">{</span><span class="n">x</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;category&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&#39;, &#39;</span><span class="si">{</span><span class="n">x</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;units_category&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&#39;),&quot;</span><span class="p">)</span>
+      <span class="k">break</span>
+
+<span class="c1"># Step 4 - open all results file and parse the data.</span>
+<span class="nb">vars</span> <span class="o">=</span> <span class="p">[</span>  <span class="c1"># display_name, aps_varname, units_type, category, units_category  - UNCOMMENT ROWS BELOW AS NEEDED</span>
+   <span class="p">(</span><span class="s1">&#39;Air temperature&#39;</span><span class="p">,</span> <span class="s1">&#39;Room air temperature&#39;</span><span class="p">,</span> <span class="s1">&#39;Temperature&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">),</span>
+   <span class="c1"># (&#39;CIBSE F1 factor&#39;, &#39;CIBSE F1 factor&#39;, &#39;Number&#39;, &#39;&#39;, &#39;&#39;),</span>
+   <span class="c1"># (&#39;CIBSE F2 factor&#39;, &#39;CIBSE F2 factor&#39;, &#39;Number&#39;, &#39;&#39;, &#39;&#39;),</span>
+   <span class="c1"># (&#39;Dry resultant temperature&#39;, &#39;Comfort temperature&#39;, &#39;Temperature&#39;, &#39;&#39;, &#39;&#39;),</span>
+   <span class="c1"># (&#39;CIBSE interm. heating correction&#39;, &#39;CIBSE interm. heating correction&#39;, &#39;Number&#39;, &#39;&#39;, &#39;&#39;),</span>
+   <span class="c1"># (&#39;Environmental temperature&#39;, &#39;Environmental temperature&#39;, &#39;Temperature&#39;, &#39;&#39;, &#39;&#39;),</span>
+   <span class="c1"># (&#39;CIBSE thermal response&#39;, &#39;CIBSE thermal response&#39;, &#39;Number&#39;, &#39;&#39;, &#39;&#39;),</span>
+   <span class="p">(</span><span class="s1">&#39;Mean radiant temperature&#39;</span><span class="p">,</span> <span class="s1">&#39;Room radiant temperature&#39;</span><span class="p">,</span> <span class="s1">&#39;Temperature&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">),</span>
+   <span class="c1"># (&#39;CIBSE interm. plant size&#39;, &#39;CIBSE interm. plant size&#39;, &#39;power&#39;, &#39;&#39;, &#39;&#39;),</span>
+   <span class="c1"># (&#39;Dew-point temperature&#39;, &#39;Room air temperature&amp;Room % saturation&amp;Atmospheric pressure[w]&#39;, &#39;Temperature&#39;, &#39;&#39;, &#39;&#39;),</span>
+   <span class="p">(</span><span class="s1">&#39;Heating set point&#39;</span><span class="p">,</span> <span class="s1">&#39;Heating set point&#39;</span><span class="p">,</span> <span class="s1">&#39;Temperature&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">),</span>
+   <span class="p">(</span><span class="s1">&#39;Cooling set point&#39;</span><span class="p">,</span> <span class="s1">&#39;Cooling set point&#39;</span><span class="p">,</span> <span class="s1">&#39;Temperature&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">),</span>
+   <span class="c1"># (&#39;Plant profile&#39;, &#39;Plant profile&#39;, &#39;Number&#39;, &#39;&#39;, &#39;&#39;),</span>
+   <span class="c1"># (&#39;HVAC zone cooling setpoint&#39;, &#39;HVAC zone cooling setpoint&#39;, &#39;Temperature&#39;, &#39;&#39;, &#39;&#39;),</span>
+   <span class="c1"># (&#39;HVAC zone heating setpoint&#39;, &#39;HVAC zone heating setpoint&#39;, &#39;Temperature&#39;, &#39;&#39;, &#39;&#39;),</span>
+   <span class="c1"># (&#39;Heating occupied and available&#39;, &#39;Heating occupied and available&#39;, &#39;Number&#39;, &#39;&#39;, &#39;&#39;),</span>
+   <span class="c1"># (&#39;Cooling occupied and available&#39;, &#39;Cooling occupied and available&#39;, &#39;Number&#39;, &#39;&#39;, &#39;&#39;),</span>
+   <span class="c1"># (&#39;People dissatisfied&#39;, &#39;Room air temperature&amp;Room % saturation&amp;Room radiant temperature&#39;, &#39;Percentage&#39;, &#39;&#39;, &#39;&#39;),</span>
+   <span class="c1"># (&#39;Predicted mean vote&#39;, &#39;Room air temperature&amp;Room % saturation&amp;Room radiant temperature&#39;, &#39;Predicted mean vote&#39;, &#39;&#39;, &#39;&#39;),</span>
+   <span class="c1"># (&#39;Comfort index&#39;, &#39;Room air temperature&amp;Room % saturation&amp;Room radiant temperature&#39;, &#39;Comfort index&#39;, &#39;&#39;, &#39;&#39;),</span>
+   <span class="c1"># (&#39;CLO&#39;, &#39;Room air temperature&amp;Room % saturation&amp;Room radiant temperature&#39;, &#39;Number&#39;, &#39;&#39;, &#39;&#39;),</span>
+   <span class="c1"># (&#39;PMV  (ASHRAE 55 Analytical)&#39;, &#39;Room air temperature&amp;Room % saturation&amp;Room radiant temperature&#39;, &#39;Predicted mean vote&#39;, &#39;&#39;, &#39;&#39;),</span>
+   <span class="c1"># (&#39;PPD  (ASHRAE 55 Analytical)&#39;, &#39;Room air temperature&amp;Room % saturation&amp;Room radiant temperature&#39;, &#39;Percentage&#39;, &#39;&#39;, &#39;&#39;),</span>
+   <span class="c1"># (&#39;CLO  (ASHRAE 55 Analytical)&#39;, &#39;Room air temperature&amp;Room % saturation&amp;Room radiant temperature&#39;, &#39;Number&#39;, &#39;&#39;, &#39;&#39;),</span>
+   <span class="c1"># (&#39;PMV  (ASHRAE 55 Analytical direct-solar)&#39;, &#39;Room air temperature&amp;Room % saturation&amp;Room radiant temperature&#39;, &#39;Predicted mean vote&#39;, &#39;&#39;, &#39;&#39;),</span>
+   <span class="c1"># (&#39;PPD  (ASHRAE 55 Analytical direct-solar)&#39;, &#39;Room air temperature&amp;Room % saturation&amp;Room radiant temperature&#39;, &#39;Percentage&#39;, &#39;&#39;, &#39;&#39;),</span>
+   <span class="c1"># (&#39;CLO  (ASHRAE 55 Analytical direct-solar)&#39;, &#39;Room air temperature&amp;Room % saturation&amp;Room radiant temperature&#39;, &#39;Number&#39;, &#39;&#39;, &#39;&#39;),</span>
+   <span class="c1"># (&#39;MRT  (ASHRAE 55 Analytical direct-solar)&#39;, &#39;Room air temperature&amp;Room % saturation&amp;Room radiant temperature&#39;, &#39;Temperature&#39;, &#39;&#39;, &#39;&#39;),</span>
+   <span class="c1"># (&#39;Top  (ASHRAE 55 Analytical direct-solar)&#39;, &#39;Room air temperature&amp;Room radiant temperature&#39;, &#39;Temperature&#39;, &#39;&#39;, &#39;&#39;),</span>
+   <span class="c1"># (&#39;PMV  (ASHRAE 55 Adaptive)&#39;, &#39;Room air temperature&amp;Room % saturation&amp;Room radiant temperature&#39;, &#39;Predicted mean vote&#39;, &#39;&#39;, &#39;&#39;),</span>
+   <span class="c1"># (&#39;PPD  (ASHRAE 55 Adaptive)&#39;, &#39;Room air temperature&amp;Room % saturation&amp;Room radiant temperature&#39;, &#39;Percentage&#39;, &#39;&#39;, &#39;&#39;),</span>
+   <span class="c1"># (&#39;CLO  (ASHRAE 55 Adaptive)&#39;, &#39;Room air temperature&amp;Room % saturation&amp;Room radiant temperature&#39;, &#39;Number&#39;, &#39;&#39;, &#39;&#39;),</span>
+   <span class="c1"># (&#39;PMV  (ASHRAE 55 Adaptive direct-solar)&#39;, &#39;Room air temperature&amp;Room % saturation&amp;Room radiant temperature&#39;, &#39;Predicted mean vote&#39;, &#39;&#39;, &#39;&#39;),</span>
+   <span class="c1"># (&#39;PPD  (ASHRAE 55 Adaptive direct-solar)&#39;, &#39;Room air temperature&amp;Room % saturation&amp;Room radiant temperature&#39;, &#39;Percentage&#39;, &#39;&#39;, &#39;&#39;),</span>
+   <span class="c1"># (&#39;CLO  (ASHRAE 55 Adaptive direct-solar)&#39;, &#39;Room air temperature&amp;Room % saturation&amp;Room radiant temperature&#39;, &#39;Number&#39;, &#39;&#39;, &#39;&#39;),</span>
+   <span class="c1"># (&#39;MRT  (ASHRAE 55 Adaptive direct-solar)&#39;, &#39;Room air temperature&amp;Room % saturation&amp;Room radiant temperature&#39;, &#39;Temperature&#39;, &#39;&#39;, &#39;&#39;),</span>
+   <span class="c1"># (&#39;Top  (ASHRAE 55 Adaptive direct-solar)&#39;, &#39;Room air temperature&amp;Room radiant temperature&#39;, &#39;Temperature&#39;, &#39;&#39;, &#39;&#39;),</span>
+   <span class="c1"># (&#39;PMV(ISO 7730 nominal air speed)&#39;, &#39;Room air temperature&amp;Room % saturation&amp;Room radiant temperature&#39;, &#39;Predicted mean vote&#39;, &#39;&#39;, &#39;&#39;),</span>
+   <span class="c1"># (&#39;PPD(ISO 7730 nominal air speed)&#39;, &#39;Room air temperature&amp;Room % saturation&amp;Room radiant temperature&#39;, &#39;Percentage&#39;, &#39;&#39;, &#39;&#39;),</span>
+   <span class="c1"># (&#39;PMV(ISO 7730 elevated air speed)&#39;, &#39;Room air temperature&amp;Room % saturation&amp;Room radiant temperature&#39;, &#39;Predicted mean vote&#39;, &#39;&#39;, &#39;&#39;),</span>
+   <span class="c1"># (&#39;PPD(ISO 7730 elevated air speed)&#39;, &#39;Room air temperature&amp;Room % saturation&amp;Room radiant temperature&#39;, &#39;Percentage&#39;, &#39;&#39;, &#39;&#39;),</span>
+   <span class="c1"># (&#39;PMV(ISO 7730 nom &amp; elev air speed cat A)&#39;, &#39;Room air temperature&amp;Room % saturation&amp;Room radiant temperature&#39;, &#39;Predicted mean vote&#39;, &#39;&#39;, &#39;&#39;),</span>
+   <span class="c1"># (&#39;PPD(ISO 7730 nom &amp; elev air speed cat A)&#39;, &#39;Room air temperature&amp;Room % saturation&amp;Room radiant temperature&#39;, &#39;Percentage&#39;, &#39;&#39;, &#39;&#39;),</span>
+   <span class="c1"># (&#39;PMV(ISO 7730 nom &amp; elev air speed cat B)&#39;, &#39;Room air temperature&amp;Room % saturation&amp;Room radiant temperature&#39;, &#39;Predicted mean vote&#39;, &#39;&#39;, &#39;&#39;),</span>
+   <span class="c1"># (&#39;PPD(ISO 7730 nom &amp; elev air speed cat B)&#39;, &#39;Room air temperature&amp;Room % saturation&amp;Room radiant temperature&#39;, &#39;Percentage&#39;, &#39;&#39;, &#39;&#39;),</span>
+   <span class="c1"># (&#39;PMV(ISO 7730 nom &amp; elev air speed cat C)&#39;, &#39;Room air temperature&amp;Room % saturation&amp;Room radiant temperature&#39;, &#39;Predicted mean vote&#39;, &#39;&#39;, &#39;&#39;),</span>
+   <span class="c1"># (&#39;PPD(ISO 7730 nom &amp; elev air speed cat C)&#39;, &#39;Room air temperature&amp;Room % saturation&amp;Room radiant temperature&#39;, &#39;Percentage&#39;, &#39;&#39;, &#39;&#39;),</span>
+   <span class="c1"># (&#39;Relative humidity&#39;, &#39;Room air temperature&amp;Room % saturation&amp;Atmospheric pressure[w]&#39;, &#39;Percentage&#39;, &#39;&#39;, &#39;&#39;),</span>
+   <span class="c1"># (&#39;Moisture content&#39;, &#39;Room air temperature&amp;Room % saturation&amp;Atmospheric pressure[w]&#39;, &#39;Moisture content&#39;, &#39;&#39;, &#39;&#39;),</span>
+   <span class="c1"># (&#39;Wet bulb temperature&#39;, &#39;Room air temperature&amp;Room % saturation&amp;Atmospheric pressure[w]&#39;, &#39;Temperature&#39;, &#39;&#39;, &#39;&#39;),</span>
+   <span class="c1"># (&#39;Standard effective temperature&#39;, &#39;Room air temperature&amp;Room % saturation&amp;Room radiant temperature&#39;, &#39;Temperature&#39;, &#39;&#39;, &#39;&#39;),</span>
+   <span class="c1"># (&#39;Operative temperature (ASHRAE)&#39;, &#39;Room air temperature&amp;Room radiant temperature&#39;, &#39;Temperature&#39;, &#39;&#39;, &#39;&#39;),</span>
+   <span class="c1"># (&#39;Operative temperature (TM 52/CIBSE)&#39;, &#39;Room air temperature&amp;Room radiant temperature&#39;, &#39;Temperature&#39;, &#39;&#39;, &#39;&#39;),</span>
+   <span class="c1"># (&#39;Degrees &gt; Max. adaptive temp. (TM 52 criterion 1)&#39;, &#39;Room air temperature&amp;Temperature[w]&#39;, &#39;Temperature&#39;, &#39;&#39;, &#39;&#39;),</span>
+   <span class="c1"># (&#39;Daily weighted exceedance (TM 52 criterion 2)&#39;, &#39;Room air temperature&amp;Temperature[w]&#39;, &#39;DegreeHours&#39;, &#39;&#39;, &#39;&#39;),</span>
+   <span class="p">(</span><span class="s1">&#39;Room CO2 concentration&#39;</span><span class="p">,</span> <span class="s1">&#39;Room CO2 concentration&#39;</span><span class="p">,</span> <span class="s1">&#39;CO2 concentration&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">),</span>
+   <span class="p">(</span><span class="s1">&#39;Space conditioning sensible&#39;</span><span class="p">,</span> <span class="s1">&#39;System plant etc. gains&#39;</span><span class="p">,</span> <span class="s1">&#39;Gain&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">),</span>
+   <span class="c1"># (&#39;Steady state heating plant load&#39;, &#39;Room units steady state htg load&#39;, &#39;Load&#39;, &#39;&#39;, &#39;&#39;),</span>
+   <span class="p">(</span><span class="s1">&#39;Heating plant sensible load&#39;</span><span class="p">,</span> <span class="s1">&#39;Room units heating load&#39;</span><span class="p">,</span> <span class="s1">&#39;Load&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">),</span>
+   <span class="p">(</span><span class="s1">&#39;Cooling plant sensible load&#39;</span><span class="p">,</span> <span class="s1">&#39;Room units cooling load&#39;</span><span class="p">,</span> <span class="s1">&#39;Load&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">),</span>
+   <span class="c1"># (&#39;Room heating load [obs]&#39;, &#39;Room heating load&#39;, &#39;Load&#39;, &#39;&#39;, &#39;&#39;),</span>
+   <span class="c1"># (&#39;Room cooling load [obs]&#39;, &#39;Room cooling load&#39;, &#39;Load&#39;, &#39;&#39;, &#39;&#39;),</span>
+   <span class="p">(</span><span class="s1">&#39;Internal gain&#39;</span><span class="p">,</span> <span class="s1">&#39;Casual gains&#39;</span><span class="p">,</span> <span class="s1">&#39;Gain&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">),</span>
+   <span class="p">(</span><span class="s1">&#39;Lighting gain&#39;</span><span class="p">,</span> <span class="s1">&#39;Lighting gain&#39;</span><span class="p">,</span> <span class="s1">&#39;Gain&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">),</span>
+   <span class="p">(</span><span class="s1">&#39;Equipment gain&#39;</span><span class="p">,</span> <span class="s1">&#39;Equipment gain&#39;</span><span class="p">,</span> <span class="s1">&#39;Gain&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">),</span>
+   <span class="p">(</span><span class="s1">&#39;People gain&#39;</span><span class="p">,</span> <span class="s1">&#39;People gain&#39;</span><span class="p">,</span> <span class="s1">&#39;Gain&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">),</span>
+   <span class="p">(</span><span class="s1">&#39;Solar gain&#39;</span><span class="p">,</span> <span class="s1">&#39;Window solar gains&#39;</span><span class="p">,</span> <span class="s1">&#39;Gain&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">),</span>
+   <span class="p">(</span><span class="s1">&#39;External conduction gain&#39;</span><span class="p">,</span> <span class="s1">&#39;Conduction from ext elements&#39;</span><span class="p">,</span> <span class="s1">&#39;Gain&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">),</span>
+   <span class="p">(</span><span class="s1">&#39;Internal conduction gain&#39;</span><span class="p">,</span> <span class="s1">&#39;Conduction from int surfaces&#39;</span><span class="p">,</span> <span class="s1">&#39;Gain&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">),</span>
+   <span class="c1"># (&#39;Conduction gain&#39;, &#39;Conduction gain&#39;, &#39;Gain&#39;, &#39;&#39;, &#39;&#39;),</span>
+   <span class="c1"># (&#39;Air exch ext vent gain [obs]&#39;, &#39;Ventilation gain from ext air&#39;, &#39;Gain&#39;, &#39;&#39;, &#39;&#39;),</span>
+   <span class="c1"># (&#39;Air exch int vent gain [obs]&#39;, &#39;Internal ventilation gains&#39;, &#39;Gain&#39;, &#39;&#39;, &#39;&#39;),</span>
+   <span class="c1"># (&#39;Air system input sensible&#39;, &#39;System air gain&#39;, &#39;Gain&#39;, &#39;&#39;, &#39;&#39;),</span>
+   <span class="c1"># (&#39;Aux vent gain&#39;, &#39;Aux mech vent gain&#39;, &#39;Gain&#39;, &#39;&#39;, &#39;&#39;),</span>
+   <span class="p">(</span><span class="s1">&#39;Natural vent gain&#39;</span><span class="p">,</span> <span class="s1">&#39;Natural vent gain&#39;</span><span class="p">,</span> <span class="s1">&#39;Gain&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">),</span>
+   <span class="p">(</span><span class="s1">&#39;Infiltration gain&#39;</span><span class="p">,</span> <span class="s1">&#39;Infiltration gain&#39;</span><span class="p">,</span> <span class="s1">&#39;Gain&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">),</span>
+   <span class="c1"># (&#39;Free cooling vent gain&#39;, &#39;Cooling vent gain&#39;, &#39;Gain&#39;, &#39;&#39;, &#39;&#39;),</span>
+   <span class="c1"># (&#39;Conditioned vent gain [obs]&#39;, &#39;Conditioned ventilation gains&#39;, &#39;Gain&#39;, &#39;&#39;, &#39;&#39;),</span>
+   <span class="c1"># (&#39;Duct conduction gain&#39;, &#39;Duct conduction gain&#39;, &#39;Gain&#39;, &#39;&#39;, &#39;&#39;),</span>
+   <span class="c1"># (&#39;Duct leakage sensible gain&#39;, &#39;Duct leakage sensible gain&#39;, &#39;Gain&#39;, &#39;&#39;, &#39;&#39;),</span>
+   <span class="c1"># (&#39;MacroFlo ext vent gain&#39;, &#39;MacroFlo ext vent gain&#39;, &#39;Gain&#39;, &#39;&#39;, &#39;&#39;),</span>
+   <span class="c1"># (&#39;MacroFlo int vent gain&#39;, &#39;MacroFlo int vent gain&#39;, &#39;Gain&#39;, &#39;&#39;, &#39;&#39;),</span>
+   <span class="c1"># (&#39;Air exch external vent [obs]&#39;, &#39;External ventilation rate&#39;, &#39;Volume flow&#39;, &#39;&#39;, &#39;&#39;),</span>
+   <span class="c1"># (&#39;Air exch internal vent [obs]&#39;, &#39;Internal ventilation rate&#39;, &#39;Volume flow&#39;, &#39;&#39;, &#39;&#39;),</span>
+   <span class="c1"># (&#39;ApSys air supply&#39;, &#39;ApSys air supply&#39;, &#39;Volume flow&#39;, &#39;&#39;, &#39;&#39;),</span>
+   <span class="c1"># (&#39;ApHVAC air supply&#39;, &#39;ApHVAC air supply&#39;, &#39;Volume flow&#39;, &#39;&#39;, &#39;&#39;),</span>
+   <span class="c1"># (&#39;System air supply [obs]&#39;, &#39;HVAC ventilation rate&#39;, &#39;Volume flow&#39;, &#39;&#39;, &#39;&#39;),</span>
+   <span class="c1"># (&#39;Auxiliary vent&#39;, &#39;Aux mech vent&#39;, &#39;Volume flow&#39;, &#39;&#39;, &#39;&#39;),</span>
+   <span class="c1"># (&#39;Auxiliary vent temperature&#39;, &#39;Aux mech vent temp&#39;, &#39;Temperature&#39;, &#39;&#39;, &#39;&#39;),</span>
+   <span class="c1"># (&#39;Natural vent&#39;, &#39;Natural vent&#39;, &#39;Volume flow&#39;, &#39;&#39;, &#39;&#39;),</span>
+   <span class="c1"># (&#39;Infiltration&#39;, &#39;Infiltration&#39;, &#39;Volume flow&#39;, &#39;&#39;, &#39;&#39;),</span>
+   <span class="c1"># (&#39;Free cooling vent&#39;, &#39;Cooling vent&#39;, &#39;Volume flow&#39;, &#39;&#39;, &#39;&#39;),</span>
+   <span class="c1"># (&#39;Duct leakage inflow&#39;, &#39;Duct leakage inflow&#39;, &#39;Volume flow&#39;, &#39;&#39;, &#39;&#39;),</span>
+   <span class="c1"># (&#39;Conditioned vent [obs]&#39;, &#39;Conditioned ventilation rate&#39;, &#39;Volume flow&#39;, &#39;&#39;, &#39;&#39;),</span>
+   <span class="c1"># (&#39;MacroFlo external vent&#39;, &#39;MacroFlo external vent&#39;, &#39;Volume flow&#39;, &#39;&#39;, &#39;&#39;),</span>
+   <span class="c1"># (&#39;MacroFlo internal vent&#39;, &#39;MacroFlo internal vent&#39;, &#39;Volume flow&#39;, &#39;&#39;, &#39;&#39;),</span>
+   <span class="c1"># (&#39;Space conditioning latent&#39;, &#39;Room latent load&#39;, &#39;Gain&#39;, &#39;&#39;, &#39;&#39;),</span>
+   <span class="c1"># (&#39;Room humidification load [obs]&#39;, &#39;Room humidification load&#39;, &#39;Load&#39;, &#39;&#39;, &#39;&#39;),</span>
+   <span class="c1"># (&#39;Room dehum load [obs]&#39;, &#39;Room dehumidification load&#39;, &#39;Load&#39;, &#39;&#39;, &#39;&#39;),</span>
+   <span class="c1"># (&#39;Humidification plant load&#39;, &#39;Room units humidification load&#39;, &#39;Load&#39;, &#39;&#39;, &#39;&#39;),</span>
+   <span class="c1"># (&#39;Dehumidification plant load&#39;, &#39;Room units dehumidification load&#39;, &#39;Load&#39;, &#39;&#39;, &#39;&#39;),</span>
+   <span class="c1"># (&#39;Cooling + dehum plant load&#39;, &#39;Room units cooling + dehum load&#39;, &#39;Load&#39;, &#39;&#39;, &#39;&#39;),</span>
+   <span class="c1"># (&#39;Internal latent gain&#39;, &#39;Internal latent gain&#39;, &#39;Gain&#39;, &#39;&#39;, &#39;&#39;),</span>
+   <span class="c1"># (&#39;Equipment latent gain&#39;, &#39;Equipment latent gain&#39;, &#39;Gain&#39;, &#39;&#39;, &#39;&#39;),</span>
+   <span class="c1"># (&#39;People latent gain&#39;, &#39;People latent gain&#39;, &#39;Gain&#39;, &#39;&#39;, &#39;&#39;),</span>
+   <span class="p">(</span><span class="s1">&#39;Number of people&#39;</span><span class="p">,</span> <span class="s1">&#39;Number of people&#39;</span><span class="p">,</span> <span class="s1">&#39;Number&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">),</span>
+   <span class="c1"># (&#39;DHW demand load&#39;, &#39;DHW demand load&#39;, &#39;Load&#39;, &#39;&#39;, &#39;&#39;),</span>
+   <span class="c1"># (&#39;DHW demand flow&#39;, &#39;DHW demand flow&#39;, &#39;Fluid flow&#39;, &#39;&#39;, &#39;&#39;),</span>
+   <span class="c1"># (&#39;DHW target supply temperature&#39;, &#39;DHW target supply temperature&#39;, &#39;Temperature&#39;, &#39;&#39;, &#39;&#39;),</span>
+   <span class="c1"># (&#39;DHW supply temperature&#39;, &#39;DHW supply temperature&#39;, &#39;Temperature&#39;, &#39;&#39;, &#39;&#39;),</span>
+   <span class="c1"># (&#39;Daylight illuminance 1&#39;, &#39;Daylight illuminance 1&#39;, &#39;Illuminance&#39;, &#39;&#39;, &#39;&#39;),</span>
+   <span class="c1"># (&#39;Daylight illuminance 2&#39;, &#39;Daylight illuminance 2&#39;, &#39;Illuminance&#39;, &#39;&#39;, &#39;&#39;),</span>
+   <span class="c1"># (&#39;Air exch ext vent lat gain [obs]&#39;, &#39;Air exch ext vent lat gain&#39;, &#39;Gain&#39;, &#39;&#39;, &#39;&#39;),</span>
+   <span class="c1"># (&#39;Air exch int vent lat gain [obs]&#39;, &#39;Air exch int vent lat gain&#39;, &#39;Gain&#39;, &#39;&#39;, &#39;&#39;),</span>
+   <span class="c1"># (&#39;Air system input latent&#39;, &#39;System air latent gain&#39;, &#39;Gain&#39;, &#39;&#39;, &#39;&#39;),</span>
+   <span class="c1"># (&#39;Vent/infiltr. latent gain&#39;, &#39;Air exchange latent gain&#39;, &#39;Gain&#39;, &#39;&#39;, &#39;&#39;),</span>
+   <span class="c1"># (&#39;Aux vent lat gain&#39;, &#39;Aux mech vent lat gain&#39;, &#39;Gain&#39;, &#39;&#39;, &#39;&#39;),</span>
+   <span class="c1"># (&#39;Duct leakage lat gain&#39;, &#39;Duct leakage lat gain&#39;, &#39;Gain&#39;, &#39;&#39;, &#39;&#39;),</span>
+   <span class="c1"># (&#39;Natural vent lat gain&#39;, &#39;Natural vent lat gain&#39;, &#39;Gain&#39;, &#39;&#39;, &#39;&#39;),</span>
+   <span class="c1"># (&#39;Infiltration lat gain&#39;, &#39;Infiltration lat gain&#39;, &#39;Gain&#39;, &#39;&#39;, &#39;&#39;),</span>
+   <span class="c1"># (&#39;Free cooling vent lat gain&#39;, &#39;Cooling vent lat gain&#39;, &#39;Gain&#39;, &#39;&#39;, &#39;&#39;),</span>
+   <span class="c1"># (&#39;Conditioned vent lat gain [obs]&#39;, &#39;Conditioned vent lat gain&#39;, &#39;Gain&#39;, &#39;&#39;, &#39;&#39;),</span>
+   <span class="c1"># (&#39;MacroFlo ext vent lat gain&#39;, &#39;MacroFlo ext vent lat gain&#39;, &#39;Gain&#39;, &#39;&#39;, &#39;&#39;),</span>
+   <span class="c1"># (&#39;MacroFlo int vent lat gain&#39;, &#39;MacroFlo int vent lat gain&#39;, &#39;Gain&#39;, &#39;&#39;, &#39;&#39;),</span>
+   <span class="c1"># (&#39;Convective room plant load&#39;, &#39;Convective plant load&#39;, &#39;Gain&#39;, &#39;&#39;, &#39;&#39;),</span>
+   <span class="c1"># (&#39;Convective lighting gain&#39;, &#39;Convective lighting gain&#39;, &#39;Gain&#39;, &#39;&#39;, &#39;&#39;),</span>
+   <span class="c1"># (&#39;Convective equipment gain&#39;, &#39;Convective equipment gain&#39;, &#39;Gain&#39;, &#39;&#39;, &#39;&#39;),</span>
+   <span class="c1"># (&#39;Convective people gain&#39;, &#39;Convective people gain&#39;, &#39;Gain&#39;, &#39;&#39;, &#39;&#39;),</span>
+   <span class="c1"># (&#39;NCM sensible load&#39;, &#39;NCM sensible load&#39;, &#39;Gain&#39;, &#39;&#39;, &#39;&#39;),</span>
+   <span class="c1"># (&#39;Conduction gain - external walls&#39;, &#39;Conduction gain - external wall&#39;, &#39;Gain&#39;, &#39;&#39;, &#39;&#39;),</span>
+   <span class="c1"># (&#39;Conduction gain - roofs&#39;, &#39;Conduction gain - roof&#39;, &#39;Gain&#39;, &#39;&#39;, &#39;&#39;),</span>
+   <span class="c1"># (&#39;Conduction gain - ground/exposed floors&#39;, &#39;Conduction gain - ground floor&#39;, &#39;Gain&#39;, &#39;&#39;, &#39;&#39;),</span>
+   <span class="c1"># (&#39;Conduction gain - external doors&#39;, &#39;Conduction gain - external door&#39;, &#39;Gain&#39;, &#39;&#39;, &#39;&#39;),</span>
+   <span class="c1"># (&#39;Conduction gain - external windows&#39;, &#39;Conduction gain - external glazed&#39;, &#39;Gain&#39;, &#39;&#39;, &#39;&#39;),</span>
+   <span class="c1"># (&#39;Conduction gain - rooflights&#39;, &#39;Conduction gain - rooflight&#39;, &#39;Gain&#39;, &#39;&#39;, &#39;&#39;),</span>
+   <span class="c1"># (&#39;Conduction gain - internal walls&#39;, &#39;Conduction gain - internal wall&#39;, &#39;Gain&#39;, &#39;&#39;, &#39;&#39;),</span>
+   <span class="c1"># (&#39;Conduction gain - ceilings&#39;, &#39;Conduction gain - ceiling&#39;, &#39;Gain&#39;, &#39;&#39;, &#39;&#39;),</span>
+   <span class="c1"># (&#39;Conduction gain - internal floors&#39;, &#39;Conduction gain - floor&#39;, &#39;Gain&#39;, &#39;&#39;, &#39;&#39;),</span>
+   <span class="c1"># (&#39;Conduction gain - internal doors&#39;, &#39;Conduction gain - internal door&#39;, &#39;Gain&#39;, &#39;&#39;, &#39;&#39;),</span>
+   <span class="c1"># (&#39;Conduction gain - internal glazing&#39;, &#39;Conduction gain - internal glazed&#39;, &#39;Gain&#39;, &#39;&#39;, &#39;&#39;),</span>
+   <span class="c1"># (&#39;Process simulation latent gain&#39;, &#39;Process simulation lat gain&#39;, &#39;Gain&#39;, &#39;&#39;, &#39;&#39;),</span>
+   <span class="c1"># (&#39;Process simulation sensible gain&#39;, &#39;Process simulation gain&#39;, &#39;Gain&#39;, &#39;&#39;, &#39;&#39;),</span>
+   <span class="c1"># (&#39;Air &amp; furniture dynamics gain&#39;, &#39;Air &amp; furniture dynamics gain&#39;, &#39;Gain&#39;, &#39;&#39;, &#39;&#39;),</span>
+   <span class="c1"># (&#39;System occupied and available&#39;, &#39;System occupied and available&#39;, &#39;Number&#39;, &#39;&#39;, &#39;&#39;),</span>
+   <span class="c1"># (&#39;System operation and available&#39;, &#39;System operation and available&#39;, &#39;Number&#39;, &#39;&#39;, &#39;&#39;),</span>
+   <span class="p">]</span>
+<span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">fp_in</span> <span class="ow">in</span> <span class="n">fps_in</span><span class="p">:</span>
+   <span class="nb">print</span><span class="p">(</span><span class="n">fp_in</span><span class="p">)</span>
+   <span class="k">with</span> <span class="n">iesve</span><span class="o">.</span><span class="n">ResultsReader</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">fp_in</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+      <span class="n">first_day</span><span class="p">,</span> <span class="n">last_day</span><span class="p">,</span> <span class="n">results_per_day</span><span class="p">,</span> <span class="n">simulation_year</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">first_day</span><span class="p">,</span> <span class="n">f</span><span class="o">.</span><span class="n">last_day</span><span class="p">,</span> <span class="n">f</span><span class="o">.</span><span class="n">results_per_day</span><span class="p">,</span> <span class="mi">2025</span>
+      <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;first_day, last_day, results_per_day, simulation_year:&#39;</span><span class="p">,</span> <span class="n">first_day</span><span class="p">,</span> <span class="n">last_day</span><span class="p">,</span> <span class="n">results_per_day</span><span class="p">,</span> <span class="n">simulation_year</span><span class="p">)</span>
+      <span class="n">first_datetime</span> <span class="o">=</span> <span class="n">datetime</span><span class="p">(</span><span class="n">simulation_year</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">days</span> <span class="o">=</span> <span class="n">first_day</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+      <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;first_datetime&#39;</span><span class="p">,</span> <span class="n">first_datetime</span><span class="p">)</span>
+      <span class="n">datetimes</span> <span class="o">=</span> <span class="p">[</span><span class="n">first_datetime</span> <span class="o">+</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">hours</span> <span class="o">=</span> <span class="p">(</span><span class="n">i</span> <span class="o">*</span> <span class="mi">24</span> <span class="o">/</span> <span class="n">results_per_day</span><span class="p">))</span>
+                     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">((</span><span class="n">last_day</span> <span class="o">-</span> <span class="n">first_day</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">results_per_day</span><span class="p">)]</span>
+      <span class="nb">print</span><span class="p">(</span><span class="n">datetimes</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">datetimes</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+      <span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">datetimes</span><span class="p">))</span>
+      <span class="k">for</span> <span class="n">room_id</span> <span class="ow">in</span> <span class="n">f</span><span class="o">.</span><span class="n">get_room_ids</span><span class="p">():</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">room_id</span><span class="p">)</span>
+            <span class="n">d</span> <span class="o">=</span> <span class="p">{</span>
+               <span class="s1">&#39;filename&#39;</span><span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">fp_in</span><span class="p">),</span>
+               <span class="s1">&#39;room_id&#39;</span><span class="p">:</span> <span class="n">room_id</span><span class="p">,</span>
+               <span class="s1">&#39;datetimes&#39;</span><span class="p">:</span> <span class="n">datetimes</span><span class="p">,</span>  <span class="c1"># [x.strftime(&#39;%Y-%m-%d %H:%M&#39;) for x in datetimes],</span>
+               <span class="s1">&#39;data&#39;</span><span class="p">:</span> <span class="p">{</span><span class="n">display_name</span><span class="p">:</span> <span class="n">f</span><span class="o">.</span><span class="n">get_room_results</span><span class="p">(</span><span class="n">room_id</span><span class="p">,</span> <span class="n">aps_varname</span><span class="p">,</span> <span class="n">display_name</span><span class="p">,</span> <span class="s1">&#39;z&#39;</span><span class="p">)</span>
+                        <span class="k">for</span> <span class="n">display_name</span><span class="p">,</span> <span class="n">aps_varname</span><span class="p">,</span> <span class="n">units_type</span><span class="p">,</span> <span class="n">category</span><span class="p">,</span> <span class="n">units_category</span> <span class="ow">in</span> <span class="nb">vars</span><span class="p">}</span>
+            <span class="p">}</span>
+            <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+
+
+<span class="c1"># Step 5. Select a filename for the new Excel file</span>
+<span class="n">root</span> <span class="o">=</span> <span class="n">Tk</span><span class="p">()</span>
+<span class="n">root</span><span class="o">.</span><span class="n">withdraw</span><span class="p">()</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">asksaveasfilename</span><span class="p">(</span><span class="n">parent</span> <span class="o">=</span> <span class="n">root</span><span class="p">,</span> <span class="n">initialdir</span> <span class="o">=</span> <span class="n">dir_vista</span><span class="p">,</span> <span class="n">defaultextension</span> <span class="o">=</span> <span class="s1">&#39;.xlsx&#39;</span><span class="p">,</span> <span class="n">filetypes</span> <span class="o">=</span> <span class="p">[(</span><span class="s2">&quot;Excel files&quot;</span><span class="p">,</span> <span class="s2">&quot;*.xlsx&quot;</span><span class="p">)])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;response:&#39;</span><span class="p">,</span> <span class="n">response</span><span class="p">)</span>
+<span class="n">root</span><span class="o">.</span><span class="n">destroy</span><span class="p">()</span>
+<span class="k">if</span> <span class="n">response</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># if &#39;cancel&#39; is pressed.</span>
+   <span class="n">quit</span><span class="p">()</span>
+<span class="k">else</span><span class="p">:</span>
+   <span class="n">fp_out</span> <span class="o">=</span> <span class="n">response</span>
+   <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;fp_out&#39;</span><span class="p">,</span> <span class="n">fp_out</span><span class="p">)</span>
+
+<span class="c1"># Step 6. Create Excel workbook</span>
+<span class="k">try</span><span class="p">:</span>
+   <span class="k">with</span> <span class="n">xlsxwriter</span><span class="o">.</span><span class="n">Workbook</span><span class="p">(</span><span class="n">fp_out</span><span class="p">)</span> <span class="k">as</span> <span class="n">workbook</span><span class="p">:</span>
+      <span class="n">worksheet</span> <span class="o">=</span> <span class="n">workbook</span><span class="o">.</span><span class="n">add_worksheet</span><span class="p">()</span>
+      <span class="n">date_format</span> <span class="o">=</span> <span class="n">workbook</span><span class="o">.</span><span class="n">add_format</span><span class="p">({</span><span class="s1">&#39;num_format&#39;</span><span class="p">:</span> <span class="s1">&#39;yyyy-mm-dd hh:mm&#39;</span><span class="p">})</span>
+      <span class="n">display_names</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">vars</span><span class="p">]</span>
+      <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;display_names:&#39;</span><span class="p">,</span> <span class="n">display_names</span><span class="p">)</span>
+      <span class="n">headers</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;filename&#39;</span><span class="p">,</span> <span class="s1">&#39;room_id&#39;</span><span class="p">,</span> <span class="s1">&#39;datetimes&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="n">display_names</span>
+      <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;headers:&#39;</span><span class="p">,</span> <span class="n">headers</span><span class="p">)</span>
+      <span class="n">row</span> <span class="o">=</span> <span class="mi">0</span>
+      <span class="k">for</span> <span class="n">col</span><span class="p">,</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">headers</span><span class="p">):</span>
+            <span class="n">worksheet</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="n">col</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+      <span class="n">row</span> <span class="o">+=</span> <span class="mi">1</span>
+      <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">result</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="s1">&#39;filename&#39;</span><span class="p">],</span> <span class="n">d</span><span class="p">[</span><span class="s1">&#39;room_id&#39;</span><span class="p">])</span>
+            <span class="n">data_length</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="s1">&#39;datetimes&#39;</span><span class="p">])</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">data_length</span><span class="p">):</span>
+               <span class="k">for</span> <span class="n">col</span><span class="p">,</span> <span class="n">header</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">headers</span><span class="p">):</span>
+                  <span class="k">if</span> <span class="n">col</span> <span class="o">&lt;</span><span class="mi">2</span><span class="p">:</span>
+                        <span class="n">worksheet</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="n">col</span><span class="p">,</span> <span class="n">d</span><span class="p">[</span><span class="n">header</span><span class="p">])</span>
+                  <span class="k">elif</span> <span class="n">col</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+                        <span class="n">worksheet</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="n">col</span><span class="p">,</span> <span class="n">d</span><span class="p">[</span><span class="n">header</span><span class="p">][</span><span class="n">i</span><span class="p">],</span> <span class="n">date_format</span><span class="p">)</span>
+                  <span class="k">else</span><span class="p">:</span>
+                        <span class="k">if</span> <span class="ow">not</span> <span class="n">d</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">][</span><span class="n">header</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                           <span class="n">worksheet</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="n">col</span><span class="p">,</span> <span class="n">d</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">][</span><span class="n">header</span><span class="p">][</span><span class="n">i</span><span class="p">])</span>
+               <span class="n">row</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="k">except</span> <span class="n">xlsxwriter</span><span class="o">.</span><span class="n">exceptions</span><span class="o">.</span><span class="n">FileCreateError</span><span class="p">:</span>
+   <span class="n">root</span> <span class="o">=</span> <span class="n">Tk</span><span class="p">()</span>
+   <span class="n">root</span><span class="o">.</span><span class="n">withdraw</span><span class="p">()</span>
+   <span class="n">messagebox</span><span class="o">.</span><span class="n">showinfo</span><span class="p">(</span><span class="s1">&#39;File Create Error&#39;</span><span class="p">,</span> <span class="s1">&#39;Permission denied. Is the Excel workbook open?&#39;</span><span class="p">,</span> <span class="n">parent</span> <span class="o">=</span> <span class="n">root</span><span class="p">)</span>
+   <span class="n">root</span><span class="o">.</span><span class="n">destroy</span><span class="p">()</span>
+   <span class="n">quit</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;---end---&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="PlotRoomHeatBalance.html" class="btn btn-neutral float-left" title="Plot room heat balance" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="ExportResultsToCSV.html" class="btn btn-neutral float-right" title="Export results to CSV files" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Steven Firth.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

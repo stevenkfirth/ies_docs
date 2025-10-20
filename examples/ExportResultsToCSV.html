@@ -1,0 +1,375 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Export results to CSV files &mdash; IES-VE Python API  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=e6a37869" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Parametric analysis with heating setpoint" href="ParametricRunThermostat.html" />
+    <link rel="prev" title="Export room results to Excel" href="ExportRoomResultsToExcel.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            IES-VE Python API
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quick_start.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../code_snippets/code_snippets.html">Code Snippets</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="examples.html">Example Scripts</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="PlotAirTemperaturesBoxPlot.html">Plot room air temperatures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="PlotRoomHeatBalance.html">Plot room heat balance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ExportRoomResultsToExcel.html">Export room results to Excel</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Export results to CSV files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ParametricRunThermostat.html">Parametric analysis with heating setpoint</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../api.html">API Reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">IES-VE Python API</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="examples.html">Example Scripts</a></li>
+      <li class="breadcrumb-item active">Export results to CSV files</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/examples/ExportResultsToCSV.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="export-results-to-csv-files">
+<h1>Export results to CSV files<a class="headerlink" href="#export-results-to-csv-files" title="Link to this heading"></a></h1>
+<p>This script:</p>
+<ul class="simple">
+<li><p>Asks the user to open an IES-VE result file.</p></li>
+<li><p>Exports all of the data in the results file to separate CSV files.</p></li>
+</ul>
+<p>This was originally published as an article here: <a class="reference external" href="https://www.stevenfirth.com/how-to-export-results-from-ies-using-python/">https://www.stevenfirth.com/how-to-export-results-from-ies-using-python/</a></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ExportResultsToCSV</span>
+
+<span class="c1"># - Exports a results .aps file to multiple .csv file.</span>
+<span class="c1"># - Saves the following data:</span>
+<span class="c1">#   - weather results: {APS_FILE_NAME}_weather.csv</span>
+<span class="c1">#   - room-level results: {APS_FILE_NAME}_room_level_{ROOM_ID}.csv</span>
+<span class="c1">#   - apache system misc results: {APS_FILE_NAME}_apache_system_misc_{SYSTEM_ID}.csv</span>
+<span class="c1">#   - apache system energy results: {APS_FILE_NAME}_apache_system_energy_{SYSTEM_ID}.csv</span>
+<span class="c1">#   - apache system carbon results: {APS_FILE_NAME}_apache_system_carbon_{SYSTEM_ID}.csv</span>
+<span class="c1">#   - building load results: {APS_FILE_NAME}_building_loads.csv</span>
+<span class="c1">#   - building energy results: {APS_FILE_NAME}_building_energy.csv</span>
+<span class="c1">#   - building carbon results: {APS_FILE_NAME}_building_carbon.csv</span>
+<span class="c1">#   - surface-level results: {APS_FILE_NAME}_surface_level_{ROOM_ID}_{SURFACE_ID}.csv</span>
+<span class="c1">#   - opening-level results: {APS_FILE_NAME}_opening_level_{ROOM_ID}_{OPENING_ID}.csv</span>
+
+<span class="c1"># 1. Setup</span>
+<span class="c1"># - import packages</span>
+<span class="kn">import</span> <span class="nn">iesve</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">csv</span>
+<span class="kn">from</span> <span class="nn">tkinter</span> <span class="kn">import</span> <span class="n">Tk</span><span class="p">,</span> <span class="n">messagebox</span>
+<span class="kn">from</span> <span class="nn">tkinter.filedialog</span> <span class="kn">import</span> <span class="n">askopenfilename</span>
+<span class="c1"># - instances</span>
+<span class="n">current_project</span> <span class="o">=</span> <span class="n">iesve</span><span class="o">.</span><span class="n">VEProject</span><span class="o">.</span><span class="n">get_current_project</span><span class="p">()</span>
+<span class="c1"># - directories</span>
+<span class="n">dir_current_project</span> <span class="o">=</span> <span class="n">current_project</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\\</span><span class="s1">&#39;</span><span class="p">,</span><span class="s1">&#39;/&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;dir_current_project: &#39;</span><span class="p">,</span> <span class="n">dir_current_project</span><span class="p">)</span>
+<span class="k">assert</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">dir_current_project</span><span class="p">),</span> <span class="s2">&quot;No IESVE project folder found.&quot;</span>
+<span class="n">dir_vista</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">dir_current_project</span><span class="p">,</span> <span class="s1">&#39;vista&#39;</span><span class="p">)</span>
+
+<span class="c1"># 2. Select results file</span>
+<span class="c1"># - Select file</span>
+<span class="n">root</span> <span class="o">=</span> <span class="n">Tk</span><span class="p">()</span>
+<span class="n">root</span><span class="o">.</span><span class="n">withdraw</span><span class="p">()</span>
+<span class="n">fp_in</span> <span class="o">=</span> <span class="n">askopenfilename</span><span class="p">(</span><span class="n">title</span> <span class="o">=</span> <span class="s1">&#39;Select IES results file&#39;</span><span class="p">,</span> <span class="n">parent</span> <span class="o">=</span> <span class="n">root</span><span class="p">,</span> <span class="n">initialdir</span> <span class="o">=</span> <span class="n">dir_vista</span><span class="p">,</span> <span class="n">filetypes</span> <span class="o">=</span> <span class="p">[(</span><span class="s2">&quot;APS files&quot;</span><span class="p">,</span><span class="s2">&quot;*.aps&quot;</span><span class="p">)])</span>
+<span class="n">root</span><span class="o">.</span><span class="n">destroy</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;fp_in: &#39;</span><span class="p">,</span> <span class="n">fp_in</span><span class="p">)</span>
+<span class="c1"># - Exit if filepath is empty string</span>
+<span class="k">if</span> <span class="n">fp_in</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
+   <span class="n">messagebox</span><span class="o">.</span><span class="n">showinfo</span><span class="p">(</span><span class="s1">&#39;User input needed&#39;</span><span class="p">,</span> <span class="s1">&#39;Please select a .aps results file.&#39;</span><span class="p">)</span>
+   <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;No results .aps file selected.&quot;</span><span class="p">)</span>
+<span class="c1"># - Exit if filepath is not in project filepath</span>
+<span class="k">if</span> <span class="ow">not</span> <span class="n">dir_current_project</span> <span class="ow">in</span> <span class="n">fp_in</span><span class="p">:</span>
+   <span class="n">messagebox</span><span class="o">.</span><span class="n">showinfo</span><span class="p">(</span><span class="s1">&#39;User input needed&#39;</span><span class="p">,</span> <span class="s1">&#39;Please select a .aps results file in the current IES project.&#39;</span><span class="p">)</span>
+   <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Results .aps file selected should be in the current IES project.&quot;</span><span class="p">)</span>
+
+<span class="c1"># 3. Export weather data</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Export weather data&#39;</span><span class="p">,</span> <span class="n">end</span> <span class="o">=</span> <span class="s1">&#39; &#39;</span><span class="p">)</span>
+<span class="k">with</span> <span class="n">iesve</span><span class="o">.</span><span class="n">ResultsReader</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">fp_in</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+   <span class="n">model_level</span> <span class="o">=</span> <span class="s1">&#39;w&#39;</span>
+   <span class="n">variables</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">f</span><span class="o">.</span><span class="n">get_variables</span><span class="p">()</span> <span class="k">if</span> <span class="n">x</span><span class="p">[</span><span class="s1">&#39;model_level&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">model_level</span><span class="p">]</span>
+      <span class="c1"># [dict {&#39;display_name&#39;: ..., &#39;aps_varname&#39;: ..., &#39;units_type&#39;: ..., &#39;model_level&#39;: ..., &#39;subtype&#39;: ..., &#39;custom_type&#39;: ..., &#39;post_process_spec&#39;: ...}]</span>
+   <span class="n">result</span> <span class="o">=</span> <span class="p">{</span><span class="n">variable</span><span class="p">[</span><span class="s1">&#39;display_name&#39;</span><span class="p">]:</span> <span class="n">f</span><span class="o">.</span><span class="n">get_weather_results</span><span class="p">(</span><span class="n">variable</span><span class="p">[</span><span class="s1">&#39;aps_varname&#39;</span><span class="p">],</span> <span class="n">variable</span><span class="p">[</span><span class="s1">&#39;display_name&#39;</span><span class="p">])</span> <span class="k">for</span> <span class="n">variable</span> <span class="ow">in</span> <span class="n">variables</span><span class="p">}</span>
+   <span class="n">result</span> <span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="p">:[</span><span class="kc">None</span><span class="p">]</span> <span class="o">*</span> <span class="mi">8760</span> <span class="k">if</span> <span class="n">v</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">v</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">v</span> <span class="ow">in</span> <span class="n">result</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>   <span class="c1"># if any values are `None`, then replace with a list of [None, None, ...]</span>
+   <span class="n">fp_out</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">fp_in</span><span class="p">[:</span><span class="o">-</span><span class="mi">4</span><span class="p">]</span><span class="si">}</span><span class="s1">_weather.csv&#39;</span>
+   <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">fp_out</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="n">newline</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f1</span><span class="p">:</span>
+      <span class="n">csvwriter</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">writer</span><span class="p">(</span><span class="n">f1</span><span class="p">)</span>
+      <span class="n">csvwriter</span><span class="o">.</span><span class="n">writerow</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">result</span><span class="p">))</span>
+      <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="nb">list</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">values</span><span class="p">())):</span>
+            <span class="n">csvwriter</span><span class="o">.</span><span class="n">writerow</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">()</span>
+
+<span class="c1"># 4. Export room-level data</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Export room-level data&#39;</span><span class="p">,</span> <span class="n">end</span> <span class="o">=</span> <span class="s1">&#39; &#39;</span><span class="p">)</span>
+<span class="k">with</span> <span class="n">iesve</span><span class="o">.</span><span class="n">ResultsReader</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">fp_in</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+   <span class="n">model_level</span> <span class="o">=</span> <span class="s1">&#39;z&#39;</span>
+   <span class="n">variables</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">f</span><span class="o">.</span><span class="n">get_variables</span><span class="p">()</span> <span class="k">if</span> <span class="n">x</span><span class="p">[</span><span class="s1">&#39;model_level&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">model_level</span><span class="p">]</span>
+   <span class="k">for</span> <span class="n">room_id</span> <span class="ow">in</span> <span class="n">f</span><span class="o">.</span><span class="n">get_room_ids</span><span class="p">():</span>
+      <span class="nb">print</span><span class="p">(</span><span class="n">room_id</span><span class="p">,</span> <span class="n">end</span> <span class="o">=</span> <span class="s1">&#39; &#39;</span><span class="p">)</span>
+      <span class="n">result</span> <span class="o">=</span> <span class="p">{</span><span class="n">variable</span><span class="p">[</span><span class="s1">&#39;display_name&#39;</span><span class="p">]:</span> <span class="n">f</span><span class="o">.</span><span class="n">get_room_results</span><span class="p">(</span><span class="n">room_id</span><span class="p">,</span> <span class="n">variable</span><span class="p">[</span><span class="s1">&#39;aps_varname&#39;</span><span class="p">],</span> <span class="n">variable</span><span class="p">[</span><span class="s1">&#39;display_name&#39;</span><span class="p">],</span> <span class="n">model_level</span><span class="p">)</span> <span class="k">for</span> <span class="n">variable</span> <span class="ow">in</span> <span class="n">variables</span><span class="p">}</span>
+      <span class="n">result</span> <span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="p">:[</span><span class="kc">None</span><span class="p">]</span> <span class="o">*</span> <span class="mi">8760</span> <span class="k">if</span> <span class="n">v</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">v</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">v</span> <span class="ow">in</span> <span class="n">result</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
+      <span class="n">fp_out</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">fp_in</span><span class="p">[:</span><span class="o">-</span><span class="mi">4</span><span class="p">]</span><span class="si">}</span><span class="s1">_room_level_</span><span class="si">{</span><span class="n">room_id</span><span class="si">}</span><span class="s1">.csv&#39;</span>
+      <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">fp_out</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="n">newline</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f1</span><span class="p">:</span>
+            <span class="n">csvwriter</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">writer</span><span class="p">(</span><span class="n">f1</span><span class="p">)</span>
+            <span class="n">csvwriter</span><span class="o">.</span><span class="n">writerow</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">result</span><span class="p">))</span>
+            <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="nb">list</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">values</span><span class="p">())):</span>
+               <span class="n">csvwriter</span><span class="o">.</span><span class="n">writerow</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">()</span>
+
+<span class="c1"># 5. Export apache system misc results</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Export apache system misc results&#39;</span><span class="p">,</span> <span class="n">end</span> <span class="o">=</span> <span class="s1">&#39; &#39;</span><span class="p">)</span>
+<span class="k">with</span> <span class="n">iesve</span><span class="o">.</span><span class="n">ResultsReader</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">fp_in</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+   <span class="n">model_level</span> <span class="o">=</span> <span class="s1">&#39;v&#39;</span>
+   <span class="n">variables</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">f</span><span class="o">.</span><span class="n">get_variables</span><span class="p">()</span> <span class="k">if</span> <span class="n">x</span><span class="p">[</span><span class="s1">&#39;model_level&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">model_level</span><span class="p">]</span>
+   <span class="k">for</span> <span class="n">system_id</span> <span class="ow">in</span> <span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">f</span><span class="o">.</span><span class="n">get_apache_systems</span><span class="p">()]:</span>
+      <span class="nb">print</span><span class="p">(</span><span class="n">system_id</span><span class="p">,</span> <span class="n">end</span> <span class="o">=</span> <span class="s1">&#39; &#39;</span><span class="p">)</span>
+      <span class="n">result</span> <span class="o">=</span> <span class="p">{</span><span class="n">variable</span><span class="p">[</span><span class="s1">&#39;display_name&#39;</span><span class="p">]:</span> <span class="n">f</span><span class="o">.</span><span class="n">get_apache_system_results</span><span class="p">(</span><span class="n">system_id</span><span class="p">,</span> <span class="n">variable</span><span class="p">[</span><span class="s1">&#39;aps_varname&#39;</span><span class="p">],</span> <span class="n">variable</span><span class="p">[</span><span class="s1">&#39;display_name&#39;</span><span class="p">],</span> <span class="n">model_level</span><span class="p">)</span> <span class="k">for</span> <span class="n">variable</span> <span class="ow">in</span> <span class="n">variables</span><span class="p">}</span>
+      <span class="n">result</span> <span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="p">:[</span><span class="kc">None</span><span class="p">]</span> <span class="o">*</span> <span class="mi">8760</span> <span class="k">if</span> <span class="n">v</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">v</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">v</span> <span class="ow">in</span> <span class="n">result</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
+      <span class="n">fp_out</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">fp_in</span><span class="p">[:</span><span class="o">-</span><span class="mi">4</span><span class="p">]</span><span class="si">}</span><span class="s1">_apache_system_misc_</span><span class="si">{</span><span class="n">system_id</span><span class="si">}</span><span class="s1">.csv&#39;</span>
+      <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">fp_out</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="n">newline</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">csvwriter</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">writer</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+            <span class="n">csvwriter</span><span class="o">.</span><span class="n">writerow</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">result</span><span class="p">))</span>
+            <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="nb">list</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">values</span><span class="p">())):</span>
+               <span class="n">csvwriter</span><span class="o">.</span><span class="n">writerow</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">()</span>
+
+<span class="c1"># 6. Export apache system energy results</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Export apache system energy results&#39;</span><span class="p">,</span> <span class="n">end</span> <span class="o">=</span> <span class="s1">&#39; &#39;</span><span class="p">)</span>
+<span class="k">with</span> <span class="n">iesve</span><span class="o">.</span><span class="n">ResultsReader</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">fp_in</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+   <span class="n">model_level</span> <span class="o">=</span> <span class="s1">&#39;j&#39;</span>
+   <span class="n">variables</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">f</span><span class="o">.</span><span class="n">get_variables</span><span class="p">()</span> <span class="k">if</span> <span class="n">x</span><span class="p">[</span><span class="s1">&#39;model_level&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">model_level</span><span class="p">]</span>
+   <span class="k">for</span> <span class="n">system_id</span> <span class="ow">in</span> <span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">f</span><span class="o">.</span><span class="n">get_apache_systems</span><span class="p">()]:</span>
+      <span class="nb">print</span><span class="p">(</span><span class="n">system_id</span><span class="p">,</span> <span class="n">end</span> <span class="o">=</span> <span class="s1">&#39; &#39;</span><span class="p">)</span>
+      <span class="n">result</span> <span class="o">=</span> <span class="p">{</span><span class="n">variable</span><span class="p">[</span><span class="s1">&#39;display_name&#39;</span><span class="p">]:</span> <span class="n">f</span><span class="o">.</span><span class="n">get_apache_system_results</span><span class="p">(</span><span class="n">system_id</span><span class="p">,</span> <span class="n">variable</span><span class="p">[</span><span class="s1">&#39;aps_varname&#39;</span><span class="p">],</span> <span class="n">variable</span><span class="p">[</span><span class="s1">&#39;display_name&#39;</span><span class="p">],</span> <span class="n">model_level</span><span class="p">)</span> <span class="k">for</span> <span class="n">variable</span> <span class="ow">in</span> <span class="n">variables</span><span class="p">}</span>
+      <span class="n">result</span> <span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="p">:[</span><span class="kc">None</span><span class="p">]</span> <span class="o">*</span> <span class="mi">8760</span> <span class="k">if</span> <span class="n">v</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">v</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">v</span> <span class="ow">in</span> <span class="n">result</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
+      <span class="n">fp_out</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">fp_in</span><span class="p">[:</span><span class="o">-</span><span class="mi">4</span><span class="p">]</span><span class="si">}</span><span class="s1">_apache_system_energy_</span><span class="si">{</span><span class="n">system_id</span><span class="si">}</span><span class="s1">.csv&#39;</span>
+      <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">fp_out</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="n">newline</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">csvwriter</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">writer</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+            <span class="n">csvwriter</span><span class="o">.</span><span class="n">writerow</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">result</span><span class="p">))</span>
+            <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="nb">list</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">values</span><span class="p">())):</span>
+               <span class="n">csvwriter</span><span class="o">.</span><span class="n">writerow</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">()</span>
+
+<span class="c1"># 7. Export apache system carbon results</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Export apache system carbon results&#39;</span><span class="p">,</span> <span class="n">end</span> <span class="o">=</span> <span class="s1">&#39; &#39;</span><span class="p">)</span>
+<span class="k">with</span> <span class="n">iesve</span><span class="o">.</span><span class="n">ResultsReader</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">fp_in</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+   <span class="n">model_level</span> <span class="o">=</span> <span class="s1">&#39;r&#39;</span>
+   <span class="n">variables</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">f</span><span class="o">.</span><span class="n">get_variables</span><span class="p">()</span> <span class="k">if</span> <span class="n">x</span><span class="p">[</span><span class="s1">&#39;model_level&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">model_level</span><span class="p">]</span>
+   <span class="k">for</span> <span class="n">system_id</span> <span class="ow">in</span> <span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">f</span><span class="o">.</span><span class="n">get_apache_systems</span><span class="p">()]:</span>
+      <span class="nb">print</span><span class="p">(</span><span class="n">system_id</span><span class="p">,</span> <span class="n">end</span> <span class="o">=</span> <span class="s1">&#39; &#39;</span><span class="p">)</span>
+      <span class="n">result</span> <span class="o">=</span> <span class="p">{</span><span class="n">variable</span><span class="p">[</span><span class="s1">&#39;display_name&#39;</span><span class="p">]:</span> <span class="n">f</span><span class="o">.</span><span class="n">get_apache_system_results</span><span class="p">(</span><span class="n">system_id</span><span class="p">,</span> <span class="n">variable</span><span class="p">[</span><span class="s1">&#39;aps_varname&#39;</span><span class="p">],</span> <span class="n">variable</span><span class="p">[</span><span class="s1">&#39;display_name&#39;</span><span class="p">],</span> <span class="n">model_level</span><span class="p">)</span> <span class="k">for</span> <span class="n">variable</span> <span class="ow">in</span> <span class="n">variables</span><span class="p">}</span>
+      <span class="n">result</span> <span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="p">:[</span><span class="kc">None</span><span class="p">]</span> <span class="o">*</span> <span class="mi">8760</span> <span class="k">if</span> <span class="n">v</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">v</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">v</span> <span class="ow">in</span> <span class="n">result</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
+      <span class="n">fp_out</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">fp_in</span><span class="p">[:</span><span class="o">-</span><span class="mi">4</span><span class="p">]</span><span class="si">}</span><span class="s1">_apache_system_carbon_</span><span class="si">{</span><span class="n">system_id</span><span class="si">}</span><span class="s1">.csv&#39;</span>
+      <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">fp_out</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="n">newline</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">csvwriter</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">writer</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+            <span class="n">csvwriter</span><span class="o">.</span><span class="n">writerow</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">result</span><span class="p">))</span>
+            <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="nb">list</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">values</span><span class="p">())):</span>
+               <span class="n">csvwriter</span><span class="o">.</span><span class="n">writerow</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">()</span>
+
+<span class="c1"># 8. Export building loads results</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Export building loads results&#39;</span><span class="p">,</span> <span class="n">end</span> <span class="o">=</span> <span class="s1">&#39; &#39;</span><span class="p">)</span>
+<span class="k">with</span> <span class="n">iesve</span><span class="o">.</span><span class="n">ResultsReader</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">fp_in</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+   <span class="n">model_level</span> <span class="o">=</span> <span class="s1">&#39;l&#39;</span>
+   <span class="n">variables</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">f</span><span class="o">.</span><span class="n">get_variables</span><span class="p">()</span> <span class="k">if</span> <span class="n">x</span><span class="p">[</span><span class="s1">&#39;model_level&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">model_level</span><span class="p">]</span>
+   <span class="n">result</span> <span class="o">=</span> <span class="p">{</span><span class="n">variable</span><span class="p">[</span><span class="s1">&#39;display_name&#39;</span><span class="p">]:</span> <span class="n">f</span><span class="o">.</span><span class="n">get_results</span><span class="p">(</span><span class="n">variable</span><span class="p">[</span><span class="s1">&#39;aps_varname&#39;</span><span class="p">],</span> <span class="n">variable</span><span class="p">[</span><span class="s1">&#39;display_name&#39;</span><span class="p">],</span> <span class="n">model_level</span><span class="p">)</span> <span class="k">for</span> <span class="n">variable</span> <span class="ow">in</span> <span class="n">variables</span><span class="p">}</span>
+   <span class="n">result</span> <span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="p">:[</span><span class="kc">None</span><span class="p">]</span> <span class="o">*</span> <span class="mi">8760</span> <span class="k">if</span> <span class="n">v</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">v</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">v</span> <span class="ow">in</span> <span class="n">result</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
+   <span class="n">fp_out</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">fp_in</span><span class="p">[:</span><span class="o">-</span><span class="mi">4</span><span class="p">]</span><span class="si">}</span><span class="s1">_building_loads.csv&#39;</span>
+   <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">fp_out</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="n">newline</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f1</span><span class="p">:</span>
+      <span class="n">csvwriter</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">writer</span><span class="p">(</span><span class="n">f1</span><span class="p">)</span>
+      <span class="n">csvwriter</span><span class="o">.</span><span class="n">writerow</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">result</span><span class="p">))</span>
+      <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="nb">list</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">values</span><span class="p">())):</span>
+            <span class="n">csvwriter</span><span class="o">.</span><span class="n">writerow</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">()</span>
+
+<span class="c1"># 9. Export building energy results</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Export building energy results&#39;</span><span class="p">,</span> <span class="n">end</span> <span class="o">=</span> <span class="s1">&#39; &#39;</span><span class="p">)</span>
+<span class="k">with</span> <span class="n">iesve</span><span class="o">.</span><span class="n">ResultsReader</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">fp_in</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+   <span class="n">model_level</span> <span class="o">=</span> <span class="s1">&#39;e&#39;</span>
+   <span class="n">variables</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">f</span><span class="o">.</span><span class="n">get_variables</span><span class="p">()</span> <span class="k">if</span> <span class="n">x</span><span class="p">[</span><span class="s1">&#39;model_level&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">model_level</span><span class="p">]</span>
+   <span class="n">result</span> <span class="o">=</span> <span class="p">{</span><span class="n">variable</span><span class="p">[</span><span class="s1">&#39;display_name&#39;</span><span class="p">]:</span> <span class="n">f</span><span class="o">.</span><span class="n">get_results</span><span class="p">(</span><span class="n">variable</span><span class="p">[</span><span class="s1">&#39;aps_varname&#39;</span><span class="p">],</span> <span class="n">variable</span><span class="p">[</span><span class="s1">&#39;display_name&#39;</span><span class="p">],</span> <span class="n">model_level</span><span class="p">)</span> <span class="k">for</span> <span class="n">variable</span> <span class="ow">in</span> <span class="n">variables</span><span class="p">}</span>
+   <span class="n">result</span> <span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="p">:[</span><span class="kc">None</span><span class="p">]</span> <span class="o">*</span> <span class="mi">8760</span> <span class="k">if</span> <span class="n">v</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">v</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">v</span> <span class="ow">in</span> <span class="n">result</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
+   <span class="n">fp_out</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">fp_in</span><span class="p">[:</span><span class="o">-</span><span class="mi">4</span><span class="p">]</span><span class="si">}</span><span class="s1">_building_energy.csv&#39;</span>
+   <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">fp_out</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="n">newline</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f1</span><span class="p">:</span>
+      <span class="n">csvwriter</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">writer</span><span class="p">(</span><span class="n">f1</span><span class="p">)</span>
+      <span class="n">csvwriter</span><span class="o">.</span><span class="n">writerow</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">result</span><span class="p">))</span>
+      <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="nb">list</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">values</span><span class="p">())):</span>
+            <span class="n">csvwriter</span><span class="o">.</span><span class="n">writerow</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">()</span>
+
+<span class="c1"># 10. Export building carbon results</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Export building carbon results&#39;</span><span class="p">,</span> <span class="n">end</span> <span class="o">=</span> <span class="s1">&#39; &#39;</span><span class="p">)</span>
+<span class="k">with</span> <span class="n">iesve</span><span class="o">.</span><span class="n">ResultsReader</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">fp_in</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+   <span class="n">model_level</span> <span class="o">=</span> <span class="s1">&#39;c&#39;</span>
+   <span class="n">variables</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">f</span><span class="o">.</span><span class="n">get_variables</span><span class="p">()</span> <span class="k">if</span> <span class="n">x</span><span class="p">[</span><span class="s1">&#39;model_level&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">model_level</span><span class="p">]</span>
+   <span class="n">result</span> <span class="o">=</span> <span class="p">{</span><span class="n">variable</span><span class="p">[</span><span class="s1">&#39;display_name&#39;</span><span class="p">]:</span> <span class="n">f</span><span class="o">.</span><span class="n">get_results</span><span class="p">(</span><span class="n">variable</span><span class="p">[</span><span class="s1">&#39;aps_varname&#39;</span><span class="p">],</span> <span class="n">variable</span><span class="p">[</span><span class="s1">&#39;display_name&#39;</span><span class="p">],</span> <span class="n">model_level</span><span class="p">)</span> <span class="k">for</span> <span class="n">variable</span> <span class="ow">in</span> <span class="n">variables</span><span class="p">}</span>
+   <span class="n">result</span> <span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="p">:[</span><span class="kc">None</span><span class="p">]</span> <span class="o">*</span> <span class="mi">8760</span> <span class="k">if</span> <span class="n">v</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">v</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">v</span> <span class="ow">in</span> <span class="n">result</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
+   <span class="n">fp_out</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">fp_in</span><span class="p">[:</span><span class="o">-</span><span class="mi">4</span><span class="p">]</span><span class="si">}</span><span class="s1">_building_carbon.csv&#39;</span>
+   <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">fp_out</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="n">newline</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f1</span><span class="p">:</span>
+      <span class="n">csvwriter</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">writer</span><span class="p">(</span><span class="n">f1</span><span class="p">)</span>
+      <span class="n">csvwriter</span><span class="o">.</span><span class="n">writerow</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">result</span><span class="p">))</span>
+      <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="nb">list</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">values</span><span class="p">())):</span>
+            <span class="n">csvwriter</span><span class="o">.</span><span class="n">writerow</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">()</span>
+
+<span class="c1"># 11. Export surface_level results</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Export surface_level results&#39;</span><span class="p">,</span> <span class="n">end</span> <span class="o">=</span> <span class="s1">&#39; &#39;</span><span class="p">)</span>
+<span class="k">with</span> <span class="n">iesve</span><span class="o">.</span><span class="n">ResultsReader</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">fp_in</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+   <span class="n">model_level</span> <span class="o">=</span> <span class="s1">&#39;s&#39;</span>
+   <span class="n">variables</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">f</span><span class="o">.</span><span class="n">get_variables</span><span class="p">()</span> <span class="k">if</span> <span class="n">x</span><span class="p">[</span><span class="s1">&#39;model_level&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">model_level</span><span class="p">]</span>
+   <span class="k">for</span> <span class="n">body</span> <span class="ow">in</span> <span class="n">current_project</span><span class="o">.</span><span class="n">models</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">get_bodies</span><span class="p">(</span><span class="kc">False</span><span class="p">):</span>
+      <span class="n">room_id</span> <span class="o">=</span> <span class="n">body</span><span class="o">.</span><span class="n">get_room_data</span><span class="p">()</span><span class="o">.</span><span class="n">id</span>
+      <span class="c1">#print(&#39;room_id&#39;, room_id, end = &#39; &#39;)</span>
+      <span class="k">for</span> <span class="n">surface</span> <span class="ow">in</span> <span class="n">body</span><span class="o">.</span><span class="n">get_surfaces</span><span class="p">():</span>
+            <span class="k">try</span><span class="p">:</span>
+               <span class="n">aps_handle</span> <span class="o">=</span> <span class="n">surface</span><span class="o">.</span><span class="n">get_properties</span><span class="p">()[</span><span class="s1">&#39;aps_handle&#39;</span><span class="p">]</span>
+            <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+               <span class="k">continue</span>
+            <span class="n">surface_id</span> <span class="o">=</span> <span class="n">surface</span><span class="o">.</span><span class="n">get_properties</span><span class="p">()[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">surface_id</span><span class="p">,</span> <span class="n">end</span> <span class="o">=</span> <span class="s1">&#39; &#39;</span><span class="p">)</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="p">{</span><span class="n">variable</span><span class="p">[</span><span class="s1">&#39;display_name&#39;</span><span class="p">]:</span> <span class="n">f</span><span class="o">.</span><span class="n">get_all_surface_results</span><span class="p">(</span><span class="n">room_id</span><span class="p">,</span> <span class="n">aps_handle</span><span class="p">,</span> <span class="n">variable</span><span class="p">[</span><span class="s1">&#39;aps_varname&#39;</span><span class="p">])</span> <span class="k">for</span> <span class="n">variable</span> <span class="ow">in</span> <span class="n">variables</span><span class="p">}</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="p">:[</span><span class="kc">None</span><span class="p">]</span> <span class="o">*</span> <span class="mi">8760</span> <span class="k">if</span> <span class="n">v</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">v</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">v</span> <span class="ow">in</span> <span class="n">result</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
+            <span class="n">fp_out</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">fp_in</span><span class="p">[:</span><span class="o">-</span><span class="mi">4</span><span class="p">]</span><span class="si">}</span><span class="s1">_surface_level_</span><span class="si">{</span><span class="n">room_id</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">surface_id</span><span class="si">}</span><span class="s1">.csv&#39;</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">fp_out</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="n">newline</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f1</span><span class="p">:</span>
+               <span class="n">csvwriter</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">writer</span><span class="p">(</span><span class="n">f1</span><span class="p">)</span>
+               <span class="n">csvwriter</span><span class="o">.</span><span class="n">writerow</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">result</span><span class="p">))</span>
+               <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="nb">list</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">values</span><span class="p">())):</span>
+                  <span class="n">csvwriter</span><span class="o">.</span><span class="n">writerow</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">()</span>
+
+<span class="c1"># 12. Export opening_level results</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Export opening_level results&#39;</span><span class="p">,</span> <span class="n">end</span> <span class="o">=</span> <span class="s1">&#39; &#39;</span><span class="p">)</span>
+<span class="k">with</span> <span class="n">iesve</span><span class="o">.</span><span class="n">ResultsReader</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">fp_in</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+   <span class="n">model_level</span> <span class="o">=</span> <span class="s1">&#39;o&#39;</span>
+   <span class="n">variables</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">f</span><span class="o">.</span><span class="n">get_variables</span><span class="p">()</span> <span class="k">if</span> <span class="n">x</span><span class="p">[</span><span class="s1">&#39;model_level&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">model_level</span><span class="p">]</span>
+   <span class="k">for</span> <span class="n">body</span> <span class="ow">in</span> <span class="n">current_project</span><span class="o">.</span><span class="n">models</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">get_bodies</span><span class="p">(</span><span class="kc">False</span><span class="p">):</span>
+      <span class="n">room_id</span> <span class="o">=</span> <span class="n">body</span><span class="o">.</span><span class="n">get_room_data</span><span class="p">()</span><span class="o">.</span><span class="n">id</span>
+      <span class="c1">#print(&#39;room_id&#39;, room_id, end = &#39; &#39;)</span>
+      <span class="k">for</span> <span class="n">surface</span> <span class="ow">in</span> <span class="n">body</span><span class="o">.</span><span class="n">get_surfaces</span><span class="p">():</span>
+            <span class="k">try</span><span class="p">:</span>
+               <span class="n">aps_handle</span> <span class="o">=</span> <span class="n">surface</span><span class="o">.</span><span class="n">get_properties</span><span class="p">()[</span><span class="s1">&#39;aps_handle&#39;</span><span class="p">]</span>
+            <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+               <span class="k">continue</span>
+            <span class="n">surface_id</span> <span class="o">=</span> <span class="n">surface</span><span class="o">.</span><span class="n">get_properties</span><span class="p">()[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span>
+            <span class="c1">#print(&#39;surface_id&#39;, surface_id, end = &#39; &#39;)</span>
+            <span class="n">surface_index</span> <span class="o">=</span> <span class="n">surface</span><span class="o">.</span><span class="n">index</span>
+            <span class="k">for</span> <span class="n">opening</span> <span class="ow">in</span> <span class="n">surface</span><span class="o">.</span><span class="n">get_openings</span><span class="p">():</span>
+               <span class="n">opening_id</span> <span class="o">=</span> <span class="n">opening</span><span class="o">.</span><span class="n">get_id</span><span class="p">()</span>
+               <span class="nb">print</span><span class="p">(</span><span class="n">opening_id</span><span class="p">,</span> <span class="n">end</span> <span class="o">=</span> <span class="s1">&#39; &#39;</span><span class="p">)</span>
+               <span class="n">opening_index</span> <span class="o">=</span> <span class="n">opening</span><span class="o">.</span><span class="n">get_properties</span><span class="p">()[</span><span class="s1">&#39;index&#39;</span><span class="p">]</span>
+               <span class="n">result</span> <span class="o">=</span> <span class="p">{</span><span class="n">variable</span><span class="p">[</span><span class="s1">&#39;display_name&#39;</span><span class="p">]:</span> <span class="n">f</span><span class="o">.</span><span class="n">get_all_opening_results</span><span class="p">(</span><span class="n">room_id</span><span class="p">,</span> <span class="n">surface_index</span><span class="p">,</span> <span class="n">opening_index</span><span class="p">,</span> <span class="n">variable</span><span class="p">[</span><span class="s1">&#39;aps_varname&#39;</span><span class="p">])</span> <span class="k">for</span> <span class="n">variable</span> <span class="ow">in</span> <span class="n">variables</span><span class="p">}</span>
+               <span class="n">result</span> <span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="p">:[</span><span class="kc">None</span><span class="p">]</span> <span class="o">*</span> <span class="mi">8760</span> <span class="k">if</span> <span class="n">v</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">v</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">v</span> <span class="ow">in</span> <span class="n">result</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
+               <span class="n">fp_out</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">fp_in</span><span class="p">[:</span><span class="o">-</span><span class="mi">4</span><span class="p">]</span><span class="si">}</span><span class="s1">_opening_level_</span><span class="si">{</span><span class="n">room_id</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">opening_id</span><span class="si">}</span><span class="s1">.csv&#39;</span>
+               <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">fp_out</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="n">newline</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f1</span><span class="p">:</span>
+                  <span class="n">csvwriter</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">writer</span><span class="p">(</span><span class="n">f1</span><span class="p">)</span>
+                  <span class="n">csvwriter</span><span class="o">.</span><span class="n">writerow</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">result</span><span class="p">))</span>
+                  <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="nb">list</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">values</span><span class="p">())):</span>
+                        <span class="n">csvwriter</span><span class="o">.</span><span class="n">writerow</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">()</span>
+
+<span class="c1"># 13. Export hvac_node_level results</span>
+<span class="c1"># -- TO DO IF NEEDED --</span>
+<span class="c1"># n</span>
+<span class="c1"># get_hvac_node_results(node_nr, layer_nr = -1, var_name, start_day = -1, end_day = -1)</span>
+<span class="c1"># -&gt; Numpy array of floats</span>
+<span class="c1"># Get the results for HVAC Node.  Use layer_nr to specify multiplex layer, or -1 for plant-side node (outside of multiplex).  See variables list for available variables and matching level.  See get_results for start_day and end_day details.</span>
+
+<span class="c1"># 14. Export hvac_component_level results</span>
+<span class="c1"># -- TO DO IF NEEDED --</span>
+<span class="c1"># h</span>
+<span class="c1"># get_hvac_component_results( component_id, component_type, var_name, start_day = -1, end_day = -1 )</span>
+<span class="c1"># -&gt; Numpy array of floats</span>
+<span class="c1"># Get the results for HVAC Component ID + variable.  See variables list for available variables and matching level.  See get_results for start_day and end_day details.</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;END&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="ExportRoomResultsToExcel.html" class="btn btn-neutral float-left" title="Export room results to Excel" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="ParametricRunThermostat.html" class="btn btn-neutral float-right" title="Parametric analysis with heating setpoint" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Steven Firth.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
